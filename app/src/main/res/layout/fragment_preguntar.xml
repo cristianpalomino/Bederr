@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_maven">
+
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/frame_menu"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Preguntar"
+            android:id="@+id/action_middle"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/color_blanco"
+            android:layout_gravity="center" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_right"
+            android:src="@drawable/menu_cerrar"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_container"
+        android:background="@color/color_blanco">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:hint="¿Qué es lo que estás buscando?"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:id="@+id/txt_pregunta"
+                android:background="@color/color_blanco"
+                android:layout_weight="1"
+                android:maxEms="150"
+                android:ems="150"
+                android:imeOptions="actionDone"
+                android:maxLines="10"
+                />
+
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/img_categoria_pregunta"
+                android:src="@drawable/ropa"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="150"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textColor="@color/plomo_claro_silver"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:id="@+id/txt_cantidad_pregunta"
+            android:paddingRight="15dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="5dp">
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:imeOptions="actionGo"
+                android:drawableLeft="@drawable/icono_ubicacion"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Mi Ubicación"
+                android:textColor="@color/plomo_oscuro_asbestos"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                android:id="@+id/btn_mi_ubicacion"
+                android:background="@drawable/holo_flat_button_plomo"
+                android:layout_marginRight="8dp"
+                android:visibility="gone" />
+
+
+            <Button
+                android:layout_weight="2"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:imeOptions="actionGo"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Postear"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="16sp"
+                android:id="@+id/btn_postear"
+                android:background="@drawable/button_verde_maven" />a
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

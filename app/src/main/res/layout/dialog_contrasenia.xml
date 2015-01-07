@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#27292B">
+
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/frame_menu"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Contraseña"
+            android:id="@+id/action_middle"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/color_blanco"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_right"
+            android:src="@drawable/menu_cerrar"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:id="@+id/frame_container"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="text"
+            android:ems="10"
+            android:hint="Correo"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/holo_flat_button_plomo_claro"
+            android:imeOptions="actionNext"
+            android:lines="1"
+            android:maxLines="1"
+            android:id="@+id/txt_correo" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="Password"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/holo_flat_button_plomo_claro"
+            android:imeOptions="actionNext"
+            android:lines="1"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:id="@+id/txt_password" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:imeOptions="actionNext"
+            android:lines="1"
+            android:maxLines="1"
+            android:hint="New Password"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:background="@drawable/holo_flat_button_plomo_claro"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_new_password" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:lines="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:maxLines="1"
+            android:layout_marginTop="5dp"
+            android:hint="Repeat New Password"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/holo_flat_button_plomo_claro"
+            android:id="@+id/txt_re_new_password" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:lines="1"
+            android:imeOptions="actionGo"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="Cambiar"
+            android:textColor="@color/color_blanco"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp"
+            android:id="@+id/btn_cambiar_password"
+            android:background="@drawable/button_verde_maven"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/dialogo_bederr"
+            android:id="@+id/img_logo_beeder"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

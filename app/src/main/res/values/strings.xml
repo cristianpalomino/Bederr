@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bederr</string>
+
+    <string name="parse_app_id">5LqMdjuGjO8RjQw0OHARksSjETlEfe1oM5wysRim</string>
+    <string name="parse_client_key">ljCsdl2fjT2Wx0kIFdmJLU7KjpWuJ62WeNelAEww</string>
+    <string name="facebook_app_id">333797340078510</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <array name="opciones_mapa">
+        <item>Google Maps</item>
+        <item>Waze</item>
+    </array>
+
+
+    <!-- Date Util -->
+    <string name="date_util_term_less"></string>
+    <string name="date_util_term_a">1</string>
+    <string name="date_util_term_an">1</string>
+
+    <string name="date_util_unit_second">segundo</string>
+    <string name="date_util_unit_seconds">segundos</string>
+    <string name="date_util_unit_minute">minuto</string>
+    <string name="date_util_unit_minutes">minutos</string>
+    <string name="date_util_unit_hour">hora</string>
+    <string name="date_util_unit_hours">horas</string>
+    <string name="date_util_unit_day">día</string>
+    <string name="date_util_unit_days">días</string>
+    <string name="date_util_unit_month">mes</string>
+    <string name="date_util_unit_months">meses</string>
+    <string name="date_util_unit_year">año</string>
+    <string name="date_util_unit_years">años</string>
+
+    <string name="date_util_prefix_lt"></string>
+    <string name="date_util_prefix_about"></string>
+    <string name="date_util_prefix_over"></string>
+    <string name="date_util_prefix_almost"></string>
+
+    <string name="date_util_suffix">atras</string>
+
+    <string name="titulo_tutorial_pregunta">Pregunta</string>
+    <string name="descripcion_tutorial_pregunta">Descubre nuevos\nlugares con ayuda de\nla comunidad Bederr,\npreguntando lo que quieras encontrar.</string>
+    <string name="titulo_tutorial_explora">Explora</string>
+    <string name="descripcion_tutorial_explora">Encuentra cualquier\nlocal de la ciudad\nfiltrando por\ncategorías, así la\nbúsqueda se hará más\nfácil y práctica.</string>
+    <string name="titulo_tutorial_listas">Listas</string>
+    <string name="descripcion_tutorial_lista">Entérate de cuales son\nlos mejores lugares para\ncomer un ceviche o para\ncomprar ropa deportiva\ncon nuestras listas de\nrecomendaciones.</string>
+    <string name="titulo_tutorial_beneficios">Beneficios</string>
+    <string name="descripcion_tutorial_beneficios">Agrega todos tus\nprogramas de beneficios\ny accede a ellos de\nmanera inmediata..</string>
+
+
+    <!-- String's v2 -->
+    <string name="error_login_message">Usuario o contraseña incorrectos.</string>
+    <string name="error_api_message">Ocurrio un error con el servidor.</string>
+
+</resources>

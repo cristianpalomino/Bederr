@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_maven">
+
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/frame_menu"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_left"
+            android:src="@drawable/menu_atras"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            android:layout_gravity="left|center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Corporativo"
+            android:id="@+id/action_middle"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/color_blanco"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/frame_container"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="fill_parent"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="8dp"
+                android:inputType="textPersonName"
+                android:ems="15"
+                android:imeOptions="actionNext"
+                android:hint="Nick"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:id="@+id/edtnick" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="5dp"
+                android:inputType="textPersonName"
+                android:ems="15"
+                android:imeOptions="actionNext"
+                android:hint="Nombre"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:id="@+id/edtnombre" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="5dp"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"
+                android:hint="Apellido"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:ems="10"
+                android:id="@+id/edtapellido" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:imeOptions="actionNext"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:hint="Mail"
+                android:id="@+id/edtmail" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:imeOptions="actionNext"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="date"
+                android:ems="10"
+                android:hint="Cumpleaños"
+                android:id="@+id/edtcumpleanios" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="5dp"
+                android:imeOptions="actionNext"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:hint="Sexo"
+                android:id="@+id/edtsexo" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="5dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:layout_gravity="center"
+                android:imeOptions="actionNext"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:hint="Contraseña"
+                android:singleLine="true"
+                android:id="@+id/edtcontrasenia" />
+
+            <EditText
+                android:hint="Confirmar Contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_registro"
+                android:layout_marginBottom="10dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:visibility="gone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:id="@+id/edtrepcontrasenia" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lines="1"
+                android:visibility="visible"
+                android:imeOptions="actionGo"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Registrar"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:id="@+id/btnregistrar"
+                android:background="@drawable/button_verde_maven" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

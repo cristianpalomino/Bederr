@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="@drawable/fondo_message"
+        android:layout_margin="20dp"
+        android:id="@+id/frame_message_cargando"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Cargando"
+            android:id="@+id/text_type_message_cargando"
+            android:textColor="@color/color_blanco"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_type_message_cargando"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icono_cargando"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/frame_message_no_gps"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:background="@android:color/transparent"
+        android:visibility="visible">
+
+        <FrameLayout
+            android:orientation="vertical"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/fondo_message"
+            android:layout_margin="20dp"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:visibility="visible"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="No GPS"
+                android:id="@+id/text_type_message_no_gps"
+                android:paddingBottom="3dp"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:gravity="top"
+                android:layout_gravity="top|center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_type_message_no_gps"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icono_no_gps"
+                android:layout_marginBottom="25dp"
+                android:layout_gravity="bottom|center" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ingrese a settings\n y active su GPS."
+            android:id="@+id/text_type_message_desc_no_gps"
+            android:paddingBottom="3dp"
+            android:textColor="@color/color_blanco"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/frame_message_no_wifi"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="15dp"
+        android:background="@android:color/transparent"
+        android:paddingTop="15dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/fondo_message"
+            android:layout_margin="20dp"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Sin conexión"
+                android:id="@+id/text_type_message_no_wifi"
+                android:paddingBottom="3dp"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_type_message_no_wifi"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icono_no_wifi"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ingrese a settings y configura\nuna red wifi para continuar."
+            android:id="@+id/text_type_message_desc_no_wifi"
+            android:paddingBottom="3dp"
+            android:textColor="@color/color_blanco"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:id="@+id/frame_message_no_data"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fondo_message"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="No Data"
+                android:id="@+id/text_type_message_no_data"
+                android:paddingBottom="3dp"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_type_message_no_data"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icono_no_data"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="No contamos con\ninformación disponible\n en este momento."
+            android:id="@+id/text_type_message_desc_no_data"
+            android:paddingBottom="3dp"
+            android:textColor="@color/color_blanco"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </LinearLayout>
+</FrameLayout>

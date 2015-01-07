@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="Maven" parent="Theme.AppCompat.Light">
+
+    </style>
+
+    <style name="Dialog_Animation_UP_DOWN">
+        <item name="android:windowEnterAnimation">@anim/abajo_arriba_b</item>
+        <item name="android:windowExitAnimation">@anim/arriba_abajo_b</item>
+    </style>
+
+    <style name="Dialog_Animation_DOWN_UP">
+        <item name="android:windowEnterAnimation">@anim/abajo_arriba</item>
+        <item name="android:windowExitAnimation">@anim/arriba_abajo</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>

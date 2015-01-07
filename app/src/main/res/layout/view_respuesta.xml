@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:background="@drawable/holo_flat_button_plomo_claro"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/imgusuariopregunta"
+                android:src="@drawable/placeholder_usuario"
+                android:adjustViewBounds="true"
+                android:layout_margin="5dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_vertical" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Mario Gil pregunto :"
+                    android:lines="1"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:id="@+id/nombreusuario"
+                    android:textColor="#584545"
+                    android:layout_alignTop="@+id/img_categoria_local"
+                    android:layout_toRightOf="@+id/img_categoria_local"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Respuesta usuario"
+                    android:lines="1"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:id="@+id/texto_respuesta"
+                    android:textColor="@color/color_negro"
+                    android:layout_alignTop="@+id/img_categoria_local"
+                    android:layout_toRightOf="@+id/img_categoria_local"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="#F8F5F1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icono_timer_pregunta"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerInside"
+                    android:layout_marginRight="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Hace 12 minutos"
+                    android:lines="1"
+                    android:maxEms="20"
+                    android:layout_marginRight="5dp"
+                    android:maxLines="1"
+                    android:id="@+id/tiempopregunta"
+                    android:textColor="#7B6569"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/img_categoria_local"
+                    android:src="@drawable/ropa"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="10dp"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_vertical" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Pizza Hut"
+                        android:lines="1"
+                        android:maxEms="1"
+                        android:maxLines="1"
+                        android:id="@+id/nombre_local"
+                        android:textColor="#584545"
+                        android:layout_alignTop="@+id/img_categoria_local"
+                        android:layout_toRightOf="@+id/img_categoria_local"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Av. Javier Prado 554 - Miraflores"
+                        android:lines="1"
+                        android:maxEms="1"
+                        android:maxLines="1"
+                        android:id="@+id/direccion_local"
+                        android:textColor="#7B6569"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Categoria"
+                            android:lines="1"
+                            android:textColor="#7B6569"
+                            android:maxEms="25"
+                            android:layout_marginRight="5dp"
+                            android:maxLines="1"
+                            android:id="@+id/categoria_local" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="right"
+                            android:id="@+id/linearLayout">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/circulo_verde"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:layout_margin="1dp"
+                                android:id="@+id/img_cupon_verde" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:layout_margin="1dp"
+                                android:id="@+id/img_cupon_celeste"
+                                android:src="@drawable/circulo_celeste"
+                                />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:layout_margin="1dp"
+                                android:src="@drawable/circulo_plomo"
+                                android:id="@+id/img_cupon_plomo"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

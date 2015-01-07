@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+    <!-- Estado Presionado Checked -->
+    <item android:state_checked="true">
+    	  <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <shape android:shape="oval" >
+                    <padding android:left="3dp"
+                        	 android:top="3dp"
+                        	 android:right="3dp"
+                        	 android:bottom="3dp"
+                        	 />
+					<size android:width="16dp" android:height="16dp"/>
+                    <solid android:color="@color/morado_wisteria" />
+                </shape>   
+			 </item>
+            <item>
+                <shape android:shape="oval">
+                    <padding android:left="2dp"
+                        	 android:top="2dp"
+                        	 android:right="2dp"
+                        	 android:bottom="2dp"
+                        	 />
+					<size android:width="13dp" android:height="13dp"/>
+                    <solid android:color="@color/plomo_claro_clouds" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="oval">
+					<size android:width="10dp" android:height="10dp"/>
+                    <solid android:color="@color/morado_wisteria" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    
+    <!-- Estado Normal No Checked -->
+    <item>
+		<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <shape android:shape="oval" >
+                    <padding android:left="3dp"
+                        	 android:top="3dp"
+                        	 android:right="3dp"
+                        	 android:bottom="3dp"
+                        	 />
+					<size android:width="16dp" android:height="16dp"/>
+                    <solid android:color="@color/plomo_claro_silver" />
+                </shape>   
+			 </item>
+            <item>
+                <shape android:shape="oval">
+					<size android:width="14dp" android:height="14dp"/>
+                    <solid android:color="@color/plomo_claro_clouds" />
+                </shape>
+            </item>
+        </layer-list>    
+    </item>
+
+</selector>

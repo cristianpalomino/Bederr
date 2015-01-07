@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/fondo_maven"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/frame_menu"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Corporativo"
+            android:id="@+id/action_middle"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/color_blanco"
+            android:layout_gravity="center" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_right"
+            android:src="@drawable/menu_cerrar"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/frame_container">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="@drawable/holo_flat_button_azul_claro"
+                android:id="@+id/card_tipo_cupon"
+                android:layout_height="100dp">
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Beneficio Coporativo"
+                        android:textColor="#F8F5F1"
+                        android:layout_gravity="center|left"
+                        android:gravity="center|left"
+                        android:id="@+id/txt_tipo_beneficio"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Beneficio Coporativo"
+                        android:textColor="#F8F5F1"
+                        android:layout_gravity="center|left"
+                        android:gravity="center|left"
+                        android:id="@+id/txt_nombre_cupon"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
+                        android:id="@+id/txt_detalle_cupon"
+                        android:textColor="#F8F5F1"
+                        android:layout_weight="1"
+                        android:maxLines="2" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:layout_gravity="center|left"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Almuerzo Ejecutivo 14 soles."
+                        android:id="@+id/txt_descripcion_cupon"
+                        android:textColor="#F8F5F1"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/img_empresa_cupon"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/cat_comida"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:background="@drawable/holo_flat_button_plomo_claro"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fragment_terminos">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:id="@+id/imgqr"
+                        android:src="@drawable/maven_qr"
+                        android:adjustViewBounds="true"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20:00"
+                        android:layout_marginTop="5dp"
+                        android:textSize="35sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:textColor="@color/color_letra"
+                        android:id="@+id/txtcontador" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Termino y Condiciones"
+                        android:textColor="#584545"
+                        android:layout_gravity="center|left"
+                        android:gravity="center|left"
+                        android:textStyle="bold"
+                        android:id="@+id/txt_terminos_y_condiciones_text"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo- do consequat. Duis aute irure dolor in reprehenderit in vo- luptate velit esse cillum dolore eu fugiat nulla pariatur. Ex- cepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est labo"
+                        android:id="@+id/txt_terminos_y_condiciones"
+                        android:textColor="#584545"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:imeOptions="actionGo"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:text="Usar"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:id="@+id/btnusar"
+                    android:background="@drawable/button_verde_maven" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

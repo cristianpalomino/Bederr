@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_maven">
+
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/frame_menu"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_left"
+            android:src="@drawable/menu_cerrar"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            android:layout_gravity="left|center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Buscar"
+            android:id="@+id/txt_action_right"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/color_blanco"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp" />
+
+
+    </FrameLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="35dp"
+        android:id="@+id/edt_buscar_categorias"
+        android:layout_gravity="center"
+        android:gravity="left|center"
+        android:drawableLeft="@drawable/menu_lupa"
+        android:hint="Categorías..."
+        android:lines="1"
+        android:maxLines="1"
+        android:imeOptions="actionNext"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textColorHint="#8A8A8D"
+        android:textColor="#8A8A8D"
+        android:maxEms="15"
+        android:drawablePadding="10dp"
+        android:background="@drawable/holo_flat_edittext_plomo_oscuro"
+        android:minLines="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/edt_buscar_distrito"
+        android:layout_gravity="center"
+        android:maxEms="15"
+        android:gravity="left|center"
+        android:hint="Distritos..."
+        android:textColorHint="#8A8A8D"
+        android:textColor="#8A8A8D"
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionPrevious"
+        android:textSize="16sp"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:layout_marginRight="5dp"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/menu_distritos"
+        android:background="@drawable/holo_flat_edittext_plomo_oscuro"
+        android:layout_marginBottom="5dp"
+        android:minLines="1" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/frame_container">
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:divider="@null"
+                android:isScrollContainer="false"
+                android:dividerHeight="0dp"
+                android:scrollbars="none"
+                android:id="@+id/lista_distritos"
+                android:visibility="gone" />
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:scrollbars="none"
+                android:layout_height="fill_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:isScrollContainer="false"
+                android:id="@+id/lista_categorias"
+                android:visibility="gone" />
+
+        </LinearLayout>
+</LinearLayout>

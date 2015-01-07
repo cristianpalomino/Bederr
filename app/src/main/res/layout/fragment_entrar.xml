@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_tutorial">
+
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/frame_menu"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_right"
+            android:src="@drawable/menu_cerrar"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_container"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/logo_bederr_a"
+                    android:adjustViewBounds="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Maven"
+                    android:visibility="gone"
+                    android:textSize="34sp"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/fragment_entrar_titulo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Project"
+                    android:visibility="gone"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_blanco"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/fragment_central_project" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_margin="10dp">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingresa con Nosotros"
+                    android:id="@+id/btnlogeo"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/icono_bederr_boton"
+                    android:paddingLeft="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:background="@drawable/holo_flat_button_verde_claro" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingresa con Facebook"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/btnfacebook"
+                    android:drawableLeft="@drawable/icono_bederr_boton_facebook"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:paddingLeft="15dp"
+                    android:background="@drawable/holo_flat_button_facebook" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Si aún no te haz registrado, que esperas?"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtregistro"
+                    android:padding="5dp"
+                    android:autoLink="all"
+                    android:linksClickable="true"
+                    android:textColorLink="@color/color_blanco"
+                    android:textColor="@color/color_blanco"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

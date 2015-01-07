@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="45dp"
+        android:paddingLeft="55dp">
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/img_icono_tutorial"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/titulo_tutorial_explora"
+            android:textColor="#584545"
+            android:gravity="left|center"
+            android:textStyle="bold"
+            android:id="@+id/titulo_icono_tutorial"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#584545"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/descripcion_tutorial_explora"
+            android:gravity="left|center"
+            android:id="@+id/desc_icono_tutorial"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+</LinearLayout>

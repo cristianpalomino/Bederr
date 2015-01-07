@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/holo_flat_button_plomo_claro"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fondo_maven"
+            android:id="@+id/img_lista" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10+"
+                android:lines="1"
+                android:textSize="60sp"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:id="@+id/txt_top_ten"
+                android:layout_gravity="left|top"
+                android:padding="20dp"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:padding="20dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tacu Tacu"
+                    android:lines="1"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_blanco"
+                    android:id="@+id/txt_titulo_lista"
+                    android:layout_gravity="left|top"
+                    android:paddingTop="20dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="por : Barry"
+                    android:lines="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold"
+                    android:id="@+id/txt_autor_lista"
+                    android:layout_gravity="left|top"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

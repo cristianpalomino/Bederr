@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/holo_flat_button_plomo_claro"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#7B6569"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="a 120 mts"
+            android:id="@+id/txt_distancia_local"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/img_categoria_local"
+                android:src="@drawable/ropa"
+                android:adjustViewBounds="true"
+                android:layout_margin="10dp"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_vertical" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Pizza Hut"
+                    android:lines="1"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:id="@+id/txt_nombre_local"
+                    android:textColor="#584545"
+                    android:layout_alignTop="@+id/img_categoria_local"
+                    android:layout_toRightOf="@+id/img_categoria_local"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Av. Javier Prado 554 - Miraflores"
+                    android:lines="1"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:id="@+id/txt_direccion_local"
+                    android:textColor="#7B6569"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Categoria"
+                        android:lines="1"
+                        android:textColor="#7B6569"
+                        android:maxLines="1"
+                        android:id="@+id/txt_categoria_local"
+                        android:layout_marginRight="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/circulo_verde"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:id="@+id/img_cupon_verde"
+                            android:layout_marginRight="1dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:id="@+id/img_cupon_celeste"
+                            android:src="@drawable/circulo_celeste"
+                            android:layout_marginRight="1dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:src="@drawable/circulo_plomo"
+                            android:id="@+id/img_cupon_plomo"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>
