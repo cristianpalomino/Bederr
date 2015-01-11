@@ -5,11 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bederr.account_v2.dialogs.Update_Profile_Dialog;
+import com.bederr.account_v2.interfaces.OnSuccessCounty;
 import com.bederr.account_v2.interfaces.OnSuccessMe;
+import com.bederr.account_v2.services.Service_Country;
+import com.bederr.account_v2.views.Country_V;
+import com.bederr.beans_v2.Country_DTO;
 import com.bederr.main.Bederr;
 import com.bederr.dialog.Dialog_Contrasenia;
 import com.bederr.fragments.Fragment_Master;
@@ -23,12 +28,16 @@ import com.bederr.utils.RoundedTransformation;
 import com.bederr.utils.Util_Fonts;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 /**
  * Created by Gantz on 30/09/14.
  */
 public class Fragment_Perfil_v2 extends Fragment_Master {
 
     private ImageView action_right;
+    private LinearLayout containerciudad;
+
 
     public Fragment_Perfil_v2() {
         setId_layout(R.layout.fragment_perfil);
@@ -112,6 +121,33 @@ public class Fragment_Perfil_v2 extends Fragment_Master {
                 Dialog_Contrasenia dialog_contrasenia = new Dialog_Contrasenia(getActivity());
                 dialog_contrasenia.getWindow().setWindowAnimations(R.style.Dialog_Animation_UP_DOWN);
                 dialog_contrasenia.show();
+            }
+        });
+
+        getView().findViewById(R.id.txtciudadusuario).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final LinearLayout ciudades = (LinearLayout) getView().findViewById(R.id.containerciudad);
+
+                Service_Country service_country = new Service_Country(getBederr());
+                service_country.sendRequest();
+                service_country.setOnSuccessCounty(new OnSuccessCounty() {
+                    @Override
+                    public void onSuccessCountry(boolean success,
+                                                 ArrayList<Country_DTO> country_dtos,
+                                                 String message) {
+                        try {
+                            if(success){
+                                for (int i = 0; i < country_dtos.size() ; i++) {
+                                    Country_V country_v = new Country_V(getBederr(),country_dtos.get(i));
+                                    ciudades.addView(country_v);
+                                }
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 

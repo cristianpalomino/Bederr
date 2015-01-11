@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bederr.main.Bederr;
-import com.bederr.questions.fragments.Question_F;
+import com.bederr.questions_v2.fragments.Question_F;
 import com.bederr.retail_v2.fragments.Explore_F;
 import com.bederr.account_v2.fragments.Fragment_Entrar_v2;
 import com.bederr.account_v2.fragments.Fragment_Perfil_v2;

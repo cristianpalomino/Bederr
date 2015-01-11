@@ -1,6 +1,5 @@
-package com.bederr.questions.interfaces;
+package com.bederr.questions_v2.interfaces;
 
-import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Question_DTO;
 
 import java.util.ArrayList;

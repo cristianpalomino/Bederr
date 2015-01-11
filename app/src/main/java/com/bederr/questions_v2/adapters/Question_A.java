@@ -1,4 +1,4 @@
-package com.bederr.questions.adapters;
+package com.bederr.questions_v2.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,8 +18,7 @@ import com.bederr.utils.Util_Categorias;
 import com.bederr.utils.Util_Fonts;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONObject;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,9 +95,16 @@ public class Question_A extends BaseAdapter {
 
         holder.nombreusuario.setText(question_dto.getOwner_fullname() + " preguntó:");
 
-        //Date localDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(question_dto.getCreated_at());
-        //holder.tiempopregunta.setText(new PrettyTime(context).getTimeAgo(localDate));
-        holder.tiempopregunta.setText(question_dto.getCreated_at());
+        /*
+        try {
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ");
+            Date localDate = formater.parse(question_dto.getCreated_at());
+            holder.tiempopregunta.setText(new PrettyTime(context).getTimeAgo(localDate));
+            holder.tiempopregunta.setText(question_dto.getCreated_at());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        */
 
         holder.cantidadrespuesta.setText(question_dto.getNum_answers() + " respuesta(s).");
         holder.pregunta.setText(question_dto.getContent());

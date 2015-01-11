@@ -9,12 +9,11 @@ import android.widget.Toast;
 
 import com.bederr.main.Bederr;
 import com.bederr.benefits_v2.fragments.Benefits_F;
-import com.bederr.fragments.Fragment_Preguntas_v2;
 import com.bederr.beans.Usuario_DTO;
 
 import pe.bederr.com.R;
 import com.bederr.main.Tutorial;
-import com.bederr.fragments.Fragment_Preguntas;
+import com.bederr.questions_v2.fragments.Question_F;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,7 +107,7 @@ public class Session_Manager {
         editor.commit();
 
         ((Bederr) context).clearHistory();
-        ((Bederr) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, Fragment_Preguntas_v2.newInstance(), Fragment_Preguntas.class.getName()).commit();
+        ((Bederr) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, Question_F.newInstance(), Question_F.class.getName()).commit();
         Toast.makeText(context, "Cerrando sessión", Toast.LENGTH_SHORT).show();
         hideSoftKeyboard();
     }

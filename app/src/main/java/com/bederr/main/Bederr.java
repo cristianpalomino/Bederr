@@ -24,9 +24,9 @@ import com.bederr.beans_v2.Listing_DTO;
 import com.bederr.beans_v2.Locality_DTO;
 import com.bederr.beans_v2.Offer_DTO;
 import com.bederr.beans_v2.Place_DTO;
+import com.bederr.beans_v2.Question_DTO;
 import com.bederr.fragments.Fragment_Menu;
-import com.bederr.fragments.Fragment_Preguntas_v2;
-import com.bederr.questions.fragments.Question_F;
+import com.bederr.questions_v2.fragments.Question_F;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.parse.ParseFacebookUtils;
 
@@ -60,10 +60,20 @@ public class Bederr extends ActionBarActivity {
     private Listing_DTO listing_dto;
     private Place_DTO place_dto;
     private Offer_DTO offer_dto;
+    private Question_DTO question_dto;
     private CorporateOffer_DTO corporateOffer_dto;
     private Benefit_Program_DTO benefit_program_dto;
     private ArrayList<Locality_DTO> locality_dtos;
     private ArrayList<Category_DTO> category_dtos;
+
+
+    public Question_DTO getQuestion_dto() {
+        return question_dto;
+    }
+
+    public void setQuestion_dto(Question_DTO question_dto) {
+        this.question_dto = question_dto;
+    }
 
     public ArrayList<Locality_DTO> getLocality_dtos() {
         return locality_dtos;

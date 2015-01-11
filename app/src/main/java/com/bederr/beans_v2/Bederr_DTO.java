@@ -141,6 +141,27 @@ public class Bederr_DTO {
     }
 
     /**
+     * Parse Data(JSON) to Place_DTO
+     *
+     * @return
+     */
+    public ArrayList<Country_DTO> parseCountrys() {
+        ArrayList<Country_DTO> country_dtos = new ArrayList<Country_DTO>();
+        try {
+            JSONArray array = getDatasourcearray();
+            for (int i = 0; i < array.length(); i++) {
+                Country_DTO country_dto = new Country_DTO();
+                country_dto.setDataSource(array.getJSONObject(i));
+                country_dtos.add(country_dto);
+            }
+            return country_dtos;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * Parse Data(JSON) to Benefit_Program_DTO
      *
      * @return
@@ -237,6 +258,27 @@ public class Bederr_DTO {
                 question_dtos.add(question_dto);
             }
             return question_dtos;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Parse Data(JSON) to Listing_DTO
+     *
+     * @return
+     */
+    public ArrayList<Answer_DTO> parseAnswerDTOs() {
+        ArrayList<Answer_DTO> answer_dtos = new ArrayList<Answer_DTO>();
+        try {
+            JSONArray array = getDataSource().getJSONArray("results");
+            for (int i = 0; i < array.length(); i++) {
+                Answer_DTO answer_dto = new Answer_DTO();
+                answer_dto.setDataSource(array.getJSONObject(i));
+                answer_dtos.add(answer_dto);
+            }
+            return answer_dtos;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

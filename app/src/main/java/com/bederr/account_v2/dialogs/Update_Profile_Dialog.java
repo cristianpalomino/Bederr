@@ -91,6 +91,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
         edtcorreo.setTypeface(Util_Fonts.setPNALight(getContext()));
         txtcumpleanios.setTypeface(Util_Fonts.setPNALight(getContext()));
         txtsexo.setTypeface(Util_Fonts.setPNALight(getContext()));
+        txtdni.setTypeface(Util_Fonts.setPNALight(getContext()));
         btn_editar.setTypeface(Util_Fonts.setPNASemiBold(getContext()));
 
         User_DTO user_dto = new User_DTO();

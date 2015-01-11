@@ -1,4 +1,4 @@
-package com.bederr.questions.fragments;
+package com.bederr.questions_v2.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.bederr.adapter.Adapter_Preguntas;
-import com.bederr.beans.Pregunta_DTO;
-import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Question_DTO;
 import com.bederr.dialog.Dialog_Categoria;
 import com.bederr.fragments.Fragment_Detalle_Pregunta;
@@ -21,10 +19,9 @@ import com.bederr.fragments.Fragment_Detalle_Pregunta_v2;
 import com.bederr.fragments.Fragment_Entrar;
 import com.bederr.fragments.Fragment_Master;
 import com.bederr.main.Bederr;
-import com.bederr.operations.Operation_Preguntas;
-import com.bederr.questions.adapters.Question_A;
-import com.bederr.questions.interfaces.OnSuccessQuestion;
-import com.bederr.questions.services.Service_Question;
+import com.bederr.questions_v2.adapters.Question_A;
+import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
+import com.bederr.questions_v2.services.Service_Question;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
 
@@ -157,21 +154,6 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
     @Override
     public void onAttach(final Activity activity) {
         super.onAttach(activity);
-        /*
-        Operation_Locales_Cercanos operation_locales_cercanos = new Operation_Locales_Cercanos(getActivity());
-        operation_locales_cercanos.setPage(1);
-        operation_locales_cercanos.getLocalesCercanos();
-        operation_locales_cercanos.setInterface_operation_locales_cercanos(new Operation_Locales_Cercanos.Interface_Operation_Locales_Cercanos() {
-            @Override
-            public void getLocalesCercanos(boolean status, ArrayList<Local_DTO> local_dtos, int pages) {
-                try {
-                    ((Bederr)activity).setLocal_dtos(local_dtos);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        */
     }
 
     /**
@@ -189,9 +171,14 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Pregunta_DTO pregunta_dto = (Pregunta_DTO) parent.getItemAtPosition(position);
-        ((Bederr) getActivity()).setPregunta_dto(pregunta_dto);
-        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).add(R.id.container, Fragment_Detalle_Pregunta_v2.newInstance(), Fragment_Detalle_Pregunta.class.getName()).addToBackStack(null).commit();
+
+        Question_DTO question_dto = (Question_DTO) parent.getItemAtPosition(position);
+        ((Bederr) getActivity()).setQuestion_dto(question_dto);
+        getActivity().getSupportFragmentManager().
+                beginTransaction().
+                setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
+                add(R.id.container, Detail_Question_F.newInstance(),Detail_Question_F.class.getName()).
+                addToBackStack(null).commit();
     }
 
     /**
@@ -229,21 +216,5 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
         }
     }
 
-    private void loadMoreDAta(int page) {
-        Operation_Preguntas operation_preguntas = new Operation_Preguntas(getActivity());
-        operation_preguntas.getPreguntas(page);
-        operation_preguntas.setInterface_obtener_preguntas(new Operation_Preguntas.Interface_Obtener_Preguntas() {
-            @Override
-            public void getPreguntas(boolean status, final ArrayList<Pregunta_DTO> pregunta_dtos, String mensaje) {
-                try {
-                    for (int i = 0; i < pregunta_dtos.size(); i++) {
-                        adapter_preguntas.add(pregunta_dtos.get(i));
-                    }
-                    isLoading = false;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private void loadMoreDAta(int page) {}
 }

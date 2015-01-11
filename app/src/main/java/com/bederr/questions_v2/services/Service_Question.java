@@ -1,10 +1,9 @@
-package com.bederr.questions.services;
+package com.bederr.questions_v2.services;
 
 import android.content.Context;
 
 import com.bederr.beans_v2.Bederr_DTO;
-import com.bederr.questions.interfaces.OnSuccessQuestion;
-import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
+import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
 import com.bederr.util_v2.Bederr_WS;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;

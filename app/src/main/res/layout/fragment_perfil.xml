@@ -36,18 +36,6 @@
             android:textColor="@color/color_blanco"
             android:layout_gravity="center" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/action_right"
-            android:src="@drawable/menu_lateral"
-            android:adjustViewBounds="true"
-            android:scaleType="matrix"
-            android:visibility="gone"
-            android:layout_gravity="right|center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
-
     </FrameLayout>
 
     <ScrollView
@@ -61,75 +49,93 @@
             android:id="@+id/frame_container"
             >
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:background="@color/color_blanco"
+            <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="125dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:id="@+id/img_perfil_usuario"
-                    android:src="@drawable/placeholder_usuario"
-                    android:adjustViewBounds="true"
-                    android:layout_margin="10dp"
-                    android:scaleType="fitXY"
-                    android:layout_gravity="center_vertical" />
+                android:layout_height="fill_parent">
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
+                    android:orientation="horizontal"
+                    android:background="@color/color_blanco"
+                    android:layout_width="fill_parent"
+                    android:layout_height="125dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/img_perfil_usuario"
+                        android:src="@drawable/placeholder_usuario"
+                        android:adjustViewBounds="true"
+                        android:layout_margin="10dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center_vertical" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Bederr"
-                        android:textStyle="bold"
-                        android:maxLines="1"
-                        android:lines="1"
-                        android:paddingRight="10dp"
-                        android:textColor="#7B6569"
-                        android:id="@+id/txtnombreusuario" />
+                        android:layout_gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Bederr"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:lines="1"
+                            android:paddingRight="10dp"
+                            android:textColor="#7B6569"
+                            android:id="@+id/txtnombreusuario" />
 
-                        android:maxLines="1"
-                        android:lines="1"
-                        android:paddingRight="10dp"
-                        android:textColor="#7B6569"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Bederr"
-                        android:id="@+id/txtsexousuario" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Bederr"
-                        android:maxLines="1"
-                        android:lines="1"
-                        android:paddingRight="10dp"
-                        android:textColor="#7B6569"
-                        android:id="@+id/txtcorreousuario" />
+                            android:maxLines="1"
+                            android:lines="1"
+                            android:paddingRight="10dp"
+                            android:textColor="#7B6569"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Bederr"
+                            android:id="@+id/txtsexousuario" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:maxLines="1"
-                        android:lines="1"
-                        android:paddingRight="10dp"
-                        android:textColor="#7B6569"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Bederr"
-                        android:id="@+id/txtcumpleaniosusuario" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Bederr"
+                            android:maxLines="1"
+                            android:lines="1"
+                            android:paddingRight="10dp"
+                            android:textColor="#7B6569"
+                            android:id="@+id/txtcorreousuario" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:maxLines="1"
+                            android:lines="1"
+                            android:paddingRight="10dp"
+                            android:textColor="#7B6569"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Bederr"
+                            android:id="@+id/txtcumpleaniosusuario" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/action_right"
+                    android:src="@drawable/action_edit_profile"
+                    android:adjustViewBounds="true"
+                    android:scaleType="matrix"
+                    android:visibility="visible"
+                    android:layout_gravity="right|top"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp" />
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -143,19 +149,33 @@
                 android:textColor="@color/color_blanco"
                 android:layout_gravity="left" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Lima, Perú"
-                android:background="@drawable/holo_flat_button_plomo_claro"
-                android:gravity="left"
-                android:id="@+id/txtciudadusuario"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:padding="10dp"
-                android:textColor="#7B6569"
-                android:layout_gravity="left" />
+                android:background="@drawable/holo_flat_button_plomo_claro"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Lima, Perú"
+                    android:gravity="left"
+                    android:id="@+id/txtciudadusuario"
+                    android:padding="10dp"
+                    android:textColor="#7B6569"
+                    android:layout_gravity="left" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/containerciudad">
+
+                    </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -272,6 +292,7 @@
                 android:id="@+id/cerrarsessionusuario"
                 android:textColor="#7B6569"
                 android:layout_gravity="left" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
