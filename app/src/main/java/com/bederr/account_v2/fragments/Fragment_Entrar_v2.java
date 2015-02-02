@@ -96,6 +96,8 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
 
             case R.id.btnfacebook:
                 loginFacebook();
+                getView().setClickable(false);
+                getView().setOnClickListener(null);
                 break;
 
             case R.id.txtregistro:

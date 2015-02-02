@@ -40,10 +40,16 @@
     </FrameLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/frame_container"
+        android:visibility="gone"></LinearLayout>
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/frame_container"
         android:background="@color/color_blanco">
 
         <LinearLayout

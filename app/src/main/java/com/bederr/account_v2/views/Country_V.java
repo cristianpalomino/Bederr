@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bederr.beans_v2.Area_DTO;
 import com.bederr.beans_v2.Country_DTO;
 import com.bederr.beans_v2.Offer_DTO;
+import com.bederr.utils.Util_Fonts;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class Country_V extends LinearLayout {
         container = (LinearLayout) view.findViewById(R.id.containerarea);
 
         pais.setText(country_dto.getName());
+        pais.setTypeface(Util_Fonts.setPNASemiBold(getContext()));
         Picasso.with(getContext()).load(country_dto.getFlag_image()).into(imagenpais);
 
         ArrayList<Area_DTO> area_dtos = country_dto.getAreas();

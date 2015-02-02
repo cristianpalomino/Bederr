@@ -1,5 +1,7 @@
 package com.bederr.beans_v2;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -210,6 +212,14 @@ public class Bederr_DTO {
     public ArrayList<Locality_DTO> parseLocalityDTOs() {
         ArrayList<Locality_DTO> locality_dtos = new ArrayList<Locality_DTO>();
         try {
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id",-1);
+            jsonObject.put("name","Mi ubicación");
+            Locality_DTO mi = new Locality_DTO();
+            mi.setDataSource(jsonObject);
+            locality_dtos.add(mi);
+
             for (int i = 0; i < getDatasourcearray().length(); i++) {
                 Locality_DTO locality_dto = new Locality_DTO();
                 locality_dto.setDataSource(getDatasourcearray().getJSONObject(i));
@@ -363,11 +373,11 @@ public class Bederr_DTO {
             if (!dataSource.isNull(key)) {
                 return dataSource.getString(key);
             } else {
-                return "NULL";
+                return "No disponible";
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            return "NULL";
+            return "No disponible";
         }
     }
 

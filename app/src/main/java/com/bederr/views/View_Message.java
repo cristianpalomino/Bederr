@@ -41,7 +41,7 @@ public class View_Message extends FrameLayout {
         LinearLayout frame_no_data = (LinearLayout) this.view.findViewById(R.id.frame_message_no_data);
         LinearLayout frame_no_gps = (LinearLayout) this.view.findViewById(R.id.frame_message_no_gps);
         LinearLayout frame_no_wifi = (LinearLayout) this.view.findViewById(R.id.frame_message_no_wifi);
-        LinearLayout frame_cargando = (LinearLayout) this.view.findViewById(R.id.frame_message_cargando);
+        FrameLayout frame_cargando = (FrameLayout) this.view.findViewById(R.id.frame_message_cargando);
 
         TextView txt_message_title_cargando = (TextView) this.view.findViewById(R.id.text_type_message_cargando);
         TextView txt_message_title_no_data = (TextView) this.view.findViewById(R.id.text_type_message_no_data);

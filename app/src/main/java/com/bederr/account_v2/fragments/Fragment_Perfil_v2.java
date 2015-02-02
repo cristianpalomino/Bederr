@@ -127,8 +127,9 @@ public class Fragment_Perfil_v2 extends Fragment_Master {
         getView().findViewById(R.id.txtciudadusuario).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setOnClickListener(null);
+                view.setClickable(false);
                 final LinearLayout ciudades = (LinearLayout) getView().findViewById(R.id.containerciudad);
-
                 Service_Country service_country = new Service_Country(getBederr());
                 service_country.sendRequest();
                 service_country.setOnSuccessCounty(new OnSuccessCounty() {

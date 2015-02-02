@@ -17,7 +17,12 @@ import pe.bederr.com.R;
 import com.bederr.utils.RoundedTransformation;
 import com.bederr.utils.Util_Categorias;
 import com.bederr.utils.Util_Fonts;
+import com.bederr.utils.Util_Time;
 import com.squareup.picasso.Picasso;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
@@ -85,7 +90,7 @@ public class Answer_A extends BaseAdapter {
         holder.direccion_local.setTypeface(Util_Fonts.setPNALight(context));
         holder.categoria_local.setTypeface(Util_Fonts.setPNALight(context));
 
-        int resourceid = Util_Categorias.getImageCategory(answer_dto.getPlace_dto().getCategory_code());
+        int resourceid = Util_Categorias.getImageCategory(answer_dto.getPlace_dto().getCategory_name());
         Picasso.with(context).
                 load(resourceid).
                 centerCrop().
@@ -105,13 +110,14 @@ public class Answer_A extends BaseAdapter {
         Place_DTO place_dto = answer_dto.getPlace_dto();
 
         holder.nombre_local.setText(place_dto.getName());
+        holder.texto_respuesta.setText(answer_dto.getContent());
         holder.direccion_local.setText(place_dto.getAddress());
         holder.categoria_local.setText(place_dto.getCategory_name());
         holder.nombreusuario.setText(answer_dto.getOwner_fullname() + " respondió:");
 
-        //Date localDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(jsonObject.getString("date_register"));
-        //holder.tiempopregunta.setText(new PrettyTime(context).getTimeAgo(localDate));
-        //holder.texto_respuesta.setText(jsonObject.getString("respuesta"));
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ");
+        DateTime dt = formatter.parseDateTime(answer_dto.getCreated_at());
+        holder.tiempopregunta.setText(Util_Time.getTimeAgo(dt.getMillis()));
 
         holder.img_azul.setVisibility(place_dto.isInplace());
         holder.img_verde.setVisibility(place_dto.isEspecial());

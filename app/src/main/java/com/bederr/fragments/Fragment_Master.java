@@ -11,7 +11,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
+import com.bederr.application.Maven_Application;
+import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.main.Bederr;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Locator;
@@ -26,9 +30,21 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     public int id_layout;
     private boolean isReady = false;
     private View_Message view_message;
-
-    protected Location location;
+    private Location location;
     protected String token;
+    private Ubication_DTO ubication;
+
+
+    public String NEXT = "";
+    public String PREVIOUS = "";
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public void setId_container(int id_container) {
         this.id_container = id_container;
@@ -44,6 +60,10 @@ public class Fragment_Master extends Fragment implements Interface_Load {
 
     public int getId_layout() {
         return id_layout;
+    }
+
+    public Ubication_DTO getUbication() {
+        return ((Maven_Application)getBederr().getApplication()).getUbication();
     }
 
     private Bederr bederr;
@@ -85,7 +105,6 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
         if (isOnline()) {
             isReady = true;
             view_message = new View_Message(getActivity(), 2);
@@ -113,20 +132,20 @@ public class Fragment_Master extends Fragment implements Interface_Load {
 
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        /*
         new Locator(getActivity()).getLocation(Locator.Method.NETWORK_THEN_GPS, new Locator.Listener() {
             @Override
-            public void onLocationFound(Location location) {
+            public void onLocationFound(Location mlocation) {
                 isReady = true;
+                location = mlocation;
             }
 
             @Override
             public void onLocationNotFound() {
                 isReady = false;
                 view_message = new View_Message(getActivity(),2);
+                location = null;
             }
         });
-         */
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle bundle) {
@@ -162,30 +181,19 @@ public class Fragment_Master extends Fragment implements Interface_Load {
         getView_message().setVisibility(View.GONE);
     }
 
-    public void startGPS(){
-        new Locator(getBederr()).getLocation(Locator.Method.NETWORK_THEN_GPS,new Locator.Listener() {
-            @Override
-            public void onLocationFound(Location location) {
-                Fragment_Master.this.location = location;
-            }
-
-            @Override
-            public void onLocationNotFound() {
-                Fragment_Master.this.location = null;
-            }
-        });
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
     public String getToken() {
         token = new Session_Manager(getBederr()).getUserToken();
         return token;
     }
-}
 
+    public void closeKeyboard(){
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+}
 
 interface Interface_Load {
     void onFinishLoad(View view);

@@ -2,6 +2,7 @@ package com.bederr.questions_v2.services;
 
 import android.content.Context;
 
+import com.bederr.beans_v2.Answer_DTO;
 import com.bederr.beans_v2.Bederr_DTO;
 import com.bederr.questions_v2.interfaces.OnSuccessAnswer;
 import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
@@ -12,6 +13,8 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Gantz on 23/12/14.
@@ -38,7 +41,7 @@ public class Service_Answers {
                 super.onSuccess(statusCode, headers, response);
                 Bederr_DTO bederr_dto = new Bederr_DTO();
                 bederr_dto.setDataSource(response);
-                
+
                 String count = String.valueOf(bederr_dto.parseInt("count", response));
                 String next = bederr_dto.parseString("next", response);
                 String previous = bederr_dto.parseString("previous", response);
@@ -50,6 +53,61 @@ public class Service_Answers {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 onSuccessAnswer.onSuccessAnswer(false,null,null,null,null);
+            }
+        });
+    }
+
+    public void sendRequest(String token,String content,String placeid,String questionid) {
+        String URL = Bederr_WS.BEDERR_DETAIL_CREATE_QUESTION.replace("#",questionid);
+
+        RequestParams params = new RequestParams();
+        params.put("content", content);
+        params.put("place", placeid);
+
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.addHeader("Authorization", "Token " + token);
+        httpClient.post(context, URL, params , new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Bederr_DTO bederr_dto = new Bederr_DTO();
+                bederr_dto.setDataSource(response);
+
+                String count = String.valueOf(bederr_dto.parseInt("count", response));
+                String next = bederr_dto.parseString("next", response);
+                String previous = bederr_dto.parseString("previous", response);
+
+                onSuccessAnswer.onSuccessAnswer(true,bederr_dto.parseAnswerDTOs(),count,next,previous);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                onSuccessAnswer.onSuccessAnswer(false, null, null, null, null);
+            }
+        });
+    }
+
+    public void loadMore(String URL) {
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.get(context, URL , null , new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Bederr_DTO bederr_dto = new Bederr_DTO();
+                bederr_dto.setDataSource(response);
+
+                String count = String.valueOf(bederr_dto.parseInt("count", response));
+                String next = bederr_dto.parseString("next", response);
+                String previous = bederr_dto.parseString("previous", response);
+
+                onSuccessAnswer.onSuccessAnswer(true,bederr_dto.parseAnswerDTOs(),count,next,previous);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                onSuccessAnswer.onSuccessAnswer(false, null, null, null, null);
             }
         });
     }

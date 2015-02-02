@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bederr.beans_v2.Listing_DTO;
 import com.bederr.main.Bederr;
 import com.bederr.fragments.Fragment_Master;
 import com.bederr.retail_v2.adapters.Places_A;
@@ -20,7 +21,12 @@ import com.bederr.beans_v2.Place_DTO;
 
 import pe.bederr.com.R;
 
+import com.bederr.retail_v2.interfaces.OnSuccessListings;
+import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
+import com.bederr.retail_v2.services.Service_Listings;
 import com.bederr.utils.Util_Fonts;
+
+import java.util.ArrayList;
 
 /**
  * Created by Gantz on 30/09/14.
@@ -66,9 +72,26 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
         lista_locales.addHeaderView(view);
         lista_locales.setOnItemClickListener(this);
 
-        Places_A places_a = new Places_A(getBederr(),getBederr().getListing_dto().getPlace_dtos(),1);
-        lista_locales.setAdapter(places_a);
-        Detail_Listing_F.this.onFinishLoad(getView());
+        Service_Listings service_listings = new Service_Listings(getBederr());
+        service_listings.sendRequestListhing(String.valueOf(getBederr().getListing_dto().getId()));
+        service_listings.setOnSuccessPlaces(new OnSuccessPlaces() {
+            @Override
+            public void onSuccessPlaces(boolean success,
+                                        ArrayList<Place_DTO> place_dtos,
+                                        String count,
+                                        String next,
+                                        String previous) {
+                try {
+                    if (success) {
+                        Places_A places_a = new Places_A(getBederr(), place_dtos , 1 , "Explore");
+                        lista_locales.setAdapter(places_a);
+                        Detail_Listing_F.this.onFinishLoad(getView());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -135,7 +158,7 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
         ((Bederr) getActivity()).setPlace_dto(place_dto);
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance(), Detail_Place_F.class.getName()).
+                add(R.id.container, Detail_Place_F.newInstance("Explore"), Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
     }
 }

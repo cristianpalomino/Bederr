@@ -85,6 +85,8 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
     @Override
     protected void initView() {
         super.initView();
+        closeKeyboard();
+
         edtdistritos = (EditText) getView().findViewById(R.id.edt_buscar_distrito);
         edtcategorias = (EditText) getView().findViewById(R.id.edt_buscar_categorias);
 
@@ -121,14 +123,17 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String text = edtcategorias.getText().toString().toLowerCase(Locale.getDefault());
-                ((Category_A) listaCategorias.getAdapter()).filter(text);
+                if(listaCategorias.getAdapter() != null){
+                    String text = edtcategorias.getText().toString().toLowerCase(Locale.getDefault());
+                    ((Category_A) listaCategorias.getAdapter()).filter(text);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
+
         edtdistritos.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -146,6 +151,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
             public void afterTextChanged(Editable s) {
             }
         });
+
         edtcategorias.setOnFocusChangeListener(this);
         edtdistritos.setOnFocusChangeListener(this);
 
@@ -191,8 +197,6 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(edtcategorias, InputMethodManager.SHOW_IMPLICIT);
         if (v.equals(edtcategorias)) {
             if (hasFocus) {
                 if (!flagcategoria) {
@@ -216,23 +220,6 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
         }
     }
 
-    private boolean isCategory(String s) {
-        for (int i = 0; i < listaCategorias.getAdapter().getCount(); i++) {
-            Categoria_DTO categoria_dto = (Categoria_DTO) listaCategorias.getItemAtPosition(i);
-            if (s.equals(categoria_dto.getNombrecategoria())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isDescuentoOrBeneficio(String s) {
-        if (s.equals("Beneficio") || s.equals("Descuento")) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     protected void initActionBar() {
         super.initActionBar();
@@ -241,7 +228,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
         action_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard();
+                closeKeyboard();
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction trans = manager.beginTransaction();
                 trans.setCustomAnimations(R.animator.abajo_arriba_b, R.animator.arriba_abajo_b);
@@ -284,6 +271,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        closeKeyboard();
         Search_F.this.getView().setFocusableInTouchMode(true);
         Search_F.this.getView().requestFocus();
         Search_F.this.getView().setOnKeyListener(new View.OnKeyListener() {

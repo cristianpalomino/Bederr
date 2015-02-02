@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bederr.beans_v2.Area_DTO;
 import com.bederr.beans_v2.Area_DTO;
+import com.bederr.utils.Util_Fonts;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class Area_V extends LinearLayout {
 
     private TextView area;
     private ImageView imgarea;
+
+    private boolean checked = false;
 
     public Area_V(Context context, Area_DTO area_dto) {
         super(context);
@@ -55,6 +58,28 @@ public class Area_V extends LinearLayout {
         area = (TextView) view.findViewById(R.id.city);
         imgarea = (ImageView) view.findViewById(R.id.imgcity);
 
+        area.setTypeface(Util_Fonts.setPNALight(getContext()));
         area.setText(area_dto.getName());
+
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checked){
+                    imgarea.setVisibility(VISIBLE);
+                    checked = false;
+                }else{
+                    imgarea.setVisibility(GONE);
+                    checked = true;
+                }
+            }
+        });
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

@@ -101,7 +101,7 @@ public class Offer_Detail_F extends Fragment_Master implements Dialog_Cupon.Inte
         if(offer_dto.isValidate_use()){
             btnusar.setVisibility(View.VISIBLE);
         }else{
-            btnusar.setVisibility(View.VISIBLE);
+            btnusar.setVisibility(View.GONE);
         }
 
         txtnombrecupon.setText(offer_dto.getTitle());

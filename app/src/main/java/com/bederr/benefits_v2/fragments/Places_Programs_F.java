@@ -92,7 +92,8 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                                         String previous) {
                 try {
                     if (success) {
-                        places_a = new Places_A(getBederr(), place_dtos, 0);
+                        getBederr().setPlace_dtos(place_dtos);
+                        places_a = new Places_A(getBederr(),place_dtos,0,"Benefits");
                         lista_locales.setAdapter(places_a);
                         lista_locales.setVisibility(View.VISIBLE);
                     }
@@ -132,15 +133,15 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                                 setCustomAnimations(R.animator.abajo_arriba, R.animator.arriba_abajo).
                                 add
                                         (
-                                                R.id.container, Fragment_Busqueda_Life.newInstance(),
-                                                Fragment_Busqueda_Life.class.getName()
+                                                R.id.container, Benefits_Search_F.newInstance(),
+                                                Benefits_Search_F.class.getName()
                                         )
                                 .addToBackStack("a").commit();
                     } else {
-                        Toast.makeText(getBederr(), "No hay datos...!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBederr(), "No hay locales...!", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getBederr(), "No hay datos...!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBederr(), "No hay locales...!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -165,7 +166,7 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
         ((Bederr) getActivity()).setPlace_dto(place_dto);
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance(), Detail_Place_F.class.getName()).
+                add(R.id.container, Detail_Place_F.newInstance("Benefits"), Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
     }
 

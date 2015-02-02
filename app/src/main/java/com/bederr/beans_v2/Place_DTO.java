@@ -122,7 +122,7 @@ public class Place_DTO extends Bederr_DTO {
     }
 
     public int isCorporate() {
-        if (getCorporate_offers().size() > 0) {
+        if (getCorporate_offers().size() > 0 || getLegacy_offers().size() > 0) {
             return View.VISIBLE;
         }else{
             return View.GONE;
@@ -150,6 +150,23 @@ public class Place_DTO extends Bederr_DTO {
         try {
             ArrayList<CorporateOffer_DTO> corporateOffer_dtos = new ArrayList<CorporateOffer_DTO>();
             JSONArray jsonArray = parseJSONArray(KEY_JSON_ARRAY_CORPORATEOFFER, getDataSource());
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                CorporateOffer_DTO corporateOffer_dto = new CorporateOffer_DTO();
+                corporateOffer_dto.setDataSource(jsonArray.getJSONObject(i));
+                corporateOffer_dtos.add(corporateOffer_dto);
+            }
+            return corporateOffer_dtos;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<CorporateOffer_DTO> getLegacy_offers() {
+        try {
+            ArrayList<CorporateOffer_DTO> corporateOffer_dtos = new ArrayList<CorporateOffer_DTO>();
+            JSONArray jsonArray = parseJSONArray("legacy_corporate_offers", getDataSource());
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 CorporateOffer_DTO corporateOffer_dto = new CorporateOffer_DTO();

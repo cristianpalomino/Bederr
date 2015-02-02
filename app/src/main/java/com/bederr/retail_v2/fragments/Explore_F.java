@@ -1,6 +1,9 @@
 package com.bederr.retail_v2.fragments;
 
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +13,29 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bederr.application.Maven_Application;
+import com.bederr.beans_v2.Question_DTO;
+import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.fragments.Fragment_Master;
+import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
+import com.bederr.questions_v2.services.Service_Question;
 import com.bederr.retail_v2.adapters.Places_A;
 import com.bederr.adapter.Adapter_Locales;
 import com.bederr.beans.Local_DTO;
 import com.bederr.beans_v2.Place_DTO;
 import com.bederr.main.Bederr;
+
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 import pe.bederr.com.R;
 
 import com.bederr.operations.Operation_Locales_Cercanos;
+import com.bederr.retail_v2.dialog.Ubication_D;
 import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
 import com.bederr.retail_v2.services.Service_Places;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -32,9 +45,7 @@ import java.util.ArrayList;
 public class Explore_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
     private ListView lista_locales;
-    protected Adapter_Locales adapter_locales;
-
-    protected int page = 1;
+    protected Places_A places_a;
     private boolean isLoading = false;
 
     public Explore_F() {
@@ -64,63 +75,93 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
     @Override
     protected void initView() {
         super.initView();
+        closeKeyboard();
+
         lista_locales = (ListView) getView().findViewById(R.id.lista_locales);
         lista_locales.setOnItemClickListener(this);
         lista_locales.setOnScrollListener(this);
         lista_locales.setVisibility(View.GONE);
 
         Session_Manager session_manager = new Session_Manager(getBederr());
+        Ubication_DTO ubication_dto = getUbication();
 
-        String lat = "-12.0842643";
-        String lng = "-77.0834144";
+        if(ubication_dto != null){
+            if (ubication_dto.getLatLng() != null) {
+                if (session_manager.isLogin()) {
+                    openLoginUser(session_manager.getUserToken());
+                } else {
+                    openLogin();
+                }
+            } else {
+
+            }
+        }
+    }
+
+    private void openLoginUser(String token){
+        String lat = getUbication().getLatitude();
+        String lng = getUbication().getLongitude();
         String name = "";
         String cat = "";
         String city = "";
 
-        if (session_manager.isLogin()) {
-            Service_Places service_places = new Service_Places(getBederr());
-            service_places.sendRequestUser(session_manager.getUserToken(), lat, lng, name, cat, city);
-            service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-                @Override
-                public void onSuccessPlaces(boolean success,
-                                            ArrayList<Place_DTO> place_dtos,
-                                            String count,
-                                            String next,
-                                            String previous) {
-                    try {
-                        if (success) {
-                            Places_A places_a = new Places_A(getBederr(), place_dtos, 0);
-                            lista_locales.setAdapter(places_a);
-                            Explore_F.this.onFinishLoad(lista_locales);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        Service_Places service_places = new Service_Places(getBederr());
+        service_places.sendRequestUser(token, lat, lng, name, cat, city);
+        service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+            @Override
+            public void onSuccessPlaces(boolean success,
+                                        ArrayList<Place_DTO> place_dtos,
+                                        String count,
+                                        String next,
+                                        String previous) {
+                try {
+                    if (success) {
+                        places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
+                        lista_locales.setAdapter(places_a);
+                        Explore_F.this.onFinishLoad(lista_locales);
+
+                        NEXT = next;
+                        PREVIOUS = previous;
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-        } else {
-            Service_Places service_places = new Service_Places(getBederr());
-            service_places.sendRequest(lat, lng, name, cat, city);
-            service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-                @Override
-                public void onSuccessPlaces(boolean success,
-                                            ArrayList<Place_DTO> place_dtos,
-                                            String count,
-                                            String next,
-                                            String previous) {
-                    try {
-                        if (success) {
-                            Places_A places_a = new Places_A(getBederr(), place_dtos, 0);
-                            lista_locales.setAdapter(places_a);
-                            Explore_F.this.onFinishLoad(lista_locales);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
+            }
+        });
     }
+
+    private void openLogin(){
+        String lat = getUbication().getLatitude();
+        String lng = getUbication().getLongitude();
+        String name = "";
+        String cat = "";
+        String city = "";
+
+        Service_Places service_places = new Service_Places(getBederr());
+        service_places.sendRequest(lat, lng, name, cat, city);
+        service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+            @Override
+            public void onSuccessPlaces(boolean success,
+                                        ArrayList<Place_DTO> place_dtos,
+                                        String count,
+                                        String next,
+                                        String previous) {
+                try {
+                    if (success) {
+                        places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
+                        lista_locales.setAdapter(places_a);
+                        Explore_F.this.onFinishLoad(lista_locales);
+
+                        NEXT = next;
+                        PREVIOUS = previous;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     @Override
     protected void initActionBar() {
@@ -166,7 +207,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         ((Bederr) getActivity()).setPlace_dto(place_dto);
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance(), Detail_Place_F.class.getName()).
+                add(R.id.container, Detail_Place_F.newInstance("Explore"), Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
     }
 
@@ -198,27 +239,53 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
             if (!isLoading) {
                 isLoading = true;
-                page++;
-                loadMoreDAta(page);
+                Service_Places service_places = new Service_Places(getBederr());
+                service_places.loadMore(NEXT);
+                service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+                    @Override
+                    public void onSuccessPlaces(boolean success,
+                                                ArrayList<Place_DTO> place_dtos,
+                                                String count,
+                                                String next,
+                                                String previous) {
+                        try {
+                            if (success) {
+                                for (int i = 0; i < place_dtos.size(); i++) {
+                                    places_a.add(place_dtos.get(i));
+                                }
+
+                                /**
+                                 * Stacks
+                                 */
+                                NEXT = next;
+                                PREVIOUS = previous;
+                                isLoading = false;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
     }
 
-    private void loadMoreDAta(int page) {
-        Operation_Locales_Cercanos operation_locales_cercanos = new Operation_Locales_Cercanos(getActivity());
-        operation_locales_cercanos.setPage(page);
-        operation_locales_cercanos.getLocalesCercanos();
-        operation_locales_cercanos.setInterface_operation_locales_cercanos(new Operation_Locales_Cercanos.Interface_Operation_Locales_Cercanos() {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Explore_F.this.getView().setFocusableInTouchMode(true);
+        Explore_F.this.getView().requestFocus();
+        Explore_F.this.getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void getLocalesCercanos(boolean status, ArrayList<Local_DTO> local_dtos, int pages) {
-                try {
-                    for (int i = 0; i < local_dtos.size(); i++) {
-                        adapter_locales.add(local_dtos.get(i));
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        getBederr().clearHistory();
+                        getBederr().finish();
+                        return true;
                     }
-                    isLoading = false;
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+                return false;
             }
         });
     }

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion '20.0.0'
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         applicationId "pe.bederr.com"
         minSdkVersion 9
-        targetSdkVersion 19
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -18,10 +18,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile 'com.squareup.picasso:picasso:2.3.4'
     compile 'com.mcxiaoke.volley:library:1.0.6'
+    compile 'com.loopj.android:android-async-http:1.4.6'
+    compile 'io.nlopez.smartlocation:library:3.0.0'
     compile project(':sliding_menu')
     compile project(':FacebookSDK')
-    compile 'com.google.android.gms:play-services:+'
-    compile 'com.loopj.android:android-async-http:1.4.6'
     compile project(':ViewPagerIndicator')
 }
 

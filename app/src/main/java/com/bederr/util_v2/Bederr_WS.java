@@ -20,7 +20,7 @@ public class Bederr_WS {
      */
     public static final String BEDERR_PLACES = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/places/";
     public static final String BEDERR_LISTINGS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/listings/";
-    public static final String BEDERR_PLACES_LISTING = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/listings/:id/places/";
+    public static final String BEDERR_PLACES_LISTING = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/listings/#/places/";
     public static final String BEDERR_CATEGORY = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/categories/";
     public static final String BEDERR_LOCALITY = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/localities/";
 
@@ -39,4 +39,9 @@ public class Bederr_WS {
     public static final String BEDERR_QUESTIONS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/questions/";
     public static final String BEDERR_DETAIL_CREATE_QUESTION = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/questions/#/answers/";
 
+
+    /**
+     * GEOCODE WEB
+     */
+    public static final String BEDERR_GEOCODE = "http://maps-googleapis-com-stvd4o5841j1.runscope.net/maps/api/geocode/json?latlng=LAT,LON&sensor=true_or_false";
 }

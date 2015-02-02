@@ -36,21 +36,26 @@ public class View_Local_v2 extends RelativeLayout {
     private ImageView img_azul;
     private ImageView img_plomo;
 
-    public View_Local_v2(Context context, Place_DTO place_dto) {
+    private String option;
+
+    public View_Local_v2(Context context, Place_DTO place_dto,String option) {
         super(context);
         this.place_dto = place_dto;
+        this.option = option;
         initView();
     }
 
-    public View_Local_v2(Context context, AttributeSet attrs, Place_DTO place_dto) {
+    public View_Local_v2(Context context, AttributeSet attrs, Place_DTO place_dto,String option) {
         super(context, attrs);
         this.place_dto = place_dto;
+        this.option = option;
         initView();
     }
 
-    public View_Local_v2(Context context, AttributeSet attrs, int defStyle, Place_DTO place_dto) {
+    public View_Local_v2(Context context, AttributeSet attrs, int defStyle, Place_DTO place_dto,String option) {
         super(context, attrs, defStyle);
         this.place_dto = place_dto;
+        this.option = option;
         initView();
     }
 
@@ -74,8 +79,25 @@ public class View_Local_v2 extends RelativeLayout {
         categoria.setText(place_dto.getCategory_name());
 
         if(!place_dto.getDistance().equals("NULL")) {
-            distancia.setText(String.valueOf(round(Double.parseDouble(place_dto.getDistance()),2)) + " mts.");
-            distancia.setVisibility(VISIBLE);
+            try {
+                int metros = round(Double.parseDouble(place_dto.getDistance()), 0);
+                String mtrs = "";
+                if (metros < 1000) {
+                    mtrs = String.valueOf(round(Double.parseDouble(place_dto.getDistance()), 0));
+                    distancia.setText(mtrs + " Mts.");
+                } else {
+                    Double kms = Double.parseDouble(place_dto.getDistance()) / 1000;
+                    kms = roundKM(kms, 1);
+                    if (kms == 1.0 || kms == 2.0 || kms == 3.0 || kms == 4.0 || kms == 5.0) {
+                        distancia.setText(kms.intValue() + " Kms.");
+                    } else {
+                        distancia.setText(kms + " Kms.");
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                distancia.setVisibility(GONE);
+            }
         }else{
             distancia.setVisibility(GONE);
         }
@@ -92,26 +114,51 @@ public class View_Local_v2 extends RelativeLayout {
                 transform(new RoundedTransformation(65, 0)).
                 into(image);
 
-        if(place_dto.getInplace_offers().size() > 0){
-            img_azul.setVisibility(View.VISIBLE);
-        }
 
-        if(place_dto.getSpecial_offers().size() > 0){
-            img_verde.setVisibility(View.VISIBLE);
-        }
+        if(option.equals("Explore"))
+        {
+            if(place_dto.getInplace_offers().size() > 0){
+                img_azul.setVisibility(View.VISIBLE);
+            }
 
-        if(place_dto.getCorporate_offers().size() > 0){
-            img_plomo.setVisibility(View.VISIBLE);
-        }
+            if(place_dto.getSpecial_offers().size() > 0){
+                img_verde.setVisibility(View.VISIBLE);
+            }
 
+            if(place_dto.getCorporate_offers().size() > 0){
+                img_plomo.setVisibility(View.VISIBLE);
+            }
+
+            if(place_dto.getLegacy_offers().size() > 0){
+                img_plomo.setVisibility(View.VISIBLE);
+            }
+        }
+        else if(option.equals("Benefits"))
+        {
+            if(place_dto.getCorporate_offers().size() > 0){
+                img_plomo.setVisibility(View.VISIBLE);
+            }
+
+            if(place_dto.getLegacy_offers().size() > 0){
+                img_plomo.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
-    public static double round(double value, int places) {
+    public static double roundKM(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
         long factor = (long) Math.pow(10, places);
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public static int round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (int) Math.round((double) tmp / factor);
     }
 
     public void hideSoftKeyboard() {

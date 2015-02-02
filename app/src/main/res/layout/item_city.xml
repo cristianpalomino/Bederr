@@ -7,7 +7,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="35dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -15,11 +15,12 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Ciudad"
             android:textColor="@color/plomo_oscuro_concrete"
-            android:paddingBottom="10dp"
+            android:paddingBottom="3dp"
             android:paddingLeft="13dp"
-            android:paddingTop="10dp"
+            android:paddingTop="3dp"
             android:id="@+id/city"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
             android:id="@+id/imgcity"
             android:src="@drawable/action_check"
             android:layout_gravity="center"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

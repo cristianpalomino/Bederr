@@ -90,4 +90,28 @@ public class Service_Places {
             }
         });
     }
+
+    public void loadMore(String URL) {
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.get(context, URL , null , new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Bederr_DTO bederr_dto = new Bederr_DTO();
+                bederr_dto.setDataSource(response);
+
+                String count = String.valueOf(bederr_dto.parseInt("count", response));
+                String next = bederr_dto.parseString("next", response);
+                String previous = bederr_dto.parseString("previous", response);
+
+                onSuccessPlaces.onSuccessPlaces(true,bederr_dto.parsePlaceDTOs(),count,next,previous);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                onSuccessPlaces.onSuccessPlaces(false,null,null,null,null);
+            }
+        });
+    }
 }

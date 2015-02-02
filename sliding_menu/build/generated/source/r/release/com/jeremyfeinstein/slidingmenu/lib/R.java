@@ -814,27 +814,27 @@ containing a value of this type.
         public static int abc_search_url_text_selected=0x7f060002;
     }
     public static final class dimen {
-        public static int abc_action_bar_default_height=0x7f080000;
-        public static int abc_action_bar_icon_vertical_padding=0x7f080001;
-        public static int abc_action_bar_progress_bar_size=0x7f080002;
-        public static int abc_action_bar_stacked_max_height=0x7f080003;
-        public static int abc_action_bar_stacked_tab_max_width=0x7f080004;
-        public static int abc_action_bar_subtitle_bottom_margin=0x7f080005;
-        public static int abc_action_bar_subtitle_text_size=0x7f080006;
-        public static int abc_action_bar_subtitle_top_margin=0x7f080007;
-        public static int abc_action_bar_title_text_size=0x7f080008;
-        public static int abc_action_button_min_width=0x7f080009;
-        public static int abc_config_prefDialogWidth=0x7f08000a;
-        public static int abc_dropdownitem_icon_width=0x7f08000b;
-        public static int abc_dropdownitem_text_padding_left=0x7f08000c;
-        public static int abc_dropdownitem_text_padding_right=0x7f08000d;
-        public static int abc_panel_menu_list_width=0x7f08000e;
-        public static int abc_search_view_preferred_width=0x7f08000f;
-        public static int abc_search_view_text_min_width=0x7f080010;
-        public static int dialog_fixed_height_major=0x7f080011;
-        public static int dialog_fixed_height_minor=0x7f080012;
-        public static int dialog_fixed_width_major=0x7f080013;
-        public static int dialog_fixed_width_minor=0x7f080014;
+        public static int abc_action_bar_default_height=0x7f070000;
+        public static int abc_action_bar_icon_vertical_padding=0x7f070001;
+        public static int abc_action_bar_progress_bar_size=0x7f070002;
+        public static int abc_action_bar_stacked_max_height=0x7f070003;
+        public static int abc_action_bar_stacked_tab_max_width=0x7f070004;
+        public static int abc_action_bar_subtitle_bottom_margin=0x7f070005;
+        public static int abc_action_bar_subtitle_text_size=0x7f070006;
+        public static int abc_action_bar_subtitle_top_margin=0x7f070007;
+        public static int abc_action_bar_title_text_size=0x7f070008;
+        public static int abc_action_button_min_width=0x7f070009;
+        public static int abc_config_prefDialogWidth=0x7f07000a;
+        public static int abc_dropdownitem_icon_width=0x7f07000b;
+        public static int abc_dropdownitem_text_padding_left=0x7f07000c;
+        public static int abc_dropdownitem_text_padding_right=0x7f07000d;
+        public static int abc_panel_menu_list_width=0x7f07000e;
+        public static int abc_search_view_preferred_width=0x7f07000f;
+        public static int abc_search_view_text_min_width=0x7f070010;
+        public static int dialog_fixed_height_major=0x7f070011;
+        public static int dialog_fixed_height_minor=0x7f070012;
+        public static int dialog_fixed_width_major=0x7f070013;
+        public static int dialog_fixed_width_minor=0x7f070014;
     }
     public static final class drawable {
         public static int abc_ab_bottom_solid_dark_holo=0x7f020000;
@@ -926,72 +926,72 @@ containing a value of this type.
         public static int abc_textfield_searchview_right_holo_light=0x7f020056;
     }
     public static final class id {
-        public static int action_bar=0x7f070021;
-        public static int action_bar_activity_content=0x7f070018;
-        public static int action_bar_container=0x7f070020;
-        public static int action_bar_overlay_layout=0x7f070024;
-        public static int action_bar_root=0x7f07001f;
-        public static int action_bar_subtitle=0x7f070028;
-        public static int action_bar_title=0x7f070027;
-        public static int action_context_bar=0x7f070022;
-        public static int action_menu_divider=0x7f070019;
-        public static int action_menu_presenter=0x7f07001a;
-        public static int action_mode_close_button=0x7f070029;
-        public static int activity_chooser_view_content=0x7f07002a;
-        public static int always=0x7f07000f;
-        public static int beginning=0x7f07000a;
-        public static int checkbox=0x7f070032;
-        public static int collapseActionView=0x7f070011;
-        public static int default_activity_button=0x7f07002d;
-        public static int dialog=0x7f070016;
-        public static int disableHome=0x7f070008;
-        public static int dropdown=0x7f070017;
-        public static int edit_query=0x7f070035;
-        public static int end=0x7f07000c;
-        public static int expand_activities_button=0x7f07002b;
-        public static int expanded_menu=0x7f070031;
-        public static int fullscreen=0x7f070015;
-        public static int home=0x7f07001b;
-        public static int homeAsUp=0x7f070005;
-        public static int icon=0x7f07002f;
-        public static int ifRoom=0x7f07000e;
-        public static int image=0x7f07002c;
-        public static int left=0x7f070012;
-        public static int listMode=0x7f070001;
-        public static int list_item=0x7f07002e;
-        public static int margin=0x7f070014;
-        public static int middle=0x7f07000b;
-        public static int never=0x7f07000d;
-        public static int none=0x7f070009;
-        public static int normal=0x7f070000;
-        public static int progress_circular=0x7f07001c;
-        public static int progress_horizontal=0x7f07001d;
-        public static int radio=0x7f070034;
-        public static int right=0x7f070013;
-        public static int search_badge=0x7f070037;
-        public static int search_bar=0x7f070036;
-        public static int search_button=0x7f070038;
-        public static int search_close_btn=0x7f07003d;
-        public static int search_edit_frame=0x7f070039;
-        public static int search_go_btn=0x7f07003f;
-        public static int search_mag_icon=0x7f07003a;
-        public static int search_plate=0x7f07003b;
-        public static int search_src_text=0x7f07003c;
-        public static int search_voice_btn=0x7f070040;
-        public static int selected_view=0x7f07001e;
-        public static int shortcut=0x7f070033;
-        public static int showCustom=0x7f070007;
-        public static int showHome=0x7f070004;
-        public static int showTitle=0x7f070006;
-        public static int slidingmenumain=0x7f070041;
-        public static int split_action_bar=0x7f070023;
-        public static int submit_area=0x7f07003e;
-        public static int tabMode=0x7f070002;
-        public static int title=0x7f070030;
-        public static int top_action_bar=0x7f070025;
-        public static int up=0x7f070026;
-        public static int useLogo=0x7f070003;
-        public static int withText=0x7f070010;
+        public static int action_bar=0x7f080021;
+        public static int action_bar_activity_content=0x7f080000;
+        public static int action_bar_container=0x7f080020;
+        public static int action_bar_overlay_layout=0x7f080024;
+        public static int action_bar_root=0x7f08001f;
+        public static int action_bar_subtitle=0x7f080028;
+        public static int action_bar_title=0x7f080027;
+        public static int action_context_bar=0x7f080022;
+        public static int action_menu_divider=0x7f080001;
+        public static int action_menu_presenter=0x7f080002;
+        public static int action_mode_close_button=0x7f080029;
+        public static int activity_chooser_view_content=0x7f08002a;
+        public static int always=0x7f080014;
+        public static int beginning=0x7f080010;
+        public static int checkbox=0x7f080032;
+        public static int collapseActionView=0x7f080015;
+        public static int default_activity_button=0x7f08002d;
+        public static int dialog=0x7f08001d;
+        public static int disableHome=0x7f08000a;
+        public static int dropdown=0x7f08001e;
+        public static int edit_query=0x7f080035;
+        public static int end=0x7f080011;
+        public static int expand_activities_button=0x7f08002b;
+        public static int expanded_menu=0x7f080031;
+        public static int fullscreen=0x7f08001b;
+        public static int home=0x7f080003;
+        public static int homeAsUp=0x7f08000b;
+        public static int icon=0x7f08002f;
+        public static int ifRoom=0x7f080016;
+        public static int image=0x7f08002c;
+        public static int left=0x7f080019;
+        public static int listMode=0x7f080007;
+        public static int list_item=0x7f08002e;
+        public static int margin=0x7f08001c;
+        public static int middle=0x7f080012;
+        public static int never=0x7f080017;
+        public static int none=0x7f080013;
+        public static int normal=0x7f080008;
+        public static int progress_circular=0x7f080004;
+        public static int progress_horizontal=0x7f080005;
+        public static int radio=0x7f080034;
+        public static int right=0x7f08001a;
+        public static int search_badge=0x7f080037;
+        public static int search_bar=0x7f080036;
+        public static int search_button=0x7f080038;
+        public static int search_close_btn=0x7f08003d;
+        public static int search_edit_frame=0x7f080039;
+        public static int search_go_btn=0x7f08003f;
+        public static int search_mag_icon=0x7f08003a;
+        public static int search_plate=0x7f08003b;
+        public static int search_src_text=0x7f08003c;
+        public static int search_voice_btn=0x7f080040;
+        public static int selected_view=0x7f080006;
+        public static int shortcut=0x7f080033;
+        public static int showCustom=0x7f08000c;
+        public static int showHome=0x7f08000d;
+        public static int showTitle=0x7f08000e;
+        public static int slidingmenumain=0x7f080041;
+        public static int split_action_bar=0x7f080023;
+        public static int submit_area=0x7f08003e;
+        public static int tabMode=0x7f080009;
+        public static int title=0x7f080030;
+        public static int top_action_bar=0x7f080025;
+        public static int up=0x7f080026;
+        public static int useLogo=0x7f08000f;
+        public static int withText=0x7f080018;
     }
     public static final class integer {
         public static int abc_max_action_buttons=0x7f090000;
@@ -1243,7 +1243,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:background
         */
-        public static final int ActionBar_background = 10;
+        public static int ActionBar_background = 10;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1255,7 +1255,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:backgroundSplit
         */
-        public static final int ActionBar_backgroundSplit = 12;
+        public static int ActionBar_backgroundSplit = 12;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#backgroundStacked}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1267,7 +1267,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:backgroundStacked
         */
-        public static final int ActionBar_backgroundStacked = 11;
+        public static int ActionBar_backgroundStacked = 11;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#customNavigationLayout}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1277,7 +1277,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:customNavigationLayout
         */
-        public static final int ActionBar_customNavigationLayout = 13;
+        public static int ActionBar_customNavigationLayout = 13;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#displayOptions}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1298,7 +1298,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:displayOptions
         */
-        public static final int ActionBar_displayOptions = 3;
+        public static int ActionBar_displayOptions = 3;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#divider}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1308,7 +1308,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:divider
         */
-        public static final int ActionBar_divider = 9;
+        public static int ActionBar_divider = 9;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#height}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1324,7 +1324,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:height
         */
-        public static final int ActionBar_height = 0;
+        public static int ActionBar_height = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#homeLayout}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1334,7 +1334,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:homeLayout
         */
-        public static final int ActionBar_homeLayout = 14;
+        public static int ActionBar_homeLayout = 14;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#icon}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1344,7 +1344,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:icon
         */
-        public static final int ActionBar_icon = 7;
+        public static int ActionBar_icon = 7;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#indeterminateProgressStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1354,7 +1354,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:indeterminateProgressStyle
         */
-        public static final int ActionBar_indeterminateProgressStyle = 16;
+        public static int ActionBar_indeterminateProgressStyle = 16;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#itemPadding}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1370,7 +1370,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:itemPadding
         */
-        public static final int ActionBar_itemPadding = 18;
+        public static int ActionBar_itemPadding = 18;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#logo}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1380,7 +1380,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:logo
         */
-        public static final int ActionBar_logo = 8;
+        public static int ActionBar_logo = 8;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#navigationMode}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1398,7 +1398,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:navigationMode
         */
-        public static final int ActionBar_navigationMode = 2;
+        public static int ActionBar_navigationMode = 2;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#progressBarPadding}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1414,7 +1414,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:progressBarPadding
         */
-        public static final int ActionBar_progressBarPadding = 17;
+        public static int ActionBar_progressBarPadding = 17;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#progressBarStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1424,7 +1424,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:progressBarStyle
         */
-        public static final int ActionBar_progressBarStyle = 15;
+        public static int ActionBar_progressBarStyle = 15;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#subtitle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1438,7 +1438,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:subtitle
         */
-        public static final int ActionBar_subtitle = 4;
+        public static int ActionBar_subtitle = 4;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1448,7 +1448,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:subtitleTextStyle
         */
-        public static final int ActionBar_subtitleTextStyle = 6;
+        public static int ActionBar_subtitleTextStyle = 6;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#title}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1462,7 +1462,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:title
         */
-        public static final int ActionBar_title = 1;
+        public static int ActionBar_title = 1;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1472,7 +1472,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:titleTextStyle
         */
-        public static final int ActionBar_titleTextStyle = 5;
+        public static int ActionBar_titleTextStyle = 5;
         /** Attributes that can be used with a ActionBarLayout.
            <p>Includes the following attributes:</p>
            <table>
@@ -1491,7 +1491,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           attribute's value can be found in the {@link #ActionBarLayout} array.
           @attr name android:layout_gravity
         */
-        public static final int ActionBarLayout_android_layout_gravity = 0;
+        public static int ActionBarLayout_android_layout_gravity = 0;
         /** Attributes that can be used with a ActionBarWindow.
            <p>Includes the following attributes:</p>
            <table>
@@ -1531,7 +1531,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowActionBar
         */
-        public static final int ActionBarWindow_windowActionBar = 0;
+        public static int ActionBarWindow_windowActionBar = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#windowActionBarOverlay}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1545,7 +1545,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowActionBarOverlay
         */
-        public static final int ActionBarWindow_windowActionBarOverlay = 1;
+        public static int ActionBarWindow_windowActionBarOverlay = 1;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#windowFixedHeightMajor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1564,7 +1564,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowFixedHeightMajor
         */
-        public static final int ActionBarWindow_windowFixedHeightMajor = 6;
+        public static int ActionBarWindow_windowFixedHeightMajor = 6;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#windowFixedHeightMinor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1583,7 +1583,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowFixedHeightMinor
         */
-        public static final int ActionBarWindow_windowFixedHeightMinor = 4;
+        public static int ActionBarWindow_windowFixedHeightMinor = 4;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#windowFixedWidthMajor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1602,7 +1602,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowFixedWidthMajor
         */
-        public static final int ActionBarWindow_windowFixedWidthMajor = 3;
+        public static int ActionBarWindow_windowFixedWidthMajor = 3;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#windowFixedWidthMinor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1621,7 +1621,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowFixedWidthMinor
         */
-        public static final int ActionBarWindow_windowFixedWidthMinor = 5;
+        public static int ActionBarWindow_windowFixedWidthMinor = 5;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#windowSplitActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1635,7 +1635,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:windowSplitActionBar
         */
-        public static final int ActionBarWindow_windowSplitActionBar = 2;
+        public static int ActionBarWindow_windowSplitActionBar = 2;
         /** Attributes that can be used with a ActionMenuItemView.
            <p>Includes the following attributes:</p>
            <table>
@@ -1654,7 +1654,7 @@ containing a value of this type.
           attribute's value can be found in the {@link #ActionMenuItemView} array.
           @attr name android:minWidth
         */
-        public static final int ActionMenuItemView_android_minWidth = 0;
+        public static int ActionMenuItemView_android_minWidth = 0;
         /** Attributes that can be used with a ActionMenuView.
          */
         public static final int[] ActionMenuView = {
@@ -1691,7 +1691,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:background
         */
-        public static final int ActionMode_background = 3;
+        public static int ActionMode_background = 3;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1703,7 +1703,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:backgroundSplit
         */
-        public static final int ActionMode_backgroundSplit = 4;
+        public static int ActionMode_backgroundSplit = 4;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#height}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1719,7 +1719,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:height
         */
-        public static final int ActionMode_height = 0;
+        public static int ActionMode_height = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1729,7 +1729,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:subtitleTextStyle
         */
-        public static final int ActionMode_subtitleTextStyle = 2;
+        public static int ActionMode_subtitleTextStyle = 2;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1739,7 +1739,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:titleTextStyle
         */
-        public static final int ActionMode_titleTextStyle = 1;
+        public static int ActionMode_titleTextStyle = 1;
         /** Attributes that can be used with a ActivityChooserView.
            <p>Includes the following attributes:</p>
            <table>
@@ -1764,7 +1764,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:expandActivityOverflowButtonDrawable
         */
-        public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
+        public static int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#initialActivityCount}
           attribute's value can be found in the {@link #ActivityChooserView} array.
@@ -1778,7 +1778,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:initialActivityCount
         */
-        public static final int ActivityChooserView_initialActivityCount = 0;
+        public static int ActivityChooserView_initialActivityCount = 0;
         /** Attributes that can be used with a CompatTextView.
            <p>Includes the following attributes:</p>
            <table>
@@ -1802,7 +1802,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:textAllCaps
         */
-        public static final int CompatTextView_textAllCaps = 0;
+        public static int CompatTextView_textAllCaps = 0;
         /** Attributes that can be used with a LinearLayoutICS.
            <p>Includes the following attributes:</p>
            <table>
@@ -1829,7 +1829,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:divider
         */
-        public static final int LinearLayoutICS_divider = 0;
+        public static int LinearLayoutICS_divider = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#dividerPadding}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
@@ -1845,7 +1845,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:dividerPadding
         */
-        public static final int LinearLayoutICS_dividerPadding = 2;
+        public static int LinearLayoutICS_dividerPadding = 2;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#showDividers}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
@@ -1864,7 +1864,7 @@ containing a value of this type.
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:showDividers
         */
-        public static final int LinearLayoutICS_showDividers = 1;
+        public static int LinearLayoutICS_showDividers = 1;
         /** Attributes that can be used with a MenuGroup.
            <p>Includes the following attributes:</p>
            <table>
@@ -1894,37 +1894,37 @@ containing a value of this type.
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:checkableBehavior
         */
-        public static final int MenuGroup_android_checkableBehavior = 5;
+        public static int MenuGroup_android_checkableBehavior = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#enabled}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:enabled
         */
-        public static final int MenuGroup_android_enabled = 0;
+        public static int MenuGroup_android_enabled = 0;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#id}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:id
         */
-        public static final int MenuGroup_android_id = 1;
+        public static int MenuGroup_android_id = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#menuCategory}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:menuCategory
         */
-        public static final int MenuGroup_android_menuCategory = 3;
+        public static int MenuGroup_android_menuCategory = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#orderInCategory}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:orderInCategory
         */
-        public static final int MenuGroup_android_orderInCategory = 4;
+        public static int MenuGroup_android_orderInCategory = 4;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#visible}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:visible
         */
-        public static final int MenuGroup_android_visible = 2;
+        public static int MenuGroup_android_visible = 2;
         /** Attributes that can be used with a MenuItem.
            <p>Includes the following attributes:</p>
            <table>
@@ -1983,7 +1983,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:actionLayout
         */
-        public static final int MenuItem_actionLayout = 14;
+        public static int MenuItem_actionLayout = 14;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#actionProviderClass}
           attribute's value can be found in the {@link #MenuItem} array.
@@ -1997,7 +1997,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:actionProviderClass
         */
-        public static final int MenuItem_actionProviderClass = 16;
+        public static int MenuItem_actionProviderClass = 16;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#actionViewClass}
           attribute's value can be found in the {@link #MenuItem} array.
@@ -2011,85 +2011,85 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:actionViewClass
         */
-        public static final int MenuItem_actionViewClass = 15;
+        public static int MenuItem_actionViewClass = 15;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#alphabeticShortcut}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:alphabeticShortcut
         */
-        public static final int MenuItem_android_alphabeticShortcut = 9;
+        public static int MenuItem_android_alphabeticShortcut = 9;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#checkable}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:checkable
         */
-        public static final int MenuItem_android_checkable = 11;
+        public static int MenuItem_android_checkable = 11;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#checked}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:checked
         */
-        public static final int MenuItem_android_checked = 3;
+        public static int MenuItem_android_checked = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#enabled}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:enabled
         */
-        public static final int MenuItem_android_enabled = 1;
+        public static int MenuItem_android_enabled = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#icon}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:icon
         */
-        public static final int MenuItem_android_icon = 0;
+        public static int MenuItem_android_icon = 0;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#id}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:id
         */
-        public static final int MenuItem_android_id = 2;
+        public static int MenuItem_android_id = 2;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#menuCategory}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:menuCategory
         */
-        public static final int MenuItem_android_menuCategory = 5;
+        public static int MenuItem_android_menuCategory = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#numericShortcut}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:numericShortcut
         */
-        public static final int MenuItem_android_numericShortcut = 10;
+        public static int MenuItem_android_numericShortcut = 10;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#onClick}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:onClick
         */
-        public static final int MenuItem_android_onClick = 12;
+        public static int MenuItem_android_onClick = 12;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#orderInCategory}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:orderInCategory
         */
-        public static final int MenuItem_android_orderInCategory = 6;
+        public static int MenuItem_android_orderInCategory = 6;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#title}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:title
         */
-        public static final int MenuItem_android_title = 7;
+        public static int MenuItem_android_title = 7;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#titleCondensed}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:titleCondensed
         */
-        public static final int MenuItem_android_titleCondensed = 8;
+        public static int MenuItem_android_titleCondensed = 8;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#visible}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:visible
         */
-        public static final int MenuItem_android_visible = 4;
+        public static int MenuItem_android_visible = 4;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#showAsAction}
           attribute's value can be found in the {@link #MenuItem} array.
@@ -2109,7 +2109,7 @@ containing a value of this type.
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:showAsAction
         */
-        public static final int MenuItem_showAsAction = 13;
+        public static int MenuItem_showAsAction = 13;
         /** Attributes that can be used with a MenuView.
            <p>Includes the following attributes:</p>
            <table>
@@ -2136,56 +2136,56 @@ containing a value of this type.
          */
         public static final int[] MenuView = {
             0x010100ae, 0x0101012c, 0x0101012d, 0x0101012e,
-            0x0101012f, 0x01010130, 0x01010131, 0x01010435
+            0x0101012f, 0x01010130, 0x01010131, 0x0101052f
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#headerBackground}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:headerBackground
         */
-        public static final int MenuView_android_headerBackground = 4;
+        public static int MenuView_android_headerBackground = 4;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#horizontalDivider}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:horizontalDivider
         */
-        public static final int MenuView_android_horizontalDivider = 2;
+        public static int MenuView_android_horizontalDivider = 2;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#itemBackground}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:itemBackground
         */
-        public static final int MenuView_android_itemBackground = 5;
+        public static int MenuView_android_itemBackground = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#itemIconDisabledAlpha}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:itemIconDisabledAlpha
         */
-        public static final int MenuView_android_itemIconDisabledAlpha = 6;
+        public static int MenuView_android_itemIconDisabledAlpha = 6;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#itemTextAppearance}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:itemTextAppearance
         */
-        public static final int MenuView_android_itemTextAppearance = 1;
+        public static int MenuView_android_itemTextAppearance = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#preserveIconSpacing}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:preserveIconSpacing
         */
-        public static final int MenuView_android_preserveIconSpacing = 7;
+        public static int MenuView_android_preserveIconSpacing = 7;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#verticalDivider}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:verticalDivider
         */
-        public static final int MenuView_android_verticalDivider = 3;
+        public static int MenuView_android_verticalDivider = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#windowAnimationStyle}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:windowAnimationStyle
         */
-        public static final int MenuView_android_windowAnimationStyle = 0;
+        public static int MenuView_android_windowAnimationStyle = 0;
         /** Attributes that can be used with a SearchView.
            <p>Includes the following attributes:</p>
            <table>
@@ -2213,19 +2213,19 @@ containing a value of this type.
           attribute's value can be found in the {@link #SearchView} array.
           @attr name android:imeOptions
         */
-        public static final int SearchView_android_imeOptions = 2;
+        public static int SearchView_android_imeOptions = 2;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#inputType}
           attribute's value can be found in the {@link #SearchView} array.
           @attr name android:inputType
         */
-        public static final int SearchView_android_inputType = 1;
+        public static int SearchView_android_inputType = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#maxWidth}
           attribute's value can be found in the {@link #SearchView} array.
           @attr name android:maxWidth
         */
-        public static final int SearchView_android_maxWidth = 0;
+        public static int SearchView_android_maxWidth = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#iconifiedByDefault}
           attribute's value can be found in the {@link #SearchView} array.
@@ -2239,7 +2239,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:iconifiedByDefault
         */
-        public static final int SearchView_iconifiedByDefault = 3;
+        public static int SearchView_iconifiedByDefault = 3;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#queryHint}
           attribute's value can be found in the {@link #SearchView} array.
@@ -2253,7 +2253,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:queryHint
         */
-        public static final int SearchView_queryHint = 4;
+        public static int SearchView_queryHint = 4;
         /** Attributes that can be used with a SlidingMenu.
            <p>Includes the following attributes:</p>
            <table>
@@ -2311,7 +2311,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:behindOffset
         */
-        public static final int SlidingMenu_behindOffset = 3;
+        public static int SlidingMenu_behindOffset = 3;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#behindScrollScale}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2325,7 +2325,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:behindScrollScale
         */
-        public static final int SlidingMenu_behindScrollScale = 5;
+        public static int SlidingMenu_behindScrollScale = 5;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#behindWidth}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2341,7 +2341,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:behindWidth
         */
-        public static final int SlidingMenu_behindWidth = 4;
+        public static int SlidingMenu_behindWidth = 4;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#fadeDegree}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2355,7 +2355,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:fadeDegree
         */
-        public static final int SlidingMenu_fadeDegree = 11;
+        public static int SlidingMenu_fadeDegree = 11;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#fadeEnabled}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2369,7 +2369,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:fadeEnabled
         */
-        public static final int SlidingMenu_fadeEnabled = 10;
+        public static int SlidingMenu_fadeEnabled = 10;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#mode}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2386,7 +2386,7 @@ containing a value of this type.
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:mode
         */
-        public static final int SlidingMenu_mode = 0;
+        public static int SlidingMenu_mode = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#selectorDrawable}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2396,7 +2396,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:selectorDrawable
         */
-        public static final int SlidingMenu_selectorDrawable = 13;
+        public static int SlidingMenu_selectorDrawable = 13;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#selectorEnabled}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2410,7 +2410,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:selectorEnabled
         */
-        public static final int SlidingMenu_selectorEnabled = 12;
+        public static int SlidingMenu_selectorEnabled = 12;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#shadowDrawable}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2420,7 +2420,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:shadowDrawable
         */
-        public static final int SlidingMenu_shadowDrawable = 8;
+        public static int SlidingMenu_shadowDrawable = 8;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#shadowWidth}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2436,7 +2436,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:shadowWidth
         */
-        public static final int SlidingMenu_shadowWidth = 9;
+        public static int SlidingMenu_shadowWidth = 9;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#touchModeAbove}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2454,7 +2454,7 @@ containing a value of this type.
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:touchModeAbove
         */
-        public static final int SlidingMenu_touchModeAbove = 6;
+        public static int SlidingMenu_touchModeAbove = 6;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#touchModeBehind}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2472,7 +2472,7 @@ containing a value of this type.
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:touchModeBehind
         */
-        public static final int SlidingMenu_touchModeBehind = 7;
+        public static int SlidingMenu_touchModeBehind = 7;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#viewAbove}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2482,7 +2482,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:viewAbove
         */
-        public static final int SlidingMenu_viewAbove = 1;
+        public static int SlidingMenu_viewAbove = 1;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#viewBehind}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -2492,7 +2492,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:viewBehind
         */
-        public static final int SlidingMenu_viewBehind = 2;
+        public static int SlidingMenu_viewBehind = 2;
         /** Attributes that can be used with a Spinner.
            <p>Includes the following attributes:</p>
            <table>
@@ -2531,37 +2531,37 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownHorizontalOffset
         */
-        public static final int Spinner_android_dropDownHorizontalOffset = 4;
+        public static int Spinner_android_dropDownHorizontalOffset = 4;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#dropDownSelector}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownSelector
         */
-        public static final int Spinner_android_dropDownSelector = 1;
+        public static int Spinner_android_dropDownSelector = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#dropDownVerticalOffset}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownVerticalOffset
         */
-        public static final int Spinner_android_dropDownVerticalOffset = 5;
+        public static int Spinner_android_dropDownVerticalOffset = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#dropDownWidth}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownWidth
         */
-        public static final int Spinner_android_dropDownWidth = 3;
+        public static int Spinner_android_dropDownWidth = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#gravity}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:gravity
         */
-        public static final int Spinner_android_gravity = 0;
+        public static int Spinner_android_gravity = 0;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#popupBackground}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:popupBackground
         */
-        public static final int Spinner_android_popupBackground = 2;
+        public static int Spinner_android_popupBackground = 2;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#disableChildrenWhenDisabled}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2575,7 +2575,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:disableChildrenWhenDisabled
         */
-        public static final int Spinner_disableChildrenWhenDisabled = 9;
+        public static int Spinner_disableChildrenWhenDisabled = 9;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#popupPromptView}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2585,7 +2585,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:popupPromptView
         */
-        public static final int Spinner_popupPromptView = 8;
+        public static int Spinner_popupPromptView = 8;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#prompt}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2595,7 +2595,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:prompt
         */
-        public static final int Spinner_prompt = 6;
+        public static int Spinner_prompt = 6;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#spinnerMode}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2612,7 +2612,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
           @attr name com.jeremyfeinstein.slidingmenu.lib:spinnerMode
         */
-        public static final int Spinner_spinnerMode = 7;
+        public static int Spinner_spinnerMode = 7;
         /** Attributes that can be used with a Theme.
            <p>Includes the following attributes:</p>
            <table>
@@ -2646,7 +2646,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:actionDropDownStyle
         */
-        public static final int Theme_actionDropDownStyle = 0;
+        public static int Theme_actionDropDownStyle = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#dropdownListPreferredItemHeight}
           attribute's value can be found in the {@link #Theme} array.
@@ -2662,7 +2662,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:dropdownListPreferredItemHeight
         */
-        public static final int Theme_dropdownListPreferredItemHeight = 1;
+        public static int Theme_dropdownListPreferredItemHeight = 1;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#listChoiceBackgroundIndicator}
           attribute's value can be found in the {@link #Theme} array.
@@ -2672,7 +2672,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:listChoiceBackgroundIndicator
         */
-        public static final int Theme_listChoiceBackgroundIndicator = 5;
+        public static int Theme_listChoiceBackgroundIndicator = 5;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#panelMenuListTheme}
           attribute's value can be found in the {@link #Theme} array.
@@ -2682,7 +2682,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:panelMenuListTheme
         */
-        public static final int Theme_panelMenuListTheme = 4;
+        public static int Theme_panelMenuListTheme = 4;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#panelMenuListWidth}
           attribute's value can be found in the {@link #Theme} array.
@@ -2698,7 +2698,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:panelMenuListWidth
         */
-        public static final int Theme_panelMenuListWidth = 3;
+        public static int Theme_panelMenuListWidth = 3;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#popupMenuStyle}
           attribute's value can be found in the {@link #Theme} array.
@@ -2708,7 +2708,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.jeremyfeinstein.slidingmenu.lib:popupMenuStyle
         */
-        public static final int Theme_popupMenuStyle = 2;
+        public static int Theme_popupMenuStyle = 2;
         /** Attributes that can be used with a View.
            <p>Includes the following attributes:</p>
            <table>
@@ -2731,7 +2731,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           attribute's value can be found in the {@link #View} array.
           @attr name android:focusable
         */
-        public static final int View_android_focusable = 0;
+        public static int View_android_focusable = 0;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#paddingEnd}
           attribute's value can be found in the {@link #View} array.
@@ -2747,7 +2747,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:paddingEnd
         */
-        public static final int View_paddingEnd = 2;
+        public static int View_paddingEnd = 2;
         /**
           <p>This symbol is the offset where the {@link com.jeremyfeinstein.slidingmenu.lib.R.attr#paddingStart}
           attribute's value can be found in the {@link #View} array.
@@ -2763,6 +2763,6 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.jeremyfeinstein.slidingmenu.lib:paddingStart
         */
-        public static final int View_paddingStart = 1;
+        public static int View_paddingStart = 1;
     };
 }

@@ -26,9 +26,9 @@ public class Util_Categorias {
     public static int getImageCategory(String name) {
         if (name.equals("Viajes")) {
             return R.drawable.categoria_viajes;
-        } else if (name.equals("Tiendas y Servicios")) {
+        } else if (name.equals("Tiendas y servicios")) {
             return R.drawable.categoria_markets;
-        } else if (name.equals("Salud y Belleza")) {
+        } else if (name.equals("Salud y belleza")) {
             return R.drawable.categoria_salud;
         } else if (name.equals("Ropa")) {
             return R.drawable.categoria_ropa;

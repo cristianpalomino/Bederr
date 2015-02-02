@@ -33,9 +33,7 @@ import java.util.ArrayList;
 public class Listing_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
     protected ListView lista_listas;
-    protected Adapter_Listas adapter_listas;
-
-    protected int page = 1;
+    protected Listing_A listing_a;
     protected boolean isLoading = false;
 
     public Listing_F() {
@@ -73,7 +71,6 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
 
         Session_Manager session_manager = new Session_Manager(getBederr());
         String area = "1";
-
         if (session_manager.isLogin()) {
             Service_Listings service_listings = new Service_Listings(getBederr());
             service_listings.sendRequestUser(session_manager.getUserToken(), area);
@@ -86,9 +83,12 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                               String previous) {
                     if (success) {
                         try {
-                            Listing_A listing_a = new Listing_A(getBederr(), listing_dtos);
+                            listing_a = new Listing_A(getBederr(), listing_dtos);
                             lista_listas.setAdapter(listing_a);
                             Listing_F.this.onFinishLoad(lista_listas);
+
+                            PREVIOUS = previous;
+                            NEXT = next;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -107,9 +107,12 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                               String previous) {
                     if (success) {
                         try {
-                            Listing_A listing_a = new Listing_A(getBederr(), listing_dtos);
+                            listing_a = new Listing_A(getBederr(), listing_dtos);
                             lista_listas.setAdapter(listing_a);
                             Listing_F.this.onFinishLoad(lista_listas);
+
+                            PREVIOUS = previous;
+                            NEXT = next;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -188,29 +191,31 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
             if (!isLoading) {
                 isLoading = true;
-                page++;
-                loadMoreDAta(page);
+
+                Service_Listings service_listings = new Service_Listings(getBederr());
+                service_listings.sendRequest(NEXT);
+                service_listings.setOnSuccessListings(new OnSuccessListings() {
+                    @Override
+                    public void onSuccessListings(boolean success,
+                                                  ArrayList<Listing_DTO> listing_dtos,
+                                                  String count,
+                                                  String next,
+                                                  String previous) {
+                        try {
+                            if(success){
+                                for (int i = 0; i < listing_dtos.size() ; i++) {
+                                    listing_a.add(listing_dtos.get(i));
+                                }
+
+                                PREVIOUS = previous;
+                                NEXT = next;
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
-    }
-
-    private void loadMoreDAta(int page) {
-        Operation_Listas operation_listas = new Operation_Listas(getActivity());
-        operation_listas.getListas(page);
-        operation_listas.setInterface_operation_listas(new Operation_Listas.Interface_Operation_listas() {
-            @Override
-            public void getlistas(boolean status, ArrayList<Lista_DTO> lista_dtos) {
-                if (status) {
-                    try {
-                        for (int i = 0; i < lista_dtos.size(); i++) {
-                            adapter_listas.add(lista_dtos.get(i));
-                        }
-                        isLoading = false;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
     }
 }

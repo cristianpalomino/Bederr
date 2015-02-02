@@ -28,6 +28,7 @@ public class Service_Question {
         this.onSuccessQuestion = onSuccessQuestion;
     }
 
+
     public void sendRequestUser(String token, String lat, String lng) {
         RequestParams params = new RequestParams();
         params.put("lat", lat);
@@ -46,13 +47,13 @@ public class Service_Question {
                 String next = bederr_dto.parseString("next", response);
                 String previous = bederr_dto.parseString("previous", response);
 
-                onSuccessQuestion.onSuccessQuestion(true,bederr_dto.parseQuestionDTOs(),count,next,previous);
+                onSuccessQuestion.onSuccessQuestion(true, bederr_dto.parseQuestionDTOs(), count, next, previous);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                onSuccessQuestion.onSuccessQuestion(false,null,null,null,null);
+                onSuccessQuestion.onSuccessQuestion(false, null, null, null, null);
             }
         });
     }
@@ -69,18 +70,64 @@ public class Service_Question {
                 super.onSuccess(statusCode, headers, response);
                 Bederr_DTO bederr_dto = new Bederr_DTO();
                 bederr_dto.setDataSource(response);
-                
+
                 String count = String.valueOf(bederr_dto.parseInt("count", response));
                 String next = bederr_dto.parseString("next", response);
                 String previous = bederr_dto.parseString("previous", response);
 
-                onSuccessQuestion.onSuccessQuestion(true,bederr_dto.parseQuestionDTOs(),count,next,previous);
+                onSuccessQuestion.onSuccessQuestion(true, bederr_dto.parseQuestionDTOs(), count, next, previous);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                onSuccessQuestion.onSuccessQuestion(false,null,null,null,null);
+                onSuccessQuestion.onSuccessQuestion(false, null, null, null, null);
+            }
+        });
+    }
+
+    public void loadMore(String URL) {
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.get(context, URL , null , new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Bederr_DTO bederr_dto = new Bederr_DTO();
+                bederr_dto.setDataSource(response);
+
+                String count = String.valueOf(bederr_dto.parseInt("count", response));
+                String next = bederr_dto.parseString("next", response);
+                String previous = bederr_dto.parseString("previous", response);
+
+                onSuccessQuestion.onSuccessQuestion(true, bederr_dto.parseQuestionDTOs(), count, next, previous);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                onSuccessQuestion.onSuccessQuestion(false, null, null, null, null);
+            }
+        });
+    }
+
+    public void sendQuestion(String token, String category, String content) {
+        RequestParams params = new RequestParams();
+        params.put("category", category);
+        params.put("content", content);
+
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.addHeader("Authorization", "Token " + token);
+        httpClient.post(context, Bederr_WS.BEDERR_QUESTIONS, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                onSuccessQuestion.onSuccessQuestion(true, null, null, null, null);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                onSuccessQuestion.onSuccessQuestion(false, null, null, null, null);
             }
         });
     }

@@ -9,12 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bederr.beans_v2.Place_DTO;
+
 import pe.bederr.com.R;
+
 import com.bederr.utils.RoundedTransformation;
 import com.bederr.utils.Util_Categorias;
 import com.bederr.utils.Util_Fonts;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -26,12 +29,14 @@ public class Places_A extends BaseAdapter {
     private ArrayList<Place_DTO> place_dtos;
     private int tipo;
     private LayoutInflater inflater;
+    private String opcion;
 
-    public Places_A(Context context, ArrayList<Place_DTO> place_dtos, int tipo) {
+    public Places_A(Context context, ArrayList<Place_DTO> place_dtos, int tipo,String opcion) {
         this.context = context;
         this.place_dtos = place_dtos;
         this.tipo = tipo;
         this.inflater = LayoutInflater.from(context);
+        this.opcion = opcion;
     }
 
     @Override
@@ -77,10 +82,23 @@ public class Places_A extends BaseAdapter {
         holder.direccion_local.setText(place_dto.getAddress());
         holder.categoria_local.setText(place_dto.getCategory_name());
 
-        if(tipo == 0) {
-            String distancia = String.valueOf(round(Double.parseDouble(place_dto.getDistance()), 2));
-            holder.distancia_local.setText(distancia + " mts.");
-        }else{
+        if (tipo == 0) {
+            int metros = round(Double.parseDouble(place_dto.getDistance()), 0);
+            String distancia = "";
+            if (metros < 1000) {
+                distancia = String.valueOf(round(Double.parseDouble(place_dto.getDistance()), 0));
+                holder.distancia_local.setText(distancia + " Mts.");
+            } else {
+                Double kms = Double.parseDouble(place_dto.getDistance()) / 1000;
+                kms = roundKM(kms, 1);
+                if (kms == 1.0 || kms == 2.0 || kms == 3.0 || kms == 4.0 || kms == 5.0) {
+                    holder.distancia_local.setText(kms.intValue() + " Kms.");
+                } else {
+                    holder.distancia_local.setText(kms + " Kms.");
+                }
+            }
+
+        } else {
             holder.distancia_local.setVisibility(View.GONE);
         }
 
@@ -96,9 +114,16 @@ public class Places_A extends BaseAdapter {
                 transform(new RoundedTransformation(65, 0)).
                 into(holder.img_categoria_local);
 
-        holder.img_azul.setVisibility(place_dto.isInplace());
-        holder.img_verde.setVisibility(place_dto.isEspecial());
-        holder.img_plomo.setVisibility(place_dto.isCorporate());
+        if(opcion.equals("Explore"))
+        {
+            holder.img_azul.setVisibility(place_dto.isInplace());
+            holder.img_verde.setVisibility(place_dto.isEspecial());
+            holder.img_plomo.setVisibility(place_dto.isCorporate());
+        }
+        else if(opcion.equals("Benefits"))
+        {
+            holder.img_plomo.setVisibility(place_dto.isCorporate());
+        }
 
         return convertView;
     }
@@ -119,11 +144,19 @@ public class Places_A extends BaseAdapter {
         ImageView img_plomo;
     }
 
-    public static double round(double value, int places) {
+    public static double roundKM(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
         long factor = (long) Math.pow(10, places);
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public static int round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (int) Math.round((double) tmp / factor);
     }
 }

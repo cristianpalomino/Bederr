@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Active su GPS\no seleccione su ciudad\npara empezar"
+            android:textColor="@color/color_letra"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/mensaje" />
+
+        <LinearLayout
+            android:id="@+id/containerpaises"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="5dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:lines="1"
+                android:imeOptions="actionGo"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Aceptar"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:id="@+id/aceptar"
+                android:background="@drawable/button_verde_maven"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:lines="1"
+                android:imeOptions="actionGo"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Seetings"
+                android:textColor="@color/color_blanco"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:id="@+id/seetings"
+                android:background="@drawable/button_verde_maven"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

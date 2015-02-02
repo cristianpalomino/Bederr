@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pe.bederr.com">
+    package="pe.bederr.com"
+    >
 
     <permission
         android:name="com.capr.bederr.permission.MAPS_RECEIVE"

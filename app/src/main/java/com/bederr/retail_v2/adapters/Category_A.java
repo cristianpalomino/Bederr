@@ -78,9 +78,6 @@ public class Category_A extends BaseAdapter {
 
         Picasso.with(context).
                 load(Util_Categorias.getImageCategory(category_dto.getName())).
-                centerCrop().
-                fit().
-                transform(new RoundedTransformation(65, 0)).
                 into(holder.imgcategoria);
 
         return convertView;

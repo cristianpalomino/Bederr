@@ -1,12 +1,14 @@
 package com.bederr.questions_v2.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bederr.beans_v2.Question_DTO;
 import com.bederr.utils.PrettyTime;
@@ -16,12 +18,21 @@ import pe.bederr.com.R;
 import com.bederr.utils.RoundedTransformation;
 import com.bederr.utils.Util_Categorias;
 import com.bederr.utils.Util_Fonts;
+import com.bederr.utils.Util_Time;
+import com.parse.ParseObject;
 import com.squareup.picasso.Picasso;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by Gantz on 5/07/14.
@@ -79,32 +90,27 @@ public class Question_A extends BaseAdapter {
         holder.pregunta.setTypeface(Util_Fonts.setPNALight(context));
         holder.cantidadrespuesta.setTypeface(Util_Fonts.setPNACursivaLight(context));
 
-        
         Picasso.with(context).
                 load(Util_Categorias.getImageCategory(question_dto.getCategory_name())).
                 centerInside().
                 fit().
                 transform(new RoundedTransformation(65, 0)).
                 into(holder.imagencategoriapregunta);
-        
-        Picasso.with(context).
-                load(question_dto.getOwner_photo()).
-                placeholder(R.drawable.placeholder_usuario).
-                transform(new RoundedTransformation(75, 0)).
-                into(holder.imagenusuario);
+
+        String owner_photo = question_dto.getOwner_photo();
+            Picasso.with(context).
+                    load(owner_photo).
+                    placeholder(R.drawable.placeholder_usuario).
+                    fit().
+                    transform(new RoundedTransformation(75, 0)).
+                    into(holder.imagenusuario);
+
 
         holder.nombreusuario.setText(question_dto.getOwner_fullname() + " preguntó:");
 
-        /*
-        try {
-            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ");
-            Date localDate = formater.parse(question_dto.getCreated_at());
-            holder.tiempopregunta.setText(new PrettyTime(context).getTimeAgo(localDate));
-            holder.tiempopregunta.setText(question_dto.getCreated_at());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        */
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ");
+        DateTime dt = formatter.parseDateTime(question_dto.getCreated_at());
+        holder.tiempopregunta.setText(Util_Time.getTimeAgo(dt.getMillis()));
 
         holder.cantidadrespuesta.setText(question_dto.getNum_answers() + " respuesta(s).");
         holder.pregunta.setText(question_dto.getContent());

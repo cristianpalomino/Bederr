@@ -17,6 +17,7 @@ import com.bederr.beans.Categoria_DTO;
 import pe.bederr.com.R;
 
 import com.bederr.fragments.Fragment_Preguntar;
+import com.bederr.questions_v2.fragments.Create_Question_F;
 
 import java.util.ArrayList;
 
@@ -67,16 +68,12 @@ public class Dialog_Categoria extends AlertDialog implements AdapterView.OnItemC
         grillacategorias.setOnItemClickListener(this);
 
         ArrayList<Categoria_DTO> categoria_dtos = new ArrayList<Categoria_DTO>();
-        categoria_dtos.add(new Categoria_DTO("Comida", "", R.drawable.categoria_comida, false, 2));
-        categoria_dtos.add(new Categoria_DTO("Ropa", "", R.drawable.categoria_ropa, false, 4));
-        categoria_dtos.add(new Categoria_DTO("Salud", "", R.drawable.categoria_salud, false, 9));
-        categoria_dtos.add(new Categoria_DTO("Bar", "", R.drawable.categoria_bar, false, 3));
-        categoria_dtos.add(new Categoria_DTO("Diversión", "", R.drawable.categoria_entretenimiento, false, 1));
-        categoria_dtos.add(new Categoria_DTO("Markets", "", R.drawable.categoria_markets, false, 7));
-        categoria_dtos.add(new Categoria_DTO("Viajes", "", R.drawable.categoria_viajes, false, 5));
-        categoria_dtos.add(new Categoria_DTO("Grifos", "", R.drawable.grifos, false, 8));
-        //categoria_dtos.add(new Categoria_DTO("", "", R.drawable.white, false, 9));
-        //categoria_dtos.add(new Categoria_DTO("", "", R.drawable.white, false, 10));
+        categoria_dtos.add(new Categoria_DTO("Viajes", "viajes", R.drawable.categoria_viajes, false, 5));
+        categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
+        categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
+        categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
+        categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
+        categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
 
         Adapter_Categoria_Pregunta adapter_categoria = new Adapter_Categoria_Pregunta(getContext(), categoria_dtos);
         grillacategorias.setAdapter(adapter_categoria);
@@ -100,6 +97,6 @@ public class Dialog_Categoria extends AlertDialog implements AdapterView.OnItemC
         hide();
         Categoria_DTO categoria_dto = (Categoria_DTO) parent.getItemAtPosition(position);
         ((Bederr) actionBarActivity).setCategoria_dto(categoria_dto);
-        actionBarActivity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).add(R.id.container, Fragment_Preguntar.newInstance(), Fragment_Preguntar.class.getName()).addToBackStack(null).commit();
+        actionBarActivity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).add(R.id.container, Create_Question_F.newInstance(), Create_Question_F.class.getName()).addToBackStack(null).commit();
     }
 }

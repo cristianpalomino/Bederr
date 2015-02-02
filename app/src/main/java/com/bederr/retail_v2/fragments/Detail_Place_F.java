@@ -46,31 +46,40 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Detail_Place_F extends Fragment_Master {
 
     private GoogleMap map;
+    private String option;
 
-    public Detail_Place_F() {
+    public Detail_Place_F()
+    {
         setId_layout(R.layout.fragment_detalle_local);
         setId_container(R.id.frame_container);
     }
 
-    public static final Detail_Place_F newInstance() {
-        return new Detail_Place_F();
+    public static final Detail_Place_F newInstance(String option) {
+        Detail_Place_F detail_place_f = new Detail_Place_F();
+        Bundle bundle = new Bundle();
+        bundle.putString("option",option);
+        detail_place_f.setArguments(bundle);
+        return detail_place_f;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        option = getArguments().getString("option");
     }
 
     @Override
     protected void initView() {
         super.initView();
+        closeKeyboard();
         Place_DTO place_dto = getBederr().getPlace_dto();
 
         LinearLayout cabecera_local = (LinearLayout) getView().findViewById(R.id.container_local);
         LinearLayout detalle_local = (LinearLayout) getView().findViewById(R.id.container_detalle_local);
         LinearLayout linearLayoutCupones = (LinearLayout) getView().findViewById(R.id.container_cupones);
 
-        View_Local_v2 view_local_v2 = new View_Local_v2(getActivity(), place_dto);
+        View_Local_v2 view_local_v2 = new View_Local_v2(getActivity(), place_dto , option);
         cabecera_local.addView(view_local_v2);
 
         View_Detalle_Local_v2 view_detalle_local_v2 = new View_Detalle_Local_v2(getActivity(), place_dto);
@@ -79,27 +88,58 @@ public class Detail_Place_F extends Fragment_Master {
         /**
          * Validad Cupones
          */
-        if(place_dto.getInplace_offers().size() > 0){
-            for (int i = 0; i < place_dto.getInplace_offers().size() ; i++) {
-                Offer_DTO offer_dto = place_dto.getInplace_offers().get(i);
-                Offer_V offer_v = new Offer_V(getBederr(),offer_dto,0);
-                linearLayoutCupones.addView(offer_v);
+
+        if(option.equals("Explore"))
+        {
+            if(place_dto.getInplace_offers().size() > 0){
+                for (int i = 0; i < place_dto.getInplace_offers().size() ; i++) {
+                    Offer_DTO offer_dto = place_dto.getInplace_offers().get(i);
+                    Offer_V offer_v = new Offer_V(getBederr(),offer_dto,0);
+                    linearLayoutCupones.addView(offer_v);
+                }
+            }
+
+            if(place_dto.getSpecial_offers().size() > 0){
+                for (int i = 0; i < place_dto.getSpecial_offers().size() ; i++) {
+                    Offer_DTO offer_dto = place_dto.getSpecial_offers().get(i);
+                    Offer_V offer_v = new Offer_V(getBederr(),offer_dto,1);
+                    linearLayoutCupones.addView(offer_v);
+                }
+            }
+
+            if(place_dto.getCorporate_offers().size() > 0){
+                for (int i = 0; i < place_dto.getCorporate_offers().size() ; i++) {
+                    CorporateOffer_DTO corporateOffer_dto = place_dto.getCorporate_offers().get(i);
+                    Offer_Corporate_V offer_corporate_v = new Offer_Corporate_V(getBederr(),corporateOffer_dto,-1);
+                    linearLayoutCupones.addView(offer_corporate_v);
+                }
+            }
+
+            if(place_dto.getLegacy_offers().size() > 0){
+                for (int i = 0; i < place_dto.getLegacy_offers().size() ; i++) {
+                    CorporateOffer_DTO corporateOffer_dto = place_dto.getLegacy_offers().get(i);
+                    Offer_Corporate_V offer_corporate_v = new Offer_Corporate_V(getBederr(),corporateOffer_dto,-1);
+                    linearLayoutCupones.addView(offer_corporate_v);
+                }
             }
         }
-
-        if(place_dto.getSpecial_offers().size() > 0){
-            for (int i = 0; i < place_dto.getSpecial_offers().size() ; i++) {
-                Offer_DTO offer_dto = place_dto.getSpecial_offers().get(i);
-                Offer_V offer_v = new Offer_V(getBederr(),offer_dto,1);
-                linearLayoutCupones.addView(offer_v);
+        else if(option.equals("Benefits"))
+        {
+            if(place_dto.getCorporate_offers().size() > 0){
+                for (int i = 0; i < place_dto.getCorporate_offers().size() ; i++) {
+                    CorporateOffer_DTO corporateOffer_dto = place_dto.getCorporate_offers().get(i);
+                    Offer_Corporate_V offer_corporate_v = new Offer_Corporate_V(getBederr(),corporateOffer_dto,-1);
+                    linearLayoutCupones.addView(offer_corporate_v);
+                }
             }
-        }
 
-        if(place_dto.getCorporate_offers().size() > 0){
-            for (int i = 0; i < place_dto.getCorporate_offers().size() ; i++) {
-                CorporateOffer_DTO corporateOffer_dto = place_dto.getCorporate_offers().get(i);
-                Offer_Corporate_V offer_corporate_v = new Offer_Corporate_V(getBederr(),corporateOffer_dto,-1);
-                linearLayoutCupones.addView(offer_corporate_v);
+            if(place_dto.getLegacy_offers().size() > 0) {
+                for (int i = 0; i < place_dto.getLegacy_offers().size(); i++) {
+                    CorporateOffer_DTO corporateOffer_dto = place_dto.getLegacy_offers().get(i);
+                    Offer_Corporate_V offer_corporate_v = new Offer_Corporate_V(getBederr(), corporateOffer_dto, -1);
+                    linearLayoutCupones.addView(offer_corporate_v);
+
+                }
             }
         }
 

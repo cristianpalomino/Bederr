@@ -13,7 +13,7 @@ public class Question_DTO extends Bederr_DTO {
     private String owner_photo = "owner_photo";
 
     private String id = "id";
-    private String num_answers = "num_answers";
+    private String num_answers = "total_answers";
 
     public String getCategory_name() {
         return parseString(category_name,getDataSource());

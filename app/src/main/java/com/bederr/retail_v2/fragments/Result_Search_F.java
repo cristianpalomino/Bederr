@@ -39,7 +39,6 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
     private String s;
     private String distrito;
     private boolean isLoading = false;
-    private int page = 1;
     protected ListView lista_locales_busquedas;
     private Places_A places_a;
 
@@ -98,16 +97,26 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
 
         Session_Manager session_manager = new Session_Manager(getBederr());
         String token = session_manager.getUserToken();
-        String lng = "";
-        String lat = "";
         String name = "";
         String cat = "";
+
         if(validateCategory()){
             cat = getCategory(s).getId();
         }else{
             name = s;
         }
+
         String locality = validateLocality();
+        String lng;
+        String lat;
+        if(locality.equals("-1")){
+            locality = "";
+            lng = getUbication().getLongitude();
+            lat = getUbication().getLatitude();
+        }else{
+            lng = "";
+            lat = "";
+        }
 
         if(session_manager.isLogin()){
             Service_Places service_places = new Service_Places(getBederr());
@@ -121,10 +130,17 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                                             String previous) {
                     try {
                         if(success){
-                            places_a = new Places_A(getActivity(), place_dtos , 0);
+                            places_a = new Places_A(getActivity(), place_dtos , 0 , "Explore");
                             lista_locales_busquedas.setAdapter(places_a);
                             Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
                         }
+
+                        /**
+                         * Stacks
+                         */
+                        NEXT = next;
+                        PREVIOUS = previous;
+                        isLoading = false;
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -142,10 +158,18 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                                             String previous) {
                     try {
                         if(success){
-                            places_a = new Places_A(getActivity(), place_dtos , 0);
+                            places_a = new Places_A(getBederr(), place_dtos, 0 , "Explore");
                             lista_locales_busquedas.setAdapter(places_a);
                             Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
                         }
+
+                        /**
+                         * Stacks
+                         */
+                        NEXT = next;
+                        PREVIOUS = previous;
+                        isLoading = false;
+
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -252,7 +276,7 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
         ((Bederr) getActivity()).setPlace_dto(place_dto);
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance(), Detail_Place_F.class.getName()).
+                add(R.id.container, Detail_Place_F.newInstance("Explore"), Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
     }
 
@@ -293,7 +317,33 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
             if (!isLoading) {
                 isLoading = true;
-                page++;
+                Service_Places service_places = new Service_Places(getBederr());
+                service_places.loadMore(NEXT);
+                service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+                    @Override
+                    public void onSuccessPlaces(boolean success,
+                                                ArrayList<Place_DTO> place_dtos,
+                                                String count,
+                                                String next,
+                                                String previous) {
+                        try {
+                            if (success) {
+                                for (int i = 0; i < place_dtos.size(); i++) {
+                                    places_a.add(place_dtos.get(i));
+                                }
+
+                                /**
+                                 * Stacks
+                                 */
+                                NEXT = next;
+                                PREVIOUS = previous;
+                                isLoading = false;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
     }

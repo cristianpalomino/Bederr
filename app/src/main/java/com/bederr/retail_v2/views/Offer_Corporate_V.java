@@ -70,20 +70,7 @@ public class Offer_Corporate_V extends RelativeLayout implements View.OnClickLis
         descripcion.setText(corporateOffer_dto.getTitle());
         frame.setBackgroundResource(R.drawable.holo_flat_button_plomo_claro);
 
-        /*
-        if (type == 0) {
-            nombre.setText("Beneficio Corporativo");
-            descripcion.setText(corporateOffer_dto.getTitle());
-            frame.setBackgroundResource(R.drawable.holo_flat_button_plomo_claro);
-        } else if (type == 1) {
-            nombre.setText("Beneficio Corporativo");
-            descripcion.setText(corporateOffer_dto.getTitle());
-            frame.setBackgroundResource(R.drawable.holo_flat_button_plomo_claro);
-        }
-        */
-
-        String urlempresa = "";
-        //String urlempresa = corporateOffer_dto.getCompany_logo();
+        String urlempresa = corporateOffer_dto.getCompany_logo();
         if (!urlempresa.toString().matches("")) {
             Picasso.with(getContext()).load(urlempresa).placeholder(R.drawable.placeholder_empresa).error(R.drawable.placeholder_empresa).centerCrop().fit().transform(new RoundedTransformation(75, 0)).into(((ImageView) findViewById(R.id.img_empresa_cupon)));
         }

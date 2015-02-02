@@ -1,7 +1,9 @@
 package com.bederr.questions_v2.fragments;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +13,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.bederr.adapter.Adapter_Preguntas;
+import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Question_DTO;
 import com.bederr.dialog.Dialog_Categoria;
-import com.bederr.fragments.Fragment_Detalle_Pregunta;
-import com.bederr.fragments.Fragment_Detalle_Pregunta_v2;
 import com.bederr.fragments.Fragment_Entrar;
 import com.bederr.fragments.Fragment_Master;
 import com.bederr.main.Bederr;
 import com.bederr.questions_v2.adapters.Question_A;
 import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
 import com.bederr.questions_v2.services.Service_Question;
+import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
+import com.bederr.retail_v2.services.Service_Places;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
 
 import java.util.ArrayList;
 
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 import pe.bederr.com.R;
 
 /**
@@ -35,9 +39,7 @@ import pe.bederr.com.R;
 public class Question_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
     private ListView lista_preguntas;
-    protected Adapter_Preguntas adapter_preguntas;
-
-    protected int page = 1;
+    private Question_A question_a;
     private boolean isLoading = false;
 
     public Question_F() {
@@ -67,59 +69,76 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
     @Override
     protected void initView() {
         super.initView();
+        closeKeyboard();
 
         lista_preguntas = (ListView) getView().findViewById(R.id.lista_preguntas);
         lista_preguntas.setOnItemClickListener(this);
         lista_preguntas.setOnScrollListener(this);
         lista_preguntas.setVisibility(View.GONE);
 
+        SmartLocation.with(getBederr()).location().oneFix().start(new OnLocationUpdatedListener() {
+            @Override
+            public void onLocationUpdated(Location location) {
+                Session_Manager session_manager = new Session_Manager(getBederr());
+                String lat = String.valueOf(SmartLocation.with(getBederr()).location().getLastLocation().getLatitude());
+                String lng = String.valueOf(SmartLocation.with(getBederr()).location().getLastLocation().getLongitude());
+                if (session_manager.isLogin()) {
+                    Service_Question service_question = new Service_Question(getBederr());
+                    service_question.sendRequestUser(session_manager.getUserToken(), lat, lng);
+                    service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
+                        @Override
+                        public void onSuccessQuestion(boolean success,
+                                                      ArrayList<Question_DTO> question_dtos,
+                                                      String count,
+                                                      String next,
+                                                      String previous) {
+                            try {
+                                if (success) {
+                                    question_a = new Question_A(getBederr(), question_dtos);
+                                    lista_preguntas.setAdapter(question_a);
+                                    Question_F.this.onFinishLoad(lista_preguntas);
 
-        Session_Manager session_manager = new Session_Manager(getBederr());
-        String lat = "-12.0842643";
-        String lng = "-77.0834144";
-        if (session_manager.isLogin()) {
-            Service_Question service_question = new Service_Question(getBederr());
-            service_question.sendRequestUser(session_manager.getUserToken(), lat, lng);
-            service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
-                @Override
-                public void onSuccessQuestion(boolean success,
-                                            ArrayList<Question_DTO> question_dtos,
-                                            String count,
-                                            String next,
-                                            String previous) {
-                    try {
-                        if (success) {
-                            Question_A question_a = new Question_A(getBederr(),question_dtos);
-                            lista_preguntas.setAdapter(question_a);
-                            Question_F.this.onFinishLoad(lista_preguntas);
+                                    /**
+                                     * Stacks
+                                     */
+                                    PREVIOUS = previous;
+                                    NEXT = next;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } else {
-            Service_Question service_question = new Service_Question(getBederr());
-            service_question.sendRequest(lat, lng);
-            service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
-                @Override
-                public void onSuccessQuestion(boolean success,
-                                            ArrayList<Question_DTO> question_dtos,
-                                            String count,
-                                            String next,
-                                            String previous) {
-                    try {
-                        if (success) {
-                            Question_A question_a = new Question_A(getBederr(),question_dtos);
-                            lista_preguntas.setAdapter(question_a);
-                            Question_F.this.onFinishLoad(lista_preguntas);
+                    });
+                } else {
+                    Service_Question service_question = new Service_Question(getBederr());
+                    service_question.sendRequest(lat, lng);
+                    service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
+                        @Override
+                        public void onSuccessQuestion(boolean success,
+                                                      ArrayList<Question_DTO> question_dtos,
+                                                      String count,
+                                                      String next,
+                                                      String previous) {
+                            try {
+                                if (success) {
+                                    question_a = new Question_A(getBederr(), question_dtos);
+                                    lista_preguntas.setAdapter(question_a);
+                                    Question_F.this.onFinishLoad(lista_preguntas);
+
+                                    /**
+                                     * Stacks
+                                     */
+                                    PREVIOUS = previous;
+                                    NEXT = next;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    });
                 }
-            });
-        }
+            }
+        });
     }
 
     @Override
@@ -151,11 +170,6 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
         });
     }
 
-    @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-    }
-
     /**
      * Callback method to be invoked when an item in this AdapterView has
      * been clicked.
@@ -171,13 +185,12 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         Question_DTO question_dto = (Question_DTO) parent.getItemAtPosition(position);
         ((Bederr) getActivity()).setQuestion_dto(question_dto);
         getActivity().getSupportFragmentManager().
                 beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Question_F.newInstance(),Detail_Question_F.class.getName()).
+                add(R.id.container, Detail_Question_F.newInstance(), Detail_Question_F.class.getName()).
                 addToBackStack(null).commit();
     }
 
@@ -210,11 +223,54 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
             if (!isLoading) {
                 isLoading = true;
-                page++;
-                loadMoreDAta(page);
+                Service_Question service_question = new Service_Question(getBederr());
+                service_question.loadMore(NEXT);
+                service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
+                    @Override
+                    public void onSuccessQuestion(boolean success,
+                                                  ArrayList<Question_DTO> question_dtos,
+                                                  String count,
+                                                  String next,
+                                                  String previous) {
+                        try {
+                            if(success){
+                                for (int i = 0; i < question_dtos.size() ; i++) {
+                                    question_a.add(question_dtos.get(i));
+                                }
+
+                                /**
+                                 * Stacks
+                                 */
+                                NEXT = next;
+                                PREVIOUS = previous;
+                                isLoading = false;
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
     }
 
-    private void loadMoreDAta(int page) {}
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Question_F.this.getView().setFocusableInTouchMode(true);
+        Question_F.this.getView().requestFocus();
+        Question_F.this.getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        getBederr().clearHistory();
+                        getBederr().finish();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+    }
 }
