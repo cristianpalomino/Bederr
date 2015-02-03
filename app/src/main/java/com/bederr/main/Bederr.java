@@ -49,6 +49,7 @@ import com.bederr.retail_v2.services.Service_Places;
 import com.bederr.util_v2.Bederr_WS;
 import com.bederr.util_v2.LocationAddress;
 import com.bederr.utils.GPSTracker;
+import com.bederr.utils.GpsLocationTracker;
 import com.bederr.utils.Locator;
 import com.google.android.gms.maps.model.LatLng;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -320,28 +321,26 @@ public class Bederr extends ActionBarActivity {
 
 
     public void loadPlaces() {
-        SmartLocation.with(Bederr.this).location().oneFix().start(new OnLocationUpdatedListener() {
+        Maven_Application application = ((Maven_Application) getApplication());
+        String lat = application.getUbication().getLatitude();
+        String lng = application.getUbication().getLongitude();
+        String name = "";
+        String cat = "";
+        String city = "";
+        String area = application.getUbication().getArea();
+
+        Service_Places service_places = new Service_Places(Bederr.this);
+        service_places.sendRequest(lat, lng, name, cat, city,area);
+        service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
             @Override
-            public void onLocationUpdated(Location location) {
-                String lat = String.valueOf(location.getLatitude());
-                String lng = String.valueOf(location.getLongitude());
-                String name = "";
-                String cat = "";
-                String city = "";
-                Service_Places service_places = new Service_Places(Bederr.this);
-                service_places.sendRequest(lat, lng, name, cat, city);
-                service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-                    @Override
-                    public void onSuccessPlaces(boolean success,
-                                                ArrayList<Place_DTO> place_dtos,
-                                                String count,
-                                                String next,
-                                                String previous) {
-                        if (success) {
-                            setPlace_dtos(place_dtos);
-                        }
-                    }
-                });
+            public void onSuccessPlaces(boolean success,
+                                        ArrayList<Place_DTO> place_dtos,
+                                        String count,
+                                        String next,
+                                        String previous) {
+                if (success) {
+                    setPlace_dtos(place_dtos);
+                }
             }
         });
     }
@@ -355,7 +354,7 @@ public class Bederr extends ActionBarActivity {
         super.onResume();
         //loadPlaces();
 
-        final GPSTracker gpsTracker = new GPSTracker(Bederr.this);
+        final GpsLocationTracker gpsTracker = new GpsLocationTracker(Bederr.this);
         if (gpsTracker.canGetLocation()) {
             Service_Country service_country = new Service_Country(this);
             service_country.sendRequest();
@@ -477,21 +476,22 @@ public class Bederr extends ActionBarActivity {
         sm_empresas.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
     }
 
-    private class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
-            Log.e("LUGAR", locationAddress);
+private class GeocoderHandler extends Handler {
+    @Override
+    public void handleMessage(Message message) {
+        String locationAddress;
+        switch (message.what) {
+            case 1:
+                Bundle bundle = message.getData();
+                locationAddress = bundle.getString("address");
+                break;
+            default:
+                locationAddress = null;
         }
+        Log.e("LUGAR", locationAddress);
     }
+
+}
 
     public void showMessage(String message) {
         Toast.makeText(Bederr.this, message, Toast.LENGTH_SHORT).show();

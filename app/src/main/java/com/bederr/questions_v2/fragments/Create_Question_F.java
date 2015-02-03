@@ -128,6 +128,7 @@ public class Create_Question_F extends Fragment_Master {
                         }
                     });
                 }
+                closeKeyboard();
             }
         });
 

@@ -104,9 +104,10 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         String name = "";
         String cat = "";
         String city = "";
+        String area = getUbication().getArea();
 
         Service_Places service_places = new Service_Places(getBederr());
-        service_places.sendRequestUser(token, lat, lng, name, cat, city);
+        service_places.sendRequestUser(token, lat, lng, name, cat, city , cat);
         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
             @Override
             public void onSuccessPlaces(boolean success,
@@ -136,9 +137,10 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         String name = "";
         String cat = "";
         String city = "";
+        String area = getUbication().getArea();
 
         Service_Places service_places = new Service_Places(getBederr());
-        service_places.sendRequest(lat, lng, name, cat, city);
+        service_places.sendRequest(lat, lng, name, cat, city , area);
         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
             @Override
             public void onSuccessPlaces(boolean success,

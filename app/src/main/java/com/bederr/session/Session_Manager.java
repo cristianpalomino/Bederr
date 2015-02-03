@@ -40,7 +40,7 @@ public class Session_Manager {
 
     public Session_Manager(Context context) {
         this.context = context;
-        preferences = context.getSharedPreferences(PREFERENCE_NAME, PRIVATE_MODE);
+        preferences = this.context.getSharedPreferences(PREFERENCE_NAME, PRIVATE_MODE);
         editor = preferences.edit();
     }
 

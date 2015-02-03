@@ -1,8 +1,11 @@
 package com.bederr.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +25,7 @@ import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.retail_v2.dialog.Ubication_D;
 import com.bederr.util_v2.Bederr_WS;
 import com.bederr.utils.GPSTracker;
+import com.bederr.utils.GpsLocationTracker;
 import com.google.android.gms.maps.model.LatLng;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -57,15 +61,15 @@ public class Splash extends ActionBarActivity {
         ImageView img_splash = (ImageView) findViewById(R.id.img_splash);
         img_splash.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
 
-
-        ParseGeoPoint.getCurrentLocationInBackground(1000,new LocationCallback() {
-            @Override
-            public void done(ParseGeoPoint parseGeoPoint, ParseException e) {
-                if(parseGeoPoint != null){
-                    showMessage(parseGeoPoint.getLatitude() + " - " + parseGeoPoint.getLongitude());
-                }
-            }
-        });
+        GpsLocationTracker mGpsLocationTracker = new GpsLocationTracker(Splash.this);
+        /**
+         * Set GPS Location fetched address
+         */
+        if (mGpsLocationTracker.canGetLocation()) {
+            showMessage(mGpsLocationTracker.getLatitude() + " - " + mGpsLocationTracker.getLongitude());
+        } else {
+            mGpsLocationTracker.showSettingsAlert();
+        }
 
         /*
         Service_Country service_country = new Service_Country(this);

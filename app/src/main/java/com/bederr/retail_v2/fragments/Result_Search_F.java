@@ -117,10 +117,11 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
             lng = "";
             lat = "";
         }
+        String area = getUbication().getArea();
 
         if(session_manager.isLogin()){
             Service_Places service_places = new Service_Places(getBederr());
-            service_places.sendRequestUser(token,lat,lng,name,cat,locality);
+            service_places.sendRequestUser(token,lat,lng,name,cat,locality,area);
             service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
                 @Override
                 public void onSuccessPlaces(boolean success,
@@ -148,7 +149,7 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
             });
         }else{
             Service_Places service_places = new Service_Places(getBederr());
-            service_places.sendRequest(lat,lng,name,cat,locality);
+            service_places.sendRequest(lat,lng,name,cat,locality,area);
             service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
                 @Override
                 public void onSuccessPlaces(boolean success,
@@ -210,7 +211,7 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                 }
             }
         }
-        return "";
+        return "-1";
     }
 
     @Override

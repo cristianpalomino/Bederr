@@ -70,7 +70,7 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_listas.setVisibility(View.GONE);
 
         Session_Manager session_manager = new Session_Manager(getBederr());
-        String area = "1";
+        String area = getUbication().getArea();
         if (session_manager.isLogin()) {
             Service_Listings service_listings = new Service_Listings(getBederr());
             service_listings.sendRequestUser(session_manager.getUserToken(), area);

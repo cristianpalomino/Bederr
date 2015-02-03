@@ -55,7 +55,7 @@ public class Benefit_Programs_F extends Fragment_Master {
         String token = new Session_Manager(getBederr()).getUserToken();
 
         Service_Programs service_programs = new Service_Programs(getBederr());
-        service_programs.sendRequest(token);
+        service_programs.sendRequest(token,getUbication().getArea());
         service_programs.setOnSuccessPrograms(new OnSuccessPrograms() {
             @Override
             public void onSuccessPrograms(boolean success,

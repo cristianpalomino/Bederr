@@ -28,7 +28,7 @@ public class Bederr_WS {
      * Beeder API - Benefits
      */
     public static final String BEDERR_OFFER = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/me/offer-uses/";
-    public static final String BEDERR_PROGRAMS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/benefit-programs/";
+    public static final String BEDERR_PROGRAMS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/*/benefit-programs/";
     public static final String BEDERR_ME_PROGRAMS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/me/benefit-programs/";
     public static final String BEDERR_ME_REMOVE_PROGRAMS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/me/benefit-programs/#/";
     public static final String BEDERR_PROGRAMS_PLACES = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/me/benefit-programs/#/places/";

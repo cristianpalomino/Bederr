@@ -28,13 +28,14 @@ public class Service_Places {
         this.onSuccessPlaces = onSuccessPlaces;
     }
 
-    public void sendRequestUser(String token, String lat, String lng, String name, String cat, String city) {
+    public void sendRequestUser(String token, String lat, String lng, String name, String cat, String city,String area) {
         RequestParams params = new RequestParams();
         params.put("lat", lat);
         params.put("lng", lng);
         params.put("name", name);
         params.put("cat", cat);
         params.put("locality", city);
+        params.put("area", area);
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.addHeader("Authorization", "Token " + token);
@@ -60,13 +61,14 @@ public class Service_Places {
         });
     }
 
-    public void sendRequest(String lat, String lng, String name, String cat, String city) {
+    public void sendRequest(String lat, String lng, String name, String cat, String city,String area) {
         RequestParams params = new RequestParams();
         params.put("lat", lat);
         params.put("lng", lng);
         params.put("name", name);
         params.put("cat", cat);
         params.put("city", city);
+        params.put("area", area);
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(context, Bederr_WS.BEDERR_PLACES, params, new JsonHttpResponseHandler() {

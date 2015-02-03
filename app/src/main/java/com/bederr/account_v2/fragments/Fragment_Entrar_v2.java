@@ -1,5 +1,6 @@
 package com.bederr.account_v2.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -37,8 +38,9 @@ import java.util.List;
  */
 public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickListener {
 
+    protected Dialog_Maven dialog_maven;
+    protected Session_Manager session_manager;
     private String type;
-    private Dialog_Maven progressDialog;
 
     public Fragment_Entrar_v2() {
         setId_layout(R.layout.fragment_entrar);
@@ -73,6 +75,9 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
     @Override
     protected void initView() {
         super.initView();
+
+        dialog_maven = new Dialog_Maven(getBederr());
+        session_manager = new Session_Manager(getActivity());
 
         Session session = Session.getActiveSession();
         if (session == null) {
@@ -114,9 +119,9 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
         ((TextView) getView().findViewById(R.id.fragment_entrar_titulo)).setTypeface(Util_Fonts.setPNASemiBold(getActivity()));
     }
 
+
     private void loginFacebook() {
-        progressDialog = new Dialog_Maven(getActivity());
-        progressDialog.show();
+        dialog_maven.show();
         List<String> permissions = Arrays.asList("email",
                 "public_profile",
                 "user_friends",
@@ -125,9 +130,10 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
                 "user_relationships",
                 "user_location",
                 "user_likes");
-        ParseFacebookUtils.logIn(permissions, getActivity(), new LogInCallback() {
+        ParseFacebookUtils.logIn(permissions,getBederr(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
+                dialog_maven.hide();
                 if (user == null) {
                     Log.e("Facebook", err.getMessage());
                 } else if (user.isNew()) {
@@ -147,10 +153,8 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
             service_login.setOnSuccessLogin(new OnSuccessLogin() {
                 @Override
                 public void onSuccessLogin(boolean success, String token_access) {
-                    progressDialog.hide();
+                    dialog_maven.hide();
                     if (success) {
-                        Toast.makeText(getBederr(), "Correcto", Toast.LENGTH_SHORT).show();
-                        Session_Manager session_manager = new Session_Manager(getBederr());
                         session_manager.crearSession_v2(token_access, 1);
                     } else {
                         Toast.makeText(getBederr(), token_access, Toast.LENGTH_SHORT).show();

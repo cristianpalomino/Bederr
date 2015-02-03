@@ -41,11 +41,13 @@ public class Service_Programs {
         this.onSuccessAdd = onSuccessAdd;
     }
 
-    public void sendRequest(String token) {
+    public void sendRequest(String token,String area) {
         RequestParams params = new RequestParams();
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.addHeader("Authorization", "Token " + token);
-        httpClient.get(context, Bederr_WS.BEDERR_PROGRAMS, params, new JsonHttpResponseHandler() {
+
+        String URL = Bederr_WS.BEDERR_PROGRAMS.replace("*",area);
+        httpClient.get(context, URL , params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

@@ -80,11 +80,13 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
             @Override
             public void onLocationUpdated(Location location) {
                 Session_Manager session_manager = new Session_Manager(getBederr());
-                String lat = String.valueOf(SmartLocation.with(getBederr()).location().getLastLocation().getLatitude());
-                String lng = String.valueOf(SmartLocation.with(getBederr()).location().getLastLocation().getLongitude());
+                String lat = getUbication().getLatitude();
+                String lng = getUbication().getLongitude();
+                String area = getUbication().getArea();
+
                 if (session_manager.isLogin()) {
                     Service_Question service_question = new Service_Question(getBederr());
-                    service_question.sendRequestUser(session_manager.getUserToken(), lat, lng);
+                    service_question.sendRequestUser(session_manager.getUserToken(), lat, lng,area);
                     service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
                         @Override
                         public void onSuccessQuestion(boolean success,
@@ -111,7 +113,7 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                     });
                 } else {
                     Service_Question service_question = new Service_Question(getBederr());
-                    service_question.sendRequest(lat, lng);
+                    service_question.sendRequest(lat, lng , getUbication().getArea());
                     service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
                         @Override
                         public void onSuccessQuestion(boolean success,
