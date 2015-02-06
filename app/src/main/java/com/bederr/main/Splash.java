@@ -66,7 +66,7 @@ public class Splash extends ActionBarActivity {
          * Set GPS Location fetched address
          */
         if (mGpsLocationTracker.canGetLocation()) {
-            showMessage(mGpsLocationTracker.getLatitude() + " - " + mGpsLocationTracker.getLongitude());
+
         } else {
             mGpsLocationTracker.showSettingsAlert();
         }
@@ -181,9 +181,5 @@ public class Splash extends ActionBarActivity {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
         }
-    }
-
-    public void showMessage(String message) {
-        Toast.makeText(Splash.this, message, Toast.LENGTH_SHORT).show();
     }
 }

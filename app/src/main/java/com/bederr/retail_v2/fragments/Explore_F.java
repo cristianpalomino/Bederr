@@ -17,6 +17,7 @@ import com.bederr.application.Maven_Application;
 import com.bederr.beans_v2.Question_DTO;
 import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.fragments.Fragment_Master;
+import com.bederr.main.Master;
 import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
 import com.bederr.questions_v2.services.Service_Question;
 import com.bederr.retail_v2.adapters.Places_A;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Explore_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class Explore_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, Bederr.BederrOnSuccessArea {
 
     private ListView lista_locales;
     protected Places_A places_a;
@@ -60,6 +61,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        getBederr().setBederrOnSuccessArea(this);
     }
 
     @Override
@@ -82,23 +84,17 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_locales.setOnScrollListener(this);
         lista_locales.setVisibility(View.GONE);
 
-        Session_Manager session_manager = new Session_Manager(getBederr());
-        Ubication_DTO ubication_dto = getUbication();
-
-        if(ubication_dto != null){
-            if (ubication_dto.getLatLng() != null) {
-                if (session_manager.isLogin()) {
-                    openLoginUser(session_manager.getUserToken());
-                } else {
-                    openLogin();
-                }
+        if(getUbication() != null){
+            Session_Manager session_manager = new Session_Manager(getBederr());
+            if (session_manager.isLogin()) {
+                openLoginUser(session_manager.getUserToken());
             } else {
-
+                openLogin();
             }
         }
     }
 
-    private void openLoginUser(String token){
+    private void openLoginUser(String token) {
         String lat = getUbication().getLatitude();
         String lng = getUbication().getLongitude();
         String name = "";
@@ -107,7 +103,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         String area = getUbication().getArea();
 
         Service_Places service_places = new Service_Places(getBederr());
-        service_places.sendRequestUser(token, lat, lng, name, cat, city , cat);
+        service_places.sendRequestUser(token, lat, lng, name, cat, city, area);
         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
             @Override
             public void onSuccessPlaces(boolean success,
@@ -131,7 +127,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         });
     }
 
-    private void openLogin(){
+    private void openLogin() {
         String lat = getUbication().getLatitude();
         String lng = getUbication().getLongitude();
         String name = "";
@@ -140,7 +136,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         String area = getUbication().getArea();
 
         Service_Places service_places = new Service_Places(getBederr());
-        service_places.sendRequest(lat, lng, name, cat, city , area);
+        service_places.sendRequest(lat, lng, name, cat, city, area);
         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
             @Override
             public void onSuccessPlaces(boolean success,
@@ -290,5 +286,19 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                 return false;
             }
         });
+    }
+
+    @Override
+    public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto) {
+        try {
+            Session_Manager session_manager = new Session_Manager(getBederr());
+            if (session_manager.isLogin()) {
+                openLoginUser(session_manager.getUserToken());
+            } else {
+                openLogin();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.bederr.application.Maven_Application;
 import com.bederr.beans_v2.Ubication_DTO;
@@ -118,6 +119,7 @@ public class Fragment_Master extends Fragment implements Interface_Load {
         super.onActivityCreated(bundle);
         initActionBar();
 
+        /*
         if (isReady) {
             initView();
             initMap();
@@ -126,6 +128,10 @@ public class Fragment_Master extends Fragment implements Interface_Load {
             getLayout().removeAllViews();
             getLayout().addView(view_message);
         }
+        */
+
+        initView();
+        initMap();
 
         onBackPressed();
     }
@@ -141,9 +147,13 @@ public class Fragment_Master extends Fragment implements Interface_Load {
 
             @Override
             public void onLocationNotFound() {
-                isReady = false;
-                view_message = new View_Message(getActivity(),2);
-                location = null;
+                try {
+                    isReady = false;
+                    view_message = new View_Message(getActivity(),2);
+                    location = null;
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -192,6 +202,10 @@ public class Fragment_Master extends Fragment implements Interface_Load {
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    public void showMessage(String message) {
+        Toast.makeText(getBederr(), message, Toast.LENGTH_SHORT).show();
     }
 }
 

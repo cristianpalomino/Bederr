@@ -4,11 +4,13 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bederr.beans_v2.Area_DTO;
 import com.bederr.beans_v2.Area_DTO;
@@ -30,7 +32,12 @@ public class Area_V extends LinearLayout {
     private TextView area;
     private ImageView imgarea;
 
+    private OnChecked onChecked;
     private boolean checked = false;
+
+    public void setOnChecked(OnChecked onChecked) {
+        this.onChecked = onChecked;
+    }
 
     public Area_V(Context context, Area_DTO area_dto) {
         super(context);
@@ -64,22 +71,41 @@ public class Area_V extends LinearLayout {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checked){
+                if(!checked){
+                    //Un - Checked
                     imgarea.setVisibility(VISIBLE);
-                    checked = false;
-                }else{
-                    imgarea.setVisibility(GONE);
                     checked = true;
+                    onChecked.onChecked(true,getArea_dto().getId());
+                }else{
+                    //Checked
+                    imgarea.setVisibility(GONE);
+                    checked = false;
+                    onChecked.onChecked(false,getArea_dto().getId());
                 }
             }
         });
+    }
+
+    public Area_DTO getArea_dto() {
+        return area_dto;
     }
 
     public boolean isChecked() {
         return checked;
     }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public void setChecked() {
+        //Un - Checked
+        imgarea.setVisibility(GONE);
+        checked = false;
+        //onChecked.onChecked(false,getArea_dto().getId());
+    }
+
+    public void showMessage(String message) {
+        Toast.makeText(getContext() , message, Toast.LENGTH_SHORT).show();
+    }
+
+    public interface OnChecked{
+        public void onChecked(boolean checked,Object tag);
     }
 }

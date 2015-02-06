@@ -15,7 +15,13 @@ public class Ubication_DTO {
 
     public Ubication_DTO(LatLng latLng, String area) {
         this.latLng = latLng;
-        this.area = area;
+
+        if(area != null){
+            this.area = area;
+        }
+        else{
+            this.area = "-1";
+        }
     }
 
     public LatLng getLatLng() {
@@ -23,11 +29,29 @@ public class Ubication_DTO {
     }
 
     public String getLatitude() {
-        return String.valueOf(latLng.latitude);
+        if(latLng != null){
+            String lat = String.valueOf(latLng.latitude);
+            if(lat != null){
+                return lat;
+            }else{
+                return "0.0";
+            }
+        }else{
+            return "0.0";
+        }
     }
 
     public String getLongitude() {
-        return String.valueOf(latLng.longitude);
+        if(latLng != null){
+            String lng = String.valueOf(latLng.longitude);
+            if(lng != null){
+                return lng;
+            }else{
+                return "0.0";
+            }
+        }else{
+            return "0.0";
+        }
     }
 
     public void setLatLng(LatLng latLng) {

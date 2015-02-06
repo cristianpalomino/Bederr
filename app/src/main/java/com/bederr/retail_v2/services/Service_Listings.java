@@ -34,9 +34,12 @@ public class Service_Listings {
     }
 
     public void sendRequestUser(String token,String area) {
+
+        String URL = Bederr_WS.BEDERR_LISTINGS.replace("*",area);
+
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.addHeader("Authorization", "Token " + token);
-        httpClient.get(context, Bederr_WS.BEDERR_LISTINGS, null , new JsonHttpResponseHandler() {
+        httpClient.get(context, URL , null , new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -59,8 +62,10 @@ public class Service_Listings {
     }
 
     public void sendRequest(String area) {
+        String URL = Bederr_WS.BEDERR_LISTINGS.replace("*",area);
+
         AsyncHttpClient httpClient = new AsyncHttpClient();
-        httpClient.get(context, Bederr_WS.BEDERR_LISTINGS, null , new JsonHttpResponseHandler() {
+        httpClient.get(context, URL , null , new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

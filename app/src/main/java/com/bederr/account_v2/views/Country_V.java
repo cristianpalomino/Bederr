@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bederr.beans_v2.Area_DTO;
 import com.bederr.beans_v2.Country_DTO;
@@ -23,7 +24,7 @@ import pe.bederr.com.R;
 /**
  * Created by Gantz on 8/01/15.
  */
-public class Country_V extends LinearLayout {
+public class Country_V extends LinearLayout implements Area_V.OnChecked {
 
     private View view;
     private Country_DTO country_dto;
@@ -31,6 +32,12 @@ public class Country_V extends LinearLayout {
     private TextView pais;
     private ImageView imagenpais;
     private LinearLayout container;
+
+    private OnChecked onChecked;
+
+    public void setOnChecked(OnChecked onChecked) {
+        this.onChecked = onChecked;
+    }
 
     public Country_V(Context context,Country_DTO country_dto) {
         super(context);
@@ -66,7 +73,31 @@ public class Country_V extends LinearLayout {
         ArrayList<Area_DTO> area_dtos = country_dto.getAreas();
         for (int i = 0; i < area_dtos.size() ; i++) {
             Area_V area_v = new Area_V(getContext(),area_dtos.get(i));
+            area_v.setOnChecked(this);
             container.addView(area_v);
         }
+    }
+
+    @Override
+    public void onChecked(boolean checked,Object tag) {
+        onChecked.onChecked(checked,tag);
+    }
+
+    public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public interface OnChecked{
+        public void onChecked(boolean checked,Object tag);
+    }
+
+    public ArrayList<Area_V> getAreas(){
+        ArrayList<Area_V> areas = new ArrayList<Area_V>();
+        for (int i = 0; i < container.getChildCount(); i++) {
+            Area_V area_v = (Area_V) container.getChildAt(i);
+            areas.add(area_v);
+        }
+
+        return areas;
     }
 }

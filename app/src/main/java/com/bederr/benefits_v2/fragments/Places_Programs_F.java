@@ -73,35 +73,37 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
         lista_locales.setOnItemClickListener(this);
         lista_locales.setVisibility(View.GONE);
 
-
         Session_Manager session_manager = new Session_Manager(getBederr());
+        if (session_manager.isLogin()) {
+            if(getUbication() != null){
+                String token = session_manager.getUserToken();
+                String lat = getUbication().getLatitude();
+                String lng = getUbication().getLongitude();
+                String id = String.valueOf(getBederr().getBenefit_program_dto().getId());
 
-        String token = session_manager.getUserToken();
-        String lat = "-12.0842643";
-        String lng = "-77.0834144";
-        String id = String.valueOf(getBederr().getBenefit_program_dto().getId());
-
-        Service_Programs_Places service_programs_places = new Service_Programs_Places(getBederr());
-        service_programs_places.sendRequestUser(token, lat, lng, id);
-        service_programs_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-            @Override
-            public void onSuccessPlaces(boolean success,
-                                        ArrayList<Place_DTO> place_dtos,
-                                        String count,
-                                        String next,
-                                        String previous) {
-                try {
-                    if (success) {
-                        getBederr().setPlace_dtos(place_dtos);
-                        places_a = new Places_A(getBederr(),place_dtos,0,"Benefits");
-                        lista_locales.setAdapter(places_a);
-                        lista_locales.setVisibility(View.VISIBLE);
+                Service_Programs_Places service_programs_places = new Service_Programs_Places(getBederr());
+                service_programs_places.sendRequestUser(token, lat, lng, id);
+                service_programs_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+                    @Override
+                    public void onSuccessPlaces(boolean success,
+                                                ArrayList<Place_DTO> place_dtos,
+                                                String count,
+                                                String next,
+                                                String previous) {
+                        try {
+                            if (success) {
+                                getBederr().setPlace_dtos(place_dtos);
+                                places_a = new Places_A(getBederr(),place_dtos,0,"Benefits");
+                                lista_locales.setAdapter(places_a);
+                                lista_locales.setVisibility(View.VISIBLE);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                });
             }
-        });
+        }
     }
 
     @Override

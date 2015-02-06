@@ -76,68 +76,74 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
         lista_preguntas.setOnScrollListener(this);
         lista_preguntas.setVisibility(View.GONE);
 
-        SmartLocation.with(getBederr()).location().oneFix().start(new OnLocationUpdatedListener() {
+        Session_Manager session_manager = new Session_Manager(getBederr());
+        if (session_manager.isLogin()) {
+            openLoginUser(session_manager.getUserToken());
+        } else {
+            openLogin();
+        }
+    }
+
+    private void openLogin() {
+        String lat = getUbication().getLatitude();
+        String lng = getUbication().getLongitude();
+        String area = getUbication().getArea();
+        Service_Question service_question = new Service_Question(getBederr());
+        service_question.sendRequest(lat, lng, area);
+        service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
             @Override
-            public void onLocationUpdated(Location location) {
-                Session_Manager session_manager = new Session_Manager(getBederr());
-                String lat = getUbication().getLatitude();
-                String lng = getUbication().getLongitude();
-                String area = getUbication().getArea();
+            public void onSuccessQuestion(boolean success,
+                                          ArrayList<Question_DTO> question_dtos,
+                                          String count,
+                                          String next,
+                                          String previous) {
+                try {
+                    if (success) {
+                        question_a = new Question_A(getBederr(), question_dtos);
+                        lista_preguntas.setAdapter(question_a);
+                        Question_F.this.onFinishLoad(lista_preguntas);
 
-                if (session_manager.isLogin()) {
-                    Service_Question service_question = new Service_Question(getBederr());
-                    service_question.sendRequestUser(session_manager.getUserToken(), lat, lng,area);
-                    service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
-                        @Override
-                        public void onSuccessQuestion(boolean success,
-                                                      ArrayList<Question_DTO> question_dtos,
-                                                      String count,
-                                                      String next,
-                                                      String previous) {
-                            try {
-                                if (success) {
-                                    question_a = new Question_A(getBederr(), question_dtos);
-                                    lista_preguntas.setAdapter(question_a);
-                                    Question_F.this.onFinishLoad(lista_preguntas);
+                        /**
+                         * Stacks
+                         */
+                        PREVIOUS = previous;
+                        NEXT = next;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-                                    /**
-                                     * Stacks
-                                     */
-                                    PREVIOUS = previous;
-                                    NEXT = next;
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                } else {
-                    Service_Question service_question = new Service_Question(getBederr());
-                    service_question.sendRequest(lat, lng , getUbication().getArea());
-                    service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
-                        @Override
-                        public void onSuccessQuestion(boolean success,
-                                                      ArrayList<Question_DTO> question_dtos,
-                                                      String count,
-                                                      String next,
-                                                      String previous) {
-                            try {
-                                if (success) {
-                                    question_a = new Question_A(getBederr(), question_dtos);
-                                    lista_preguntas.setAdapter(question_a);
-                                    Question_F.this.onFinishLoad(lista_preguntas);
+    private void openLoginUser(String token) {
+        String lat = getUbication().getLatitude();
+        String lng = getUbication().getLongitude();
+        String area = getUbication().getArea();
 
-                                    /**
-                                     * Stacks
-                                     */
-                                    PREVIOUS = previous;
-                                    NEXT = next;
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
+        Service_Question service_question = new Service_Question(getBederr());
+        service_question.sendRequestUser(token, lat, lng, area);
+        service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
+            @Override
+            public void onSuccessQuestion(boolean success,
+                                          ArrayList<Question_DTO> question_dtos,
+                                          String count,
+                                          String next,
+                                          String previous) {
+                try {
+                    if (success) {
+                        question_a = new Question_A(getBederr(), question_dtos);
+                        lista_preguntas.setAdapter(question_a);
+                        Question_F.this.onFinishLoad(lista_preguntas);
+
+                        /**
+                         * Stacks
+                         */
+                        PREVIOUS = previous;
+                        NEXT = next;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -235,8 +241,8 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                                                   String next,
                                                   String previous) {
                         try {
-                            if(success){
-                                for (int i = 0; i < question_dtos.size() ; i++) {
+                            if (success) {
+                                for (int i = 0; i < question_dtos.size(); i++) {
                                     question_a.add(question_dtos.get(i));
                                 }
 
@@ -247,7 +253,7 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                                 PREVIOUS = previous;
                                 isLoading = false;
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

@@ -19,7 +19,7 @@ public class Bederr_WS {
      * Bederr API - Places
      */
     public static final String BEDERR_PLACES = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/places/";
-    public static final String BEDERR_LISTINGS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/listings/";
+    public static final String BEDERR_LISTINGS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/*/listings/";
     public static final String BEDERR_PLACES_LISTING = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/listings/#/places/";
     public static final String BEDERR_CATEGORY = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/categories/";
     public static final String BEDERR_LOCALITY = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/localities/";
