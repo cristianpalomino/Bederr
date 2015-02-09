@@ -1,9 +1,12 @@
 package com.bederr.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.bederr.account_v2.interfaces.OnSuccessCounty;
@@ -215,5 +218,19 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        closeKeyboard();
+    }
+
+    public void closeKeyboard(){
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

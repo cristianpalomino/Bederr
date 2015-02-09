@@ -32,7 +32,7 @@ public class Util_Categorias {
             return R.drawable.categoria_salud;
         } else if (name.equals("Ropa")) {
             return R.drawable.categoria_ropa;
-        } else if (name.equals("Grifo")) {
+        } else if (name.equals("Grifos")) {
             return R.drawable.grifos;
         } else if (name.equals("Descuentos")) {
             return R.drawable.categoria_descuento;

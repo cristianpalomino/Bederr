@@ -113,15 +113,23 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                                         String previous) {
                 try {
                     if (success) {
-                        places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
-                        lista_locales.setAdapter(places_a);
-                        Explore_F.this.onFinishLoad(lista_locales);
+                        if(place_dtos.size() > 0){
+                            places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
+                            lista_locales.setAdapter(places_a);
+                            Explore_F.this.onFinishLoad(lista_locales);
 
-                        NEXT = next;
-                        PREVIOUS = previous;
+                            NEXT = next;
+                            PREVIOUS = previous;
+                        }
+                        else{
+                            getEmptyView().setVisibility(View.VISIBLE);
+                            lista_locales.setVisibility(View.GONE);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales.setVisibility(View.GONE);
                 }
             }
         });
@@ -146,15 +154,23 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                                         String previous) {
                 try {
                     if (success) {
-                        places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
-                        lista_locales.setAdapter(places_a);
-                        Explore_F.this.onFinishLoad(lista_locales);
+                        if(place_dtos.size() > 0){
+                            places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
+                            lista_locales.setAdapter(places_a);
+                            Explore_F.this.onFinishLoad(lista_locales);
 
-                        NEXT = next;
-                        PREVIOUS = previous;
+                            NEXT = next;
+                            PREVIOUS = previous;
+                        }
+                        else{
+                            getEmptyView().setVisibility(View.VISIBLE);
+                            lista_locales.setVisibility(View.GONE);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales.setVisibility(View.GONE);
                 }
             }
         });
@@ -301,4 +317,12 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
             e.printStackTrace();
         }
     }
+
+    private View getEmptyView(){
+        View view = getView().findViewById(R.id.empty_view);
+        TextView message = (TextView) view.findViewById(R.id.text_type_message_no_data);
+        message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
+        return view;
+    }
+
 }

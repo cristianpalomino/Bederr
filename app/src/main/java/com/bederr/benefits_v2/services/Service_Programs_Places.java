@@ -28,12 +28,13 @@ public class Service_Programs_Places {
         this.onSuccessPlaces = onSuccessPlaces;
     }
 
-    public void sendRequestUser(String token, String lat, String lng, String id) {
+    public void sendRequestUser(String token, String lat, String lng, String id,String area) {
         String URL = Bederr_WS.BEDERR_PROGRAMS_PLACES.replace("#", id);
 
         RequestParams params = new RequestParams();
         params.put("lat", lat);
         params.put("lng", lng);
+        params.put("area", area);
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.addHeader("Authorization", "Token " + token);

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bederr.beans_v2.Benefit_Program_DTO;
 import com.bederr.benefits_v2.interfaces.OnSuccessPrograms;
@@ -15,6 +16,7 @@ import pe.bederr.com.R;
 
 import com.bederr.benefits_v2.services.Service_Programs;
 import com.bederr.benefits_v2.views.Benefit_Program_V;
+import com.bederr.utils.Util_Fonts;
 
 import java.util.ArrayList;
 
@@ -65,17 +67,30 @@ public class Benefit_Programs_F extends Fragment_Master {
                                           String previous) {
                 try {
                     if (success) {
-                        for (int i = 0; i < benefit_program_dtos.size(); i++) {
-                            Benefit_Program_DTO benefit_program_dto = benefit_program_dtos.get(i);
-                            Benefit_Program_V benefit_program_v = new Benefit_Program_V(getBederr(), benefit_program_dto);
-                            linearLayout.addView(benefit_program_v);
-                            Benefit_Programs_F.this.onFinishLoad(linearLayout);
+                        if(benefit_program_dtos.size() > 0){
+                            for (int i = 0; i < benefit_program_dtos.size(); i++) {
+                                Benefit_Program_DTO benefit_program_dto = benefit_program_dtos.get(i);
+                                Benefit_Program_V benefit_program_v = new Benefit_Program_V(getBederr(), benefit_program_dto);
+                                linearLayout.addView(benefit_program_v);
+                                Benefit_Programs_F.this.onFinishLoad(linearLayout);
+                            }
+                        }else{
+                            getEmptyView().setVisibility(View.VISIBLE);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    getEmptyView().setVisibility(View.VISIBLE);
                 }
             }
         });
+    }
+
+
+    private View getEmptyView(){
+        View view = getView().findViewById(R.id.empty_view);
+        TextView message = (TextView) view.findViewById(R.id.text_type_message_no_data);
+        message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
+        return view;
     }
 }

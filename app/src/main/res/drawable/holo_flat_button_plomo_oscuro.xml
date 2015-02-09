@@ -4,12 +4,12 @@
     <!-- Estado Presionado -->
     <item android:state_pressed="true"><layer-list xmlns:android="http://schemas.android.com/apk/res/android">
             <item><shape android:shape="rectangle">
-                    <corners android:radius="6dp" />
+                    <corners android:radius="0dp" />
 
                     <solid android:color="@color/plomo_oscuro_asbestos" />
                 </shape></item>
             <item ><shape android:shape="rectangle">
-                    <corners android:radius="6dp" />
+                    <corners android:radius="0dp" />
 
                     <solid android:color="@color/plomo_oscuro_asbestos" />
                 </shape></item>
@@ -18,12 +18,12 @@
     <!-- Estado Focuseado -->
     <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
         <item><shape android:shape="rectangle">
-                <corners android:radius="6dp" />
+                <corners android:radius="0dp" />
 
                 <solid android:color="@color/plomo_oscuro_asbestos" />
             </shape></item>
         <item ><shape android:shape="rectangle">
-                <corners android:radius="6dp" />
+                <corners android:radius="0dp" />
 
                 <solid android:color="@color/plomo_oscuro_asbestos" />
             </shape></item>
@@ -32,12 +32,12 @@
     <!-- Estado Normal -->
     <item><layer-list xmlns:android="http://schemas.android.com/apk/res/android">
             <item><shape android:shape="rectangle">
-                    <corners android:radius="6dp" />
+                    <corners android:radius="0dp" />
 
                     <solid android:color="@color/plomo_oscuro_asbestos" />
                 </shape></item>
             <item ><shape android:shape="rectangle">
-                    <corners android:radius="6dp" />
+                    <corners android:radius="0dp" />
 
                     <solid android:color="@color/plomo_oscuro_concrete" />
                 </shape></item>

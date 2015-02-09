@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bederr.adapter.Adapter_Locales_Pregunta;
+import com.bederr.application.Maven_Application;
 import com.bederr.beans.Local_DTO;
 import com.bederr.beans_v2.Place_DTO;
 import com.bederr.fragments.Fragment_Responder;
@@ -24,6 +25,10 @@ import com.bederr.main.Bederr;
 import com.bederr.operations.Operation_Busquedas;
 import com.bederr.questions_v2.adapters.Places_Question_A;
 import com.bederr.questions_v2.fragments.Answer_F;
+import com.bederr.retail_v2.adapters.Places_A;
+import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
+import com.bederr.retail_v2.services.Service_Places;
+import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
 
 import java.util.ArrayList;
@@ -76,7 +81,7 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
         lista_locales = (ListView) view.findViewById(R.id.lista_locales);
         lista_locales.setOnItemClickListener(this);
 
-        Places_Question_A places_question_a = new Places_Question_A(getContext(),((Bederr) actionBarActivity).getPlace_dtos(),0);
+        Places_Question_A places_question_a = new Places_Question_A(getContext(), ((Bederr) actionBarActivity).getPlace_dtos(), 0);
         lista_locales.setAdapter(places_question_a);
 
         setView(view);
@@ -114,6 +119,7 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
         action_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 dismiss();
             }
         });
@@ -123,6 +129,40 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
+                    Maven_Application app = (Maven_Application) actionBarActivity.getApplication();
+
+                    Session_Manager session_manager = new Session_Manager(actionBarActivity);
+                    String lat = app.getUbication().getLatitude();
+                    String lng = app.getUbication().getLongitude();
+                    String name = action_middle.getText().toString();
+                    String cat = "";
+                    String city = "";
+                    String locality = "";
+                    String area = app.getUbication().getArea();
+
+                    if (session_manager.isLogin()) {
+                        Service_Places service_places = new Service_Places(actionBarActivity);
+                        service_places.sendRequestUser(session_manager.getUserToken(), lat, lng, name, cat, locality, area);
+                        service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+                            @Override
+                            public void onSuccessPlaces(boolean success,
+                                                        ArrayList<Place_DTO> place_dtos,
+                                                        String count,
+                                                        String next,
+                                                        String previous) {
+                                try {
+                                    if (success) {
+                                        Places_Question_A places_a = new Places_Question_A(actionBarActivity , place_dtos, 0);
+                                        lista_locales.setAdapter(places_a);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+
+
                     return true;
                 }
                 return false;
@@ -130,10 +170,12 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
         });
     }
 
-    public void hideSoftKeyboard() {
-        if(((Bederr)getContext()).getCurrentFocus()!=null) {
-            InputMethodManager inputMethodManager = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(((Bederr)getContext()).getCurrentFocus().getWindowToken(), 0);
+    public void closeKeyboard() {
+        View view = actionBarActivity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) actionBarActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
+
 }

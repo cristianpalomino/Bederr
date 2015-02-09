@@ -99,9 +99,9 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
         String name = "";
         String cat = "";
 
-        if(validateCategory()){
+        if (validateCategory()) {
             cat = getCategory(s).getCantidadcategoria();
-        }else{
+        } else {
             name = s;
         }
 
@@ -110,23 +110,85 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
         ArrayList<Place_DTO> places = getBederr().getPlace_dtos();
         ArrayList<Place_DTO> mplaces = new ArrayList<Place_DTO>();
 
-        for (int i = 0; i < places.size() ; i++) {
+        for (int i = 0; i < places.size(); i++) {
             Place_DTO place_dto = places.get(i);
-            String mcat = place_dto.getCategory_name();
+            String mname = place_dto.getName();
+            String mcat = place_dto.getCategory_code();
             String mdis = place_dto.getCity();
-            if(!name.equals("") && !cat.equals("") && !locality.equals("")){
-                Log.e("TODO",cat+ " - " +name + " - " +locality);
+
+            if (!cat.matches("") && !locality.matches("")) {
+                if (!cat.matches("")) {
+                    if (cat.equals(mcat) && locality.equals(mdis)) {
+                        mplaces.add(place_dto);
+                    } else {
+                        getEmptyView().setVisibility(View.VISIBLE);
+                        lista_locales_busquedas.setVisibility(View.GONE);
+                    }
+                } else {
+                    if (name.equals(mname) && locality.equals(mdis)) {
+                        mplaces.add(place_dto);
+                    } else {
+                        getEmptyView().setVisibility(View.VISIBLE);
+                        lista_locales_busquedas.setVisibility(View.GONE);
+                    }
+                }
+            } else {
+                if (!cat.matches("")) {
+                    if (mcat.equals(cat)) {
+                        mplaces.add(place_dto);
+                    } else {
+                        getEmptyView().setVisibility(View.VISIBLE);
+                        lista_locales_busquedas.setVisibility(View.GONE);
+                    }
+                } else {
+                    getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales_busquedas.setVisibility(View.GONE);
+                }
+
+                if (!name.matches("")) {
+                    if (name.equals(mname)) {
+                        mplaces.add(place_dto);
+                    } else {
+                        getEmptyView().setVisibility(View.VISIBLE);
+                        lista_locales_busquedas.setVisibility(View.GONE);
+                    }
+                } else {
+                    getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales_busquedas.setVisibility(View.GONE);
+                }
+
+                if (!locality.matches("")) {
+                    if (locality.equals(mdis)) {
+                        mplaces.add(place_dto);
+                    } else {
+                        getEmptyView().setVisibility(View.VISIBLE);
+                        lista_locales_busquedas.setVisibility(View.GONE);
+                    }
+                } else {
+                    getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales_busquedas.setVisibility(View.GONE);
+                }
             }
         }
+
+        places_a = new Places_A(getBederr(), mplaces, 0, "Benefits");
+        lista_locales_busquedas.setAdapter(places_a);
+        Benefits_Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
+
+        if(lista_locales_busquedas.getAdapter().getCount() == 0){
+                getEmptyView().setVisibility(View.VISIBLE);
+                lista_locales_busquedas.setVisibility(View.GONE);
+        }
+
     }
 
-    private boolean validateCategory(){
-        if(getBederr().getCategoria_dtos() != null){
+    private boolean validateCategory() {
+        if (getBederr().getCategoria_dtos() != null) {
             for (int i = 0; i < getBederr().getCategoria_dtos().size(); i++) {
                 Categoria_DTO category_dto = getBederr().getCategoria_dtos().get(i);
-                if(s.equals(category_dto.getNombrecategoria())){
+                if (s.equals(category_dto.getNombrecategoria())) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -134,21 +196,21 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
         return false;
     }
 
-    private Categoria_DTO getCategory(String name){
-        for (int i = 0; i < getBederr().getCategoria_dtos().size() ; i++) {
-            if(name.equals(getBederr().getCategoria_dtos().get(i).getNombrecategoria())){
+    private Categoria_DTO getCategory(String name) {
+        for (int i = 0; i < getBederr().getCategoria_dtos().size(); i++) {
+            if (name.equals(getBederr().getCategoria_dtos().get(i).getNombrecategoria())) {
                 return getBederr().getCategoria_dtos().get(i);
             }
         }
         return null;
     }
 
-    private String validateLocality(){
-        if(getBederr().getLocality_dtos() != null){
-            for (int i = 0; i < getBederr().getLocality_dtos().size() ; i++) {
+    private String validateLocality() {
+        if (getBederr().getLocality_dtos() != null) {
+            for (int i = 0; i < getBederr().getLocality_dtos().size(); i++) {
                 Locality_DTO locality_dto = getBederr().getLocality_dtos().get(i);
-                if(distrito.equals(locality_dto.getName())){
-                    return String.valueOf(locality_dto.getId());
+                if (distrito.equals(locality_dto.getName())) {
+                    return String.valueOf(locality_dto.getName());
                 }
             }
         }
@@ -220,5 +282,12 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
                 add(R.id.container, Detail_Place_F.newInstance("Benefits"), Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
+    }
+
+    private View getEmptyView() {
+        View view = getView().findViewById(R.id.empty_view);
+        TextView message = (TextView) view.findViewById(R.id.text_type_message_no_data);
+        message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
+        return view;
     }
 }

@@ -11,7 +11,7 @@
         android:layout_height="fill_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/holo_flat_button_plomo_claro"
         >
 

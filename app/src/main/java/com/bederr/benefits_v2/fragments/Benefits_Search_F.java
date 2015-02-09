@@ -158,12 +158,12 @@ public class Benefits_Search_F extends Fragment_Master implements View.OnFocusCh
         edtdistritos.setOnFocusChangeListener(this);
 
         ArrayList<Categoria_DTO> categoria_dtos = new ArrayList<Categoria_DTO>();
+        categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
+        categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
+        categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
         categoria_dtos.add(new Categoria_DTO("Viajes", "viajes", R.drawable.categoria_viajes, false, 5));
         categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
-        categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
-        categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
-        categoria_dtos.add(new Categoria_DTO("Grifo", "grifo", R.drawable.grifos, false, 8));
-        categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
+        categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
         getBederr().setCategoria_dtos(categoria_dtos);
         Benefit_Category_A adapter_categoria = new Benefit_Category_A(getBederr() , categoria_dtos);
         listaCategorias.setAdapter(adapter_categoria);

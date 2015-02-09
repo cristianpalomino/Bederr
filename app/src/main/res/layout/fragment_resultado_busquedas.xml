@@ -46,8 +46,6 @@
         android:background="@drawable/holo_flat_button_plomo_oscuro"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Categoria - Ubicación"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:id="@+id/txtcriterio"
         android:visibility="visible"
         android:layout_marginBottom="5dp"/>
@@ -63,6 +61,51 @@
             android:listSelector="@android:color/transparent"
             android:layout_height="match_parent"
             android:id="@+id/lista_locales_busquedas" />
+
+        <FrameLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/empty_view"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:background="@drawable/fondo_message"
+                android:layout_gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="No Data"
+                    android:id="@+id/text_type_message_no_data"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_type_message_no_data"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/icono_no_data"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+        </FrameLayout>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bederr.account_v2.dialogs.Update_Profile_Dialog;
 import com.bederr.beans_v2.Benefit_Program_DTO;
 import com.bederr.benefits_v2.interfaces.OnSuccessAdd;
 import com.bederr.session.Session_Manager;
@@ -30,6 +32,7 @@ public class Life_Dialog extends AlertDialog implements View.OnClickListener {
     private Benefit_Program_DTO benefit_program_dto;
     private EditText edtcodigolife;
     private Interface_Dialog_Life interface_dialog_life;
+    private ActionBarActivity activity;
 
     public Life_Dialog(Context context, Benefit_Program_DTO benefit_program_dto) {
         super(context);
@@ -79,10 +82,17 @@ public class Life_Dialog extends AlertDialog implements View.OnClickListener {
             @Override
             public void onSuccessAdd(boolean success, String message) {
                 Life_Dialog.this.hide();
-                Toast.makeText(getContext(), message , Toast.LENGTH_SHORT).show();
-                interface_dialog_life.updateView(success);
+                Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void setActivity(ActionBarActivity activity) {
+        this.activity = activity;
+    }
+
+    public ActionBarActivity getActivity() {
+        return activity;
     }
 
     public void setInterface_dialog_life(Interface_Dialog_Life interface_dialog_life) {

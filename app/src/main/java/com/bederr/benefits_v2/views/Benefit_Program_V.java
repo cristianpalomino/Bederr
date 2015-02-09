@@ -69,7 +69,7 @@ public class Benefit_Program_V extends LinearLayout implements View.OnClickListe
         descipcionempresa.setText(benefit_program_dto.getCompany_name());
         fondoempresa.setBackgroundColor(Color.parseColor("#" + benefit_program_dto.getColor()));
 
-        String logo = "http://testv2.main.com/media/"+benefit_program_dto.getCompany_logo();
+        String logo = benefit_program_dto.getCompany_logo();
         //String logo = "";
         Picasso.with(getContext()).
                 load(logo).
@@ -86,6 +86,7 @@ public class Benefit_Program_V extends LinearLayout implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Life_Dialog life_dialog = new Life_Dialog(getContext(),benefit_program_dto);
+        life_dialog.setActivity((Bederr)getContext());
         life_dialog.getWindow().setWindowAnimations(R.style.Dialog_Animation_UP_DOWN);
         life_dialog.setInterface_dialog_life(this);
         life_dialog.show();

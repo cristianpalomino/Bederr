@@ -69,6 +69,8 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
 
         Benefit_Program_V benefit_program_v = new Benefit_Program_V(getActivity(),getBederr().getBenefit_program_dto());
         ((LinearLayout) getView().findViewById(R.id.header_list)).addView(benefit_program_v);
+        benefit_program_v.setClickable(false);
+        benefit_program_v.setOnClickListener(null);
 
         lista_locales.setOnItemClickListener(this);
         lista_locales.setVisibility(View.GONE);
@@ -80,9 +82,10 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                 String lat = getUbication().getLatitude();
                 String lng = getUbication().getLongitude();
                 String id = String.valueOf(getBederr().getBenefit_program_dto().getId());
+                String area = getUbication().getArea();
 
                 Service_Programs_Places service_programs_places = new Service_Programs_Places(getBederr());
-                service_programs_places.sendRequestUser(token, lat, lng, id);
+                service_programs_places.sendRequestUser(token, lat, lng, id,area);
                 service_programs_places.setOnSuccessPlaces(new OnSuccessPlaces() {
                     @Override
                     public void onSuccessPlaces(boolean success,
@@ -92,13 +95,21 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                                                 String previous) {
                         try {
                             if (success) {
-                                getBederr().setPlace_dtos(place_dtos);
-                                places_a = new Places_A(getBederr(),place_dtos,0,"Benefits");
-                                lista_locales.setAdapter(places_a);
-                                lista_locales.setVisibility(View.VISIBLE);
+                                if(place_dtos.size() > 0){
+                                    getBederr().setPlace_dtos(place_dtos);
+                                    places_a = new Places_A(getBederr(),place_dtos,0,"Benefits");
+                                    lista_locales.setAdapter(places_a);
+                                    lista_locales.setVisibility(View.VISIBLE);
+                                    getEmptyView().setVisibility(View.GONE);
+                                }else{
+                                    getEmptyView().setVisibility(View.VISIBLE);
+                                    lista_locales.setVisibility(View.GONE);
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
+                            getEmptyView().setVisibility(View.VISIBLE);
+                            lista_locales.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -195,5 +206,12 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                 return false;
             }
         });
+    }
+
+    private View getEmptyView(){
+        View view = getView().findViewById(R.id.empty_view);
+        TextView message = (TextView) view.findViewById(R.id.text_type_message_no_data);
+        message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
+        return view;
     }
 }

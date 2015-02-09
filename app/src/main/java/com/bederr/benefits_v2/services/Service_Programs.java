@@ -126,7 +126,7 @@ public class Service_Programs {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                onSuccessAdd.onSuccessAdd(false, "Necesita actualizar su perfil con su DNI.");
+                onSuccessAdd.onSuccessAdd(false, "Necesitas actualizar tu perfil.\nPor favor ingresa tu número de DNI.");
             }
         });
     }

@@ -16,7 +16,7 @@ public class Place_DTO extends Bederr_DTO {
 
     private String name = "name";
     private String category_name = "category_name";
-    private String category_code = "category_code";
+    private String category = "category";
     private String address = "address";
     private String city = "city";
     private String state = "state";
@@ -45,7 +45,7 @@ public class Place_DTO extends Bederr_DTO {
     }
 
     public String getCategory_code() {
-        return parseString(category_code, getDataSource());
+        return parseString(category, getDataSource());
     }
 
     public String getAddress() {
