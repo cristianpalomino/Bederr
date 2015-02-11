@@ -191,7 +191,6 @@ public class Bederr extends Master implements Master.OnSuccessArea {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bederr, menu);
         return true;
     }
 

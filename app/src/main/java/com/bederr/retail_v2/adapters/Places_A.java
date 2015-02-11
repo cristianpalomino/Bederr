@@ -31,7 +31,7 @@ public class Places_A extends BaseAdapter {
     private LayoutInflater inflater;
     private String opcion;
 
-    public Places_A(Context context, ArrayList<Place_DTO> place_dtos, int tipo,String opcion) {
+    public Places_A(Context context, ArrayList<Place_DTO> place_dtos, int tipo, String opcion) {
         this.context = context;
         this.place_dtos = place_dtos;
         this.tipo = tipo;
@@ -82,7 +82,7 @@ public class Places_A extends BaseAdapter {
         holder.direccion_local.setText(place_dto.getAddress());
         holder.categoria_local.setText(place_dto.getCategory_name());
 
-        if (tipo == 0) {
+        if (!place_dto.getDistance().equals("No disponible")) {
             int metros = round(Double.parseDouble(place_dto.getDistance()), 0);
             String distancia = "";
             if (metros < 1000) {
@@ -97,7 +97,6 @@ public class Places_A extends BaseAdapter {
                     holder.distancia_local.setText(kms + " Kms.");
                 }
             }
-
         } else {
             holder.distancia_local.setVisibility(View.GONE);
         }
@@ -114,14 +113,11 @@ public class Places_A extends BaseAdapter {
                 transform(new RoundedTransformation(65, 0)).
                 into(holder.img_categoria_local);
 
-        if(opcion.equals("Explore"))
-        {
+        if (opcion.equals("Explore")) {
             holder.img_azul.setVisibility(place_dto.isInplace());
             holder.img_verde.setVisibility(place_dto.isEspecial());
             holder.img_plomo.setVisibility(place_dto.isCorporate());
-        }
-        else if(opcion.equals("Benefits"))
-        {
+        } else if (opcion.equals("Benefits")) {
             holder.img_plomo.setVisibility(place_dto.isCorporate());
         }
 

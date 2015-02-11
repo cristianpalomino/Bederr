@@ -1,5 +1,6 @@
 package com.bederr.questions_v2.fragments;
 
+import android.app.ProgressDialog;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -101,7 +102,6 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
     protected void initView() {
         super.initView();
         initHeader();
-        closeKeyboard();
 
         lista_respuestas = (ListView) getView().findViewById(R.id.lista_respuestas);
         lista_respuestas.setOnItemClickListener(this);
@@ -134,6 +134,8 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                 }
             }
         });
+
+        closeKeyboard();
     }
 
     @Override
@@ -177,16 +179,18 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
         btn_responder.setTypeface(Util_Fonts.setPNASemiBold(getActivity()));
 
         int resourceid = Util_Categorias.getImageCategory(question_dto.getCategory_name());
-        Picasso.with(getActivity()).
+        Picasso.with(getBederr()).
                 load(resourceid).
-                centerCrop().
+                centerInside().
                 fit().
                 transform(new RoundedTransformation(65, 0)).
                 into(imagencategoriapregunta);
 
-        Picasso.with(getActivity()).
-                load(question_dto.getOwner_photo()).
+        String owner_photo = question_dto.getOwner_photo();
+        Picasso.with(getBederr()).
+                load(owner_photo).
                 placeholder(R.drawable.placeholder_usuario).
+                fit().
                 transform(new RoundedTransformation(75, 0)).
                 into(imagenusuario);
 
@@ -200,6 +204,9 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
         btn_responder.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
+
+                                                 ProgressDialog dialog = ProgressDialog.show(getBederr(), null, "Espere", true, false);
+
                                                  Session_Manager session_manager = new Session_Manager(getActivity());
                                                  if (session_manager.isLogin()) {
                                                      if (getBederr().getPlace_dtos() != null) {
@@ -232,6 +239,8 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                                                              }
                                                          });
                                                      }
+
+                                                     dialog.hide();
                                                  } else {
                                                      getActivity().
                                                              getSupportFragmentManager().

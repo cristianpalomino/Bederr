@@ -1,6 +1,5 @@
 package com.bederr.retail_v2.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,23 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bederr.beans.Categoria_DTO;
-import com.bederr.beans_v2.Category_DTO;
 import com.bederr.beans_v2.Locality_DTO;
 import com.bederr.benefits_v2.adapter.Benefit_Category_A;
 import com.bederr.fragments.Fragment_Master;
 import com.bederr.retail_v2.adapters.Category_A;
 import com.bederr.retail_v2.adapters.Locality_A;
-
-import pe.bederr.com.R;
-
-import com.bederr.retail_v2.interfaces.OnSuccessCategory;
 import com.bederr.retail_v2.interfaces.OnSuccessLocality;
-import com.bederr.retail_v2.services.Service_Category;
 import com.bederr.retail_v2.services.Service_Locality;
 import com.bederr.utils.Util_Fonts;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import pe.bederr.com.R;
 
 /**
  * Created by Gantz on 5/07/14.
@@ -56,7 +51,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
     protected String otro = "";
 
     private Locality_DTO distrito_dto;
-    private Category_DTO categoria_dto;
+    private Categoria_DTO categoria_dto;
 
     public Search_F() {
         setId_layout(R.layout.fragment_busquedas);
@@ -111,8 +106,8 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
         listaCategorias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                categoria_dto = (Category_DTO) listaCategorias.getAdapter().getItem(position);
-                String categoria = categoria_dto.getName();
+                categoria_dto = (Categoria_DTO) listaCategorias.getAdapter().getItem(position);
+                String categoria = categoria_dto.getNombrecategoria();
                 edtcategorias.setText(categoria);
             }
         });
@@ -178,7 +173,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
 
         ArrayList<Categoria_DTO> categoria_dtos = new ArrayList<Categoria_DTO>();
         categoria_dtos.add(new Categoria_DTO("Beneficios", "beneficios", R.drawable.categoria_beneficio, false, 0));
-        categoria_dtos.add(new Categoria_DTO("Descuentos", "descuentos", R.drawable.comida, false, 1));
+        categoria_dtos.add(new Categoria_DTO("Descuentos", "descuentos", R.drawable.categoria_descuento, false, 1));
         categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
         categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
         categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
@@ -186,7 +181,8 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
         categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
         categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
         getBederr().setCategoria_dtos(categoria_dtos);
-        Benefit_Category_A adapter_categoria = new Benefit_Category_A(getBederr() , categoria_dtos);
+
+        Category_A adapter_categoria = new Category_A(getBederr() , categoria_dtos);
         listaCategorias.setAdapter(adapter_categoria);
         listaCategorias.setVisibility(View.VISIBLE);
     }
@@ -253,7 +249,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
                             )
                             .add(
                                     R.id.container,
-                                    Result_Search_F.newInstance(s, distrito),
+                                    Result_Search_F.newInstance(s,distrito),
                                     Result_Search_F.class.getName()
                             )
                             .addToBackStack(null)

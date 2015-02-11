@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.bederr.account_v2.fragments.Fragment_Entrar_v2;
 import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Question_DTO;
 import com.bederr.dialog.Dialog_Categoria;
@@ -69,25 +70,22 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
     @Override
     protected void initView() {
         super.initView();
-        closeKeyboard();
 
         lista_preguntas = (ListView) getView().findViewById(R.id.lista_preguntas);
         lista_preguntas.setOnItemClickListener(this);
         lista_preguntas.setOnScrollListener(this);
         lista_preguntas.setVisibility(View.GONE);
 
-        Session_Manager session_manager = new Session_Manager(getBederr());
-        if (session_manager.isLogin()) {
-            openLoginUser(session_manager.getUserToken());
-        } else {
-            openLogin();
+        try {
+            validateInitQuestion();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        closeKeyboard();
     }
 
-    private void openLogin() {
-        String lat = getUbication().getLatitude();
-        String lng = getUbication().getLongitude();
-        String area = getUbication().getArea();
+    private void openLogin(String lat, String lng, String area) {
         Service_Question service_question = new Service_Question(getBederr());
         service_question.sendRequest(lat, lng, area);
         service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
@@ -116,11 +114,7 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
         });
     }
 
-    private void openLoginUser(String token) {
-        String lat = getUbication().getLatitude();
-        String lng = getUbication().getLongitude();
-        String area = getUbication().getArea();
-
+    private void openLoginUser(String token, String lat, String lng, String area) {
         Service_Question service_question = new Service_Question(getBederr());
         service_question.sendRequestUser(token, lat, lng, area);
         service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
@@ -172,7 +166,7 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                     dialog_categoria.getWindow().setWindowAnimations(R.style.Dialog_Animation_UP_DOWN);
                     dialog_categoria.show();
                 } else {
-                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.abajo_arriba_b, R.animator.arriba_abajo_b).add(R.id.container, Fragment_Entrar.newInstance("1"), Fragment_Entrar.class.getName()).addToBackStack(null).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.abajo_arriba_b, R.animator.arriba_abajo_b).add(R.id.container, Fragment_Entrar_v2.newInstance("1"), Fragment_Entrar.class.getName()).addToBackStack(null).commit();
                 }
             }
         });
@@ -280,5 +274,47 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                 return false;
             }
         });
+    }
+
+    private void validateInitQuestion() {
+        boolean isLatLng = !getUbication().getLatitude().equals("0.0") && !getUbication().getLongitude().equals("0.0");
+        Session_Manager session_manager = new Session_Manager(getBederr());
+        /**
+         * Pregunta sobre la UBICACIÓN
+         */
+        if (getUbication() != null) {
+            String lat = getUbication().getLatitude();
+            String lng = getUbication().getLongitude();
+            String area = getUbication().getArea();
+            String token = session_manager.getUserToken();
+
+            if (session_manager.isLogin()) {
+                /**
+                 * Si tiene LAT y LONG
+                 */
+                if (isLatLng) {
+                    openLoginUser(token, lat, lng, area);
+                }
+                /**
+                 * Si tiene AREA
+                 */
+                else {
+                    openLoginUser(token, "", "", area);
+                }
+            } else {
+                /**
+                 * Si tiene LAT y LONG
+                 */
+                if (isLatLng) {
+                    openLogin(lat, lng, area);
+                }
+                /**
+                 * Si tiene AREA
+                 */
+                else {
+                    openLogin("", "", area);
+                }
+            }
+        }
     }
 }

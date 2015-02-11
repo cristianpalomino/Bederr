@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bederr.beans.Categoria_DTO;
 import com.bederr.beans_v2.Category_DTO;
 import pe.bederr.com.R;
 import com.bederr.utils.RoundedTransformation;
@@ -24,14 +25,14 @@ import java.util.Locale;
 public class Category_A extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Category_DTO> category_dtos;
-    private ArrayList<Category_DTO> mcategory_dtos;
+    private ArrayList<Categoria_DTO> category_dtos;
+    private ArrayList<Categoria_DTO> mcategory_dtos;
     private LayoutInflater inflater;
 
-    public Category_A(Context context, ArrayList<Category_DTO> category_dtos) {
+    public Category_A(Context context, ArrayList<Categoria_DTO> category_dtos) {
         this.context = context;
         this.category_dtos = category_dtos;
-        this.mcategory_dtos = new ArrayList<Category_DTO>();
+        this.mcategory_dtos = new ArrayList<Categoria_DTO>();
         this.mcategory_dtos.addAll(category_dtos);
         this.inflater = LayoutInflater.from(context);
     }
@@ -54,7 +55,7 @@ public class Category_A extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        Category_DTO category_dto = category_dtos.get(position);
+        Categoria_DTO category_dto = category_dtos.get(position);
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_categoria, parent, false);
@@ -69,15 +70,15 @@ public class Category_A extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        holder.txtcantidadcategoria.setText(category_dto.getId());
-        holder.txtnombrecategoria.setText(category_dto.getName());
+        holder.txtcantidadcategoria.setText(category_dto.getCantidadcategoria());
+        holder.txtnombrecategoria.setText(category_dto.getNombrecategoria());
 
         holder.txtnombrecategoria.setTypeface(Util_Fonts.setPNASemiBold(context));
         holder.txtcantidadcategoria.setTypeface(Util_Fonts.setPNALight(context));
         holder.txtcantidadcategoria.setVisibility(View.GONE);
 
         Picasso.with(context).
-                load(Util_Categorias.getImageCategory(category_dto.getName())).
+                load(Util_Categorias.getImageCategory(category_dto.getNombrecategoria())).
                 into(holder.imgcategoria);
 
         return convertView;
@@ -96,8 +97,8 @@ public class Category_A extends BaseAdapter {
         if (charText.length() == 0) {
             category_dtos.addAll(mcategory_dtos);
         } else {
-            for (Category_DTO wp : mcategory_dtos) {
-                if (wp.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
+            for (Categoria_DTO wp : mcategory_dtos) {
+                if (wp.getNombrecategoria().toLowerCase(Locale.getDefault()).contains(charText)) {
                     category_dtos.add(wp);
                 }
             }

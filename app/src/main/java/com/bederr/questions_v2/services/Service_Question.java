@@ -33,11 +33,12 @@ public class Service_Question {
         RequestParams params = new RequestParams();
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("area", area);
+
+        String URL = Bederr_WS.BEDERR_QUESTIONS.replace("*",area);
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.addHeader("Authorization", "Token " + token);
-        httpClient.get(context, Bederr_WS.BEDERR_QUESTIONS, params, new JsonHttpResponseHandler() {
+        httpClient.get(context, URL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -63,10 +64,11 @@ public class Service_Question {
         RequestParams params = new RequestParams();
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("area", area);
+
+        String URL = Bederr_WS.BEDERR_QUESTIONS.replace("*",area);
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
-        httpClient.get(context, Bederr_WS.BEDERR_QUESTIONS, params, new JsonHttpResponseHandler() {
+        httpClient.get(context, URL , params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -112,14 +114,16 @@ public class Service_Question {
         });
     }
 
-    public void sendQuestion(String token, String category, String content) {
+    public void sendQuestion(String token, String category, String content,String area) {
         RequestParams params = new RequestParams();
         params.put("category", category);
         params.put("content", content);
 
+        String URL = Bederr_WS.BEDERR_QUESTIONS.replace("*",area);
+
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.addHeader("Authorization", "Token " + token);
-        httpClient.post(context, Bederr_WS.BEDERR_QUESTIONS, params, new JsonHttpResponseHandler() {
+        httpClient.post(context, URL , params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

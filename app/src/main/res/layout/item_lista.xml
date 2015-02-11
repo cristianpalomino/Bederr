@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:src="@drawable/fondo_maven"
+            android:drawingCacheQuality="low"
             android:id="@+id/img_lista" />
 
         <LinearLayout

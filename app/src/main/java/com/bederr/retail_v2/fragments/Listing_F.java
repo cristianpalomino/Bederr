@@ -193,7 +193,7 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                 isLoading = true;
 
                 Service_Listings service_listings = new Service_Listings(getBederr());
-                service_listings.sendRequest(NEXT);
+                service_listings.loadMore(NEXT);
                 service_listings.setOnSuccessListings(new OnSuccessListings() {
                     @Override
                     public void onSuccessListings(boolean success,
@@ -206,9 +206,12 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                 for (int i = 0; i < listing_dtos.size() ; i++) {
                                     listing_a.add(listing_dtos.get(i));
                                 }
-
-                                PREVIOUS = previous;
+                                /**
+                                 * Stacks
+                                 */
                                 NEXT = next;
+                                PREVIOUS = previous;
+                                isLoading = false;
                             }
                         }catch (Exception e){
                             e.printStackTrace();

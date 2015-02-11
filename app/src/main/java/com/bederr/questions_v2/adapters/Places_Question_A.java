@@ -80,9 +80,21 @@ public class Places_Question_A extends BaseAdapter {
         holder.direccion_local.setText(place_dto.getAddress());
         holder.categoria_local.setText(place_dto.getCategory_name());
 
-        if(tipo == 0) {
-            String distancia = String.valueOf(round(Double.parseDouble(place_dto.getDistance()), 2));
-            holder.distancia_local.setText(distancia + " mts.");
+        if(!place_dto.getDistance().equals("No disponible")){
+            int metros = round(Double.parseDouble(place_dto.getDistance()), 0);
+            String distancia = "";
+            if (metros < 1000) {
+                distancia = String.valueOf(round(Double.parseDouble(place_dto.getDistance()), 0));
+                holder.distancia_local.setText(distancia + " Mts.");
+            } else {
+                Double kms = Double.parseDouble(place_dto.getDistance()) / 1000;
+                kms = roundKM(kms, 1);
+                if (kms == 1.0 || kms == 2.0 || kms == 3.0 || kms == 4.0 || kms == 5.0) {
+                    holder.distancia_local.setText(kms.intValue() + " Kms.");
+                } else {
+                    holder.distancia_local.setText(kms + " Kms.");
+                }
+            }
         }else{
             holder.distancia_local.setVisibility(View.GONE);
         }
@@ -117,11 +129,20 @@ public class Places_Question_A extends BaseAdapter {
         ImageView img_plomo;
     }
 
-    public static double round(double value, int places) {
+
+    public static double roundKM(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
         long factor = (long) Math.pow(10, places);
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public static int round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (int) Math.round((double) tmp / factor);
     }
 }

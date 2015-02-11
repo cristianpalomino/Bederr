@@ -36,7 +36,7 @@ public class Bederr_WS {
     /**
      * Bederr API - Question's
      */
-    public static final String BEDERR_QUESTIONS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/1/questions/";
+    public static final String BEDERR_QUESTIONS = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/areas/*/questions/";
     public static final String BEDERR_DETAIL_CREATE_QUESTION = "http://testv2-bederr-com-stvd4o5841j1.runscope.net/api/v1/questions/#/answers/";
 
 

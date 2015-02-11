@@ -65,7 +65,10 @@ public class Listing_A extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        Picasso.with(context).load(listing_dto.getImage()).fit().placeholder(R.drawable.placeholder_listas).into(holder.img_lista);
+        Picasso.with(context).
+                load(listing_dto.getImage()).
+                placeholder(R.drawable.placeholder_listas).
+                into(holder.img_lista);
 
         holder.top_lista.setText("10");
         holder.titulo_lista.setText(listing_dto.getName());

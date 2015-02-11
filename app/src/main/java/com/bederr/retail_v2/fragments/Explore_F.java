@@ -84,24 +84,14 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_locales.setOnScrollListener(this);
         lista_locales.setVisibility(View.GONE);
 
-        if(getUbication() != null){
-            Session_Manager session_manager = new Session_Manager(getBederr());
-            if (session_manager.isLogin()) {
-                openLoginUser(session_manager.getUserToken());
-            } else {
-                openLogin();
-            }
+        try {
+            validateInitPlaces();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void openLoginUser(String token) {
-        String lat = getUbication().getLatitude();
-        String lng = getUbication().getLongitude();
-        String name = "";
-        String cat = "";
-        String city = "";
-        String area = getUbication().getArea();
-
+    private void openLoginUser(String token, String lat, String lng, String name, String cat, String city, String area) {
         Service_Places service_places = new Service_Places(getBederr());
         service_places.sendRequestUser(token, lat, lng, name, cat, city, area);
         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
@@ -113,36 +103,28 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                                         String previous) {
                 try {
                     if (success) {
-                        if(place_dtos.size() > 0){
+                        if (place_dtos.size() > 0) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales.setAdapter(places_a);
                             Explore_F.this.onFinishLoad(lista_locales);
 
                             NEXT = next;
                             PREVIOUS = previous;
-                        }
-                        else{
-                            getEmptyView().setVisibility(View.VISIBLE);
+                        } else {
+                            //getEmptyView().setVisibility(View.VISIBLE);
                             lista_locales.setVisibility(View.GONE);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    getEmptyView().setVisibility(View.VISIBLE);
+                    //getEmptyView().setVisibility(View.VISIBLE);
                     lista_locales.setVisibility(View.GONE);
                 }
             }
         });
     }
 
-    private void openLogin() {
-        String lat = getUbication().getLatitude();
-        String lng = getUbication().getLongitude();
-        String name = "";
-        String cat = "";
-        String city = "";
-        String area = getUbication().getArea();
-
+    private void openLogin(String lat, String lng, String name, String cat, String city, String area) {
         Service_Places service_places = new Service_Places(getBederr());
         service_places.sendRequest(lat, lng, name, cat, city, area);
         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
@@ -154,50 +136,23 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                                         String previous) {
                 try {
                     if (success) {
-                        if(place_dtos.size() > 0){
+                        if (place_dtos.size() > 0) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales.setAdapter(places_a);
                             Explore_F.this.onFinishLoad(lista_locales);
 
                             NEXT = next;
                             PREVIOUS = previous;
-                        }
-                        else{
-                            getEmptyView().setVisibility(View.VISIBLE);
+                        } else {
+                            //getEmptyView().setVisibility(View.VISIBLE);
                             lista_locales.setVisibility(View.GONE);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    getEmptyView().setVisibility(View.VISIBLE);
+                    //getEmptyView().setVisibility(View.VISIBLE);
                     lista_locales.setVisibility(View.GONE);
                 }
-            }
-        });
-    }
-
-
-    @Override
-    protected void initActionBar() {
-        super.initActionBar();
-        ImageView action_left = (ImageView) getView().findViewById(R.id.action_left);
-        TextView action_middle = (TextView) getView().findViewById(R.id.action_middle);
-        action_middle.setTypeface(Util_Fonts.setPNALight(getActivity()));
-
-        action_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((Bederr) getActivity()).sm_menu.toggle();
-            }
-        });
-
-        action_middle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getBederr().getSupportFragmentManager().beginTransaction().
-                        setCustomAnimations(R.animator.abajo_arriba, R.animator.arriba_abajo).
-                        add(R.id.container, Search_F.newInstance(), Search_F.class.getName()).
-                        addToBackStack("busquedas").commit();
             }
         });
     }
@@ -307,22 +262,90 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
     @Override
     public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto) {
         try {
-            Session_Manager session_manager = new Session_Manager(getBederr());
-            if (session_manager.isLogin()) {
-                openLoginUser(session_manager.getUserToken());
-            } else {
-                openLogin();
-            }
+            validateInitPlaces();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void validateInitPlaces() {
+        boolean isLatLng = !getUbication().getLatitude().equals("0.0") && !getUbication().getLongitude().equals("0.0");
+        Session_Manager session_manager = new Session_Manager(getBederr());
+
+        /**
+         * Pregunta sobre la UBICACIÓN
+         */
+        if (getUbication() != null) {
+            String token = session_manager.getUserToken();
+            String lat = getUbication().getLatitude();
+            String lng = getUbication().getLongitude();
+            String name = "";
+            String cat = "";
+            String city = "";
+            String area = getUbication().getArea();
+
+            if (session_manager.isLogin()) {
+                /**
+                 * Si tiene LAT y LONG
+                 */
+                if (isLatLng) {
+                    openLoginUser(token, lat, lng, name, cat, city, "");
+                }
+                /**
+                 * Si tiene AREA
+                 */
+                else {
+                    openLoginUser(token, "", "", name, cat, city, area);
+                }
+            } else {
+                /**
+                 * Si tiene LAT y LONG
+                 */
+                if (isLatLng) {
+                    openLogin(lat, lng, name, cat, city, "");
+                }
+                /**
+                 * Si tiene AREA
+                 */
+                else {
+                    openLogin("", "", name, cat, city, area);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void initActionBar() {
+        super.initActionBar();
+        ImageView action_left = (ImageView) getView().findViewById(R.id.action_left);
+        TextView action_middle = (TextView) getView().findViewById(R.id.action_middle);
+        action_middle.setTypeface(Util_Fonts.setPNALight(getActivity()));
+
+        action_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Bederr) getActivity()).sm_menu.toggle();
+            }
+        });
+
+        action_middle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getBederr().getSupportFragmentManager().beginTransaction().
+                        setCustomAnimations(R.animator.abajo_arriba, R.animator.arriba_abajo).
+                        add(R.id.container, Search_F.newInstance(), Search_F.class.getName()).
+                        addToBackStack("busquedas").commit();
+            }
+        });
+    }
+
+    /*
     private View getEmptyView(){
         View view = getView().findViewById(R.id.empty_view);
         TextView message = (TextView) view.findViewById(R.id.text_type_message_no_data);
         message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
         return view;
     }
+    */
 
 }

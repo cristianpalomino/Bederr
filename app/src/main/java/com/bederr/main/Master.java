@@ -146,7 +146,7 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             super.onSuccess(statusCode, headers, response);
-                            String area = "NO AREA";
+                            String area = "1";
                             try {
                                 Bederr_DTO bederr_dto = new Bederr_DTO();
                                 String success = bederr_dto.parseString("status", response);
@@ -162,12 +162,16 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                                             String type = types.getString(j);
                                             if (admin_area.equals(type)) {
                                                 area = bederr_dto.parseString("long_name", address);
+                                                break;
                                             }
                                         }
                                     }
                                 } else {
                                     showMessage("No match Geocode");
-                                    onSuccessArea.onSuccessArea(false, null);
+                                    LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                                    Ubication_DTO dto = new Ubication_DTO(latLng,"1");
+                                    application.setUbication(dto);
+                                    onSuccessArea.onSuccessArea(true,dto);
                                 }
 
                                 for (int i = 0; i < country_dtos.size(); i++) {
@@ -178,21 +182,23 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                                             LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
                                             Ubication_DTO dto = new Ubication_DTO(latLng,area_dto.getId());
                                             application.setUbication(dto);
-                                            /*
                                             showMessage("GPS : ON" + "\n" +
                                                     "LAT : " + lat + "\n" +
                                                     "LNG : " + lng + "\n" +
                                                     "CIUDAD : " + area + "\n" +
                                                     "CODE : " + area_dto.getId());
-                                                    */
                                             onSuccessArea.onSuccessArea(true,dto);
+                                            break;
                                         }
                                     }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 showMessage("Fallo Geocode");
-                                onSuccessArea.onSuccessArea(false, null);
+                                LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                                Ubication_DTO dto = new Ubication_DTO(latLng,"1");
+                                application.setUbication(dto);
+                                onSuccessArea.onSuccessArea(true,dto);
                             }
                         }
 
@@ -203,6 +209,9 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                         }
                     });
                 } else {
+                    LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                    Ubication_DTO dto = new Ubication_DTO(latLng,"1");
+                    application.setUbication(dto);
                     showMessage("Fallo obtener ciudad");
                 }
             }

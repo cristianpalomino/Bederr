@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bederr.beans.Categoria_DTO;
 import com.bederr.beans_v2.Category_DTO;
 import com.bederr.beans_v2.Locality_DTO;
 import com.bederr.main.Bederr;
@@ -95,95 +96,18 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
         lista_locales_busquedas.setOnScrollListener(this);
         lista_locales_busquedas.setVisibility(View.GONE);
 
-        Session_Manager session_manager = new Session_Manager(getBederr());
-        String token = session_manager.getUserToken();
-        String name = "";
-        String cat = "";
-
-        if(validateCategory()){
-            cat = getCategory(s).getId();
-        }else{
-            name = s;
-        }
-
-        String locality = validateLocality();
-        String lng;
-        String lat;
-        if(locality.equals("-1")){
-            locality = "";
-            lng = getUbication().getLongitude();
-            lat = getUbication().getLatitude();
-        }else{
-            lng = "";
-            lat = "";
-        }
-        String area = getUbication().getArea();
-
-        if(session_manager.isLogin()){
-            Service_Places service_places = new Service_Places(getBederr());
-            service_places.sendRequestUser(token,lat,lng,name,cat,locality,area);
-            service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-                @Override
-                public void onSuccessPlaces(boolean success,
-                                            ArrayList<Place_DTO> place_dtos,
-                                            String count,
-                                            String next,
-                                            String previous) {
-                    try {
-                        if(success){
-                            places_a = new Places_A(getActivity(), place_dtos , 0 , "Explore");
-                            lista_locales_busquedas.setAdapter(places_a);
-                            Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
-                        }
-
-                        /**
-                         * Stacks
-                         */
-                        NEXT = next;
-                        PREVIOUS = previous;
-                        isLoading = false;
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }else{
-            Service_Places service_places = new Service_Places(getBederr());
-            service_places.sendRequest(lat,lng,name,cat,locality,area);
-            service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-                @Override
-                public void onSuccessPlaces(boolean success,
-                                            ArrayList<Place_DTO> place_dtos,
-                                            String count,
-                                            String next,
-                                            String previous) {
-                    try {
-                        if(success){
-                            places_a = new Places_A(getBederr(), place_dtos, 0 , "Explore");
-                            lista_locales_busquedas.setAdapter(places_a);
-                            Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
-                        }
-
-                        /**
-                         * Stacks
-                         */
-                        NEXT = next;
-                        PREVIOUS = previous;
-                        isLoading = false;
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            });
+        try {
+            validateSearchPlaces();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private boolean validateCategory(){
-        if(getBederr().getCategory_dtos() != null){
-            for (int i = 0; i < getBederr().getCategory_dtos().size(); i++) {
-                Category_DTO category_dto = getBederr().getCategory_dtos().get(i);
-                if(s.equals(category_dto.getName())){
+        if(getBederr().getCategoria_dtos() != null){
+            for (int i = 0; i < getBederr().getCategoria_dtos().size(); i++) {
+                Categoria_DTO category_dto = getBederr().getCategoria_dtos().get(i);
+                if(s.equals(category_dto.getNombrecategoria())){
                     return true;
                 }else{
                     return false;
@@ -193,10 +117,10 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
         return false;
     }
     
-    private Category_DTO getCategory(String name){
-        for (int i = 0; i < getBederr().getCategory_dtos().size() ; i++) {
-            if(name.equals(getBederr().getCategory_dtos().get(i).getName())){
-                return getBederr().getCategory_dtos().get(i);
+    private Categoria_DTO getCategory(String name){
+        for (int i = 0; i < getBederr().getCategoria_dtos().size() ; i++) {
+            if(name.equals(getBederr().getCategoria_dtos().get(i).getNombrecategoria())){
+                return getBederr().getCategoria_dtos().get(i);
             }
         }
         return null;
@@ -347,5 +271,130 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                 });
             }
         }
+    }
+
+    private void validateSearchPlaces() {
+        boolean isLatLng = !getUbication().getLatitude().equals("0.0") && !getUbication().getLongitude().equals("0.0");
+        Session_Manager session_manager = new Session_Manager(getBederr());
+
+        /**
+         * Pregunta sobre la UBICACIÓN
+         */
+        if (getUbication() != null) {
+            String token = session_manager.getUserToken();
+            String name = "";
+            String cat = "";
+            if (validateCategory()) {
+                cat = getCategory(s).getCantidadcategoria();
+            } else {
+                name = s;
+            }
+            String locality = validateLocality();
+            String lng;
+            String lat;
+            if (locality.equals("-1")) {
+                locality = "";
+                lng = getUbication().getLongitude();
+                lat = getUbication().getLatitude();
+            } else {
+                lng = "";
+                lat = "";
+            }
+            String area = getUbication().getArea();
+
+            if (session_manager.isLogin()) {
+                /**
+                 * Si tiene LAT y LONG
+                 */
+                if (isLatLng) {
+                    openLoginUser(token, lat, lng, name, cat, locality, "");
+                }
+                /**
+                 * Si tiene AREA
+                 */
+                else {
+                    openLoginUser(token, "", "", name, cat, locality, area);
+                }
+            } else {
+                /**
+                 * Si tiene LAT y LONG
+                 */
+                if (isLatLng) {
+                    openLogin(lat, lng, name, cat, locality, "");
+                }
+                /**
+                 * Si tiene AREA
+                 */
+                else {
+                    openLogin("", "", name, cat, locality, area);
+                }
+            }
+        }
+    }
+
+    private void openLoginUser(String token, String lat, String lng, String name, String cat, String city, String area) {
+        Service_Places service_places = new Service_Places(getBederr());
+        service_places.sendRequestUser(token, lat, lng, name, cat, city, area);
+        service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+            @Override
+            public void onSuccessPlaces(boolean success,
+                                        ArrayList<Place_DTO> place_dtos,
+                                        String count,
+                                        String next,
+                                        String previous) {
+                try {
+                    if (success) {
+                        if (place_dtos.size() > 0) {
+                            places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
+                            lista_locales_busquedas.setAdapter(places_a);
+                            Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
+
+                            NEXT = next;
+                            PREVIOUS = previous;
+                        } else {
+                            //getEmptyView().setVisibility(View.VISIBLE);
+                            lista_locales_busquedas.setVisibility(View.GONE);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales_busquedas.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void openLogin(String lat, String lng, String name, String cat, String city, String area) {
+        Service_Places service_places = new Service_Places(getBederr());
+        service_places.sendRequest(lat, lng, name, cat, city, area);
+        service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+            @Override
+            public void onSuccessPlaces(boolean success,
+                                        ArrayList<Place_DTO> place_dtos,
+                                        String count,
+                                        String next,
+                                        String previous) {
+                try {
+                    if (success) {
+                        if (place_dtos.size() > 0) {
+                            places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
+                            lista_locales_busquedas.setAdapter(places_a);
+                            Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
+
+                            NEXT = next;
+                            PREVIOUS = previous;
+                        } else {
+                            //getEmptyView().setVisibility(View.VISIBLE);
+                            lista_locales_busquedas.setVisibility(View.GONE);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //getEmptyView().setVisibility(View.VISIBLE);
+                    lista_locales_busquedas.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

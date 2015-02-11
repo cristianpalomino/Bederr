@@ -45,8 +45,8 @@
             android:adjustViewBounds="true"
             android:scaleType="matrix"
             android:layout_gravity="right|center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp" />
 
     </FrameLayout>
 

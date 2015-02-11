@@ -8,14 +8,14 @@
                 <shape android:shape="rectangle">
                     <corners android:radius="50dp" />
 
-                    <solid android:color="@color/verde_maven" />
+                    <solid android:color="@color/verde_claro_nephritis" />
                 </shape>
             </item>
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="50dp" />
 
-                    <solid android:color="@color/verde_maven" />
+                    <solid android:color="@color/verde_claro_nephritis" />
                 </shape>
             </item>
         </layer-list>

@@ -107,7 +107,7 @@ public class Create_Question_F extends Fragment_Master {
                     }
 
                     Service_Question service_question = new Service_Question(getBederr());
-                    service_question.sendQuestion(new Session_Manager(getBederr()).getUserToken(), getBederr().getCategoria_dto().getCantidadcategoria(), edt_pregunta.getText().toString());
+                    service_question.sendQuestion(new Session_Manager(getBederr()).getUserToken(), getBederr().getCategoria_dto().getCantidadcategoria(), edt_pregunta.getText().toString(),getUbication().getArea());
                     service_question.setOnSuccessQuestion(new OnSuccessQuestion() {
                         @Override
                         public void onSuccessQuestion(boolean success,
@@ -168,6 +168,7 @@ public class Create_Question_F extends Fragment_Master {
                 trans.remove(Create_Question_F.this);
                 trans.commit();
                 manager.popBackStack();
+                closeKeyboard();
             }
         });
     }

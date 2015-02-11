@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -64,7 +65,7 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     }
 
     public Ubication_DTO getUbication() {
-        return ((Maven_Application)getBederr().getApplication()).getUbication();
+        return ((Maven_Application) getBederr().getApplication()).getUbication();
     }
 
     private Bederr bederr;
@@ -149,9 +150,9 @@ public class Fragment_Master extends Fragment implements Interface_Load {
             public void onLocationNotFound() {
                 try {
                     isReady = false;
-                    view_message = new View_Message(getActivity(),2);
+                    view_message = new View_Message(getActivity(), 2);
                     location = null;
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -196,12 +197,8 @@ public class Fragment_Master extends Fragment implements Interface_Load {
         return token;
     }
 
-    public void closeKeyboard(){
-        View view = getActivity().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
+    public void closeKeyboard() {
+        getBederr().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     public void showMessage(String message) {

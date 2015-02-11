@@ -44,6 +44,7 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
 
     private ActionBarActivity actionBarActivity;
     private ListView lista_locales;
+    private EditText action_middle;
 
     public Places_D(Context context, ActionBarActivity actionBarActivity) {
         super(context);
@@ -109,11 +110,12 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
                 add(R.id.container, Answer_F.newInstance(), Answer_F.class.getName()).
                 addToBackStack(null).commit();
+        closeKeyboard();
     }
 
     protected void initActionBar(final View view) {
         ImageView action_left = (ImageView) view.findViewById(R.id.action_right);
-        final EditText action_middle = (EditText) view.findViewById(R.id.edt_action_middle);
+        action_middle = (EditText) view.findViewById(R.id.edt_action_middle);
         action_middle.setTypeface(Util_Fonts.setPNALight(getContext()));
 
         action_left.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +178,8 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
             InputMethodManager inputManager = (InputMethodManager) actionBarActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
-    }
 
+        InputMethodManager imm = (InputMethodManager)actionBarActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(action_middle.getWindowToken(), 0);
+    }
 }

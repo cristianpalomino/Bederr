@@ -1,5 +1,6 @@
 package com.bederr.questions_v2.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,8 +74,6 @@ public class Answer_F extends Fragment_Master {
         edt_respuesta.requestFocus();
         edt_respuesta.setTypeface(Util_Fonts.setPNALight(getActivity()));
 
-        getBederr().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
         Button btn_responder = (Button) getView().findViewById(R.id.btn_responder);
         btn_responder.setTypeface(Util_Fonts.setPNASemiBold(getActivity()));
         btn_responder.setOnClickListener(new View.OnClickListener() {
@@ -105,12 +105,14 @@ public class Answer_F extends Fragment_Master {
                                 }
                             }
                         });
-
-                        closeKeyboard();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                InputMethodManager imm = (InputMethodManager)getBederr().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edt_respuesta.getWindowToken(), 0);
+                closeKeyboard();
             }
         });
     }
