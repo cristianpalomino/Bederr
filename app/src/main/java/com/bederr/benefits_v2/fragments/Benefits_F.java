@@ -15,6 +15,7 @@ import com.bederr.benefits_v2.views.Benefit_Program_Corp_V;
 import com.bederr.fragments.Fragment_Master;
 
 import pe.bederr.com.R;
+
 import com.bederr.benefits_v2.interfaces.OnSuccessPrograms;
 import com.bederr.benefits_v2.services.Service_Programs;
 import com.bederr.session.Session_Manager;
@@ -56,6 +57,13 @@ public class Benefits_F extends Fragment_Master {
     @Override
     protected void initView() {
         super.initView();
+
+        getBederr().
+                getSupportFragmentManager().
+                beginTransaction().
+                replace(R.id.frame_container, Benefit_Programs_F.newInstance())
+                .commit();
+
         final LinearLayout frameempty = (LinearLayout) getView().findViewById(R.id.frameempy);
         final LinearLayout frameempresas = (LinearLayout) getView().findViewById(R.id.frame_container);
         final LinearLayout framegeneral = (LinearLayout) getView().findViewById(R.id.frameempresageneral);
@@ -78,14 +86,14 @@ public class Benefits_F extends Fragment_Master {
                         frameempty.setVisibility(View.GONE);
                         frameempresas.setVisibility(View.VISIBLE);
                         framegeneral.setBackground(getActivity().getResources().getDrawable(R.drawable.fondo_maven));
-                        if(benefit_program_dtos.size() > 0){
+                        if (benefit_program_dtos.size() > 0) {
                             for (int i = 0; i < benefit_program_dtos.size(); i++) {
                                 Benefit_Program_DTO benefit_program_dto = benefit_program_dtos.get(i);
                                 Benefit_Program_Corp_V benefit_program_v = new Benefit_Program_Corp_V(getBederr(), benefit_program_dto);
                                 frameempresas.addView(benefit_program_v);
                                 Benefits_F.this.onFinishLoad(frameempresas);
                             }
-                        }else{
+                        } else {
                             frameempty.setVisibility(View.VISIBLE);
                             frameempresas.setVisibility(View.GONE);
                             framegeneral.setBackgroundColor(getActivity().getResources().getColor(R.color.verde_maven));
@@ -120,11 +128,6 @@ public class Benefits_F extends Fragment_Master {
             @Override
             public void onClick(View v) {
                 getBederr().sm_empresas.showMenu();
-                getBederr().
-                        getSupportFragmentManager().
-                        beginTransaction().
-                        replace(R.id.frame_container, Benefit_Programs_F.newInstance())
-                        .commit();
             }
         });
 

@@ -180,7 +180,7 @@ public class Bederr_DTO {
             return benefit_program_dtos;
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            return benefit_program_dtos;
         }
     }
 

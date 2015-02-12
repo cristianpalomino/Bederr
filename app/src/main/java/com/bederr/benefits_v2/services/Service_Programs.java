@@ -121,7 +121,7 @@ public class Service_Programs {
         httpClient.post(context, Bederr_WS.BEDERR_ME_PROGRAMS, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                onSuccessAdd.onSuccessAdd(true, "Correcto");
+                onSuccessAdd.onSuccessAdd(true, "Agregado");
             }
 
             @Override

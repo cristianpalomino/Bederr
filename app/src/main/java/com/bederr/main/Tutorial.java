@@ -182,6 +182,11 @@ public class Tutorial extends ActionBarActivity {
                     } else {
                         Toast.makeText(Tutorial.this, token_access, Toast.LENGTH_SHORT).show();
                     }
+
+                    SharedPreferences settings = getSharedPreferences(Splash.PREFS_NAME, 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putBoolean("hasLoggedIn", true);
+                    editor.commit();
                 }
             });
         }

@@ -69,56 +69,62 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_listas.setOnScrollListener(this);
         lista_listas.setVisibility(View.GONE);
 
-        Session_Manager session_manager = new Session_Manager(getBederr());
-        String area = getUbication().getArea();
-        if (session_manager.isLogin()) {
-            Service_Listings service_listings = new Service_Listings(getBederr());
-            service_listings.sendRequestUser(session_manager.getUserToken(), area);
-            service_listings.setOnSuccessListings(new OnSuccessListings() {
-                @Override
-                public void onSuccessListings(boolean success,
-                                              ArrayList<Listing_DTO> listing_dtos,
-                                              String count,
-                                              String next,
-                                              String previous) {
-                    if (success) {
-                        try {
-                            listing_a = new Listing_A(getBederr(), listing_dtos);
-                            lista_listas.setAdapter(listing_a);
-                            Listing_F.this.onFinishLoad(lista_listas);
+        try {
+            if (getUbication() != null) {
+                Session_Manager session_manager = new Session_Manager(getBederr());
+                String area = getUbication().getArea();
+                if (session_manager.isLogin()) {
+                    Service_Listings service_listings = new Service_Listings(getBederr());
+                    service_listings.sendRequestUser(session_manager.getUserToken(), area);
+                    service_listings.setOnSuccessListings(new OnSuccessListings() {
+                        @Override
+                        public void onSuccessListings(boolean success,
+                                                      ArrayList<Listing_DTO> listing_dtos,
+                                                      String count,
+                                                      String next,
+                                                      String previous) {
+                            if (success) {
+                                try {
+                                    listing_a = new Listing_A(getBederr(), listing_dtos);
+                                    lista_listas.setAdapter(listing_a);
+                                    Listing_F.this.onFinishLoad(lista_listas);
 
-                            PREVIOUS = previous;
-                            NEXT = next;
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                                    PREVIOUS = previous;
+                                    NEXT = next;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
-                    }
-                }
-            });
-        } else {
-            Service_Listings service_listings = new Service_Listings(getBederr());
-            service_listings.sendRequest(area);
-            service_listings.setOnSuccessListings(new OnSuccessListings() {
-                @Override
-                public void onSuccessListings(boolean success,
-                                              ArrayList<Listing_DTO> listing_dtos,
-                                              String count,
-                                              String next,
-                                              String previous) {
-                    if (success) {
-                        try {
-                            listing_a = new Listing_A(getBederr(), listing_dtos);
-                            lista_listas.setAdapter(listing_a);
-                            Listing_F.this.onFinishLoad(lista_listas);
+                    });
+                } else {
+                    Service_Listings service_listings = new Service_Listings(getBederr());
+                    service_listings.sendRequest(area);
+                    service_listings.setOnSuccessListings(new OnSuccessListings() {
+                        @Override
+                        public void onSuccessListings(boolean success,
+                                                      ArrayList<Listing_DTO> listing_dtos,
+                                                      String count,
+                                                      String next,
+                                                      String previous) {
+                            if (success) {
+                                try {
+                                    listing_a = new Listing_A(getBederr(), listing_dtos);
+                                    lista_listas.setAdapter(listing_a);
+                                    Listing_F.this.onFinishLoad(lista_listas);
 
-                            PREVIOUS = previous;
-                            NEXT = next;
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                                    PREVIOUS = previous;
+                                    NEXT = next;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
-                    }
+                    });
                 }
-            });
+            }
+        } catch (Exception e) {
+            showMessage("No se ah especificado ninguna area");
         }
     }
 
@@ -202,8 +208,8 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                                   String next,
                                                   String previous) {
                         try {
-                            if(success){
-                                for (int i = 0; i < listing_dtos.size() ; i++) {
+                            if (success) {
+                                for (int i = 0; i < listing_dtos.size(); i++) {
                                     listing_a.add(listing_dtos.get(i));
                                 }
                                 /**
@@ -213,7 +219,7 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                 PREVIOUS = previous;
                                 isLoading = false;
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

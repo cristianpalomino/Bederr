@@ -121,14 +121,12 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
                     if (cat.equals(mcat) && locality.equals(mdis)) {
                         mplaces.add(place_dto);
                     } else {
-                        getEmptyView().setVisibility(View.VISIBLE);
                         lista_locales_busquedas.setVisibility(View.GONE);
                     }
                 } else {
                     if (name.equals(mname) && locality.equals(mdis)) {
                         mplaces.add(place_dto);
                     } else {
-                        getEmptyView().setVisibility(View.VISIBLE);
                         lista_locales_busquedas.setVisibility(View.GONE);
                     }
                 }
@@ -137,11 +135,9 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
                     if (mcat.equals(cat)) {
                         mplaces.add(place_dto);
                     } else {
-                        getEmptyView().setVisibility(View.VISIBLE);
                         lista_locales_busquedas.setVisibility(View.GONE);
                     }
                 } else {
-                    getEmptyView().setVisibility(View.VISIBLE);
                     lista_locales_busquedas.setVisibility(View.GONE);
                 }
 
@@ -149,11 +145,9 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
                     if (name.equals(mname)) {
                         mplaces.add(place_dto);
                     } else {
-                        getEmptyView().setVisibility(View.VISIBLE);
                         lista_locales_busquedas.setVisibility(View.GONE);
                     }
                 } else {
-                    getEmptyView().setVisibility(View.VISIBLE);
                     lista_locales_busquedas.setVisibility(View.GONE);
                 }
 
@@ -161,11 +155,9 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
                     if (locality.equals(mdis)) {
                         mplaces.add(place_dto);
                     } else {
-                        getEmptyView().setVisibility(View.VISIBLE);
                         lista_locales_busquedas.setVisibility(View.GONE);
                     }
                 } else {
-                    getEmptyView().setVisibility(View.VISIBLE);
                     lista_locales_busquedas.setVisibility(View.GONE);
                 }
             }
@@ -175,9 +167,8 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
         lista_locales_busquedas.setAdapter(places_a);
         Benefits_Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
 
-        if(lista_locales_busquedas.getAdapter().getCount() == 0){
-                getEmptyView().setVisibility(View.VISIBLE);
-                lista_locales_busquedas.setVisibility(View.GONE);
+        if (lista_locales_busquedas.getAdapter().getCount() == 0) {
+            lista_locales_busquedas.setVisibility(View.GONE);
         }
 
     }
@@ -282,12 +273,5 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
                 add(R.id.container, Detail_Place_F.newInstance("Benefits"), Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
-    }
-
-    private View getEmptyView() {
-        View view = getView().findViewById(R.id.empty_view);
-        TextView message = (TextView) view.findViewById(R.id.text_type_message_no_data);
-        message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
-        return view;
     }
 }

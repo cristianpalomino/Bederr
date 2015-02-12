@@ -71,16 +71,21 @@ public class Area_V extends LinearLayout {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!checked){
-                    //Un - Checked
-                    imgarea.setVisibility(VISIBLE);
-                    checked = true;
-                    onChecked.onChecked(true,getArea_dto().getId());
-                }else{
-                    //Checked
-                    imgarea.setVisibility(GONE);
-                    checked = false;
-                    onChecked.onChecked(false,getArea_dto().getId());
+                try {
+
+                    if (!checked) {
+                        //Un - Checked
+                        imgarea.setVisibility(VISIBLE);
+                        checked = true;
+                        onChecked.onChecked(true, getArea_dto().getId());
+                    } else {
+                        //Checked
+                        imgarea.setVisibility(GONE);
+                        checked = false;
+                        onChecked.onChecked(false, getArea_dto().getId());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -102,10 +107,10 @@ public class Area_V extends LinearLayout {
     }
 
     public void showMessage(String message) {
-        Toast.makeText(getContext() , message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    public interface OnChecked{
-        public void onChecked(boolean checked,Object tag);
+    public interface OnChecked {
+        public void onChecked(boolean checked, Object tag);
     }
 }

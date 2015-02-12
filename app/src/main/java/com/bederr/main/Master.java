@@ -87,21 +87,23 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
         if (location != null) {
-            String lat = String.valueOf(location.getLatitude());
-            String lng = String.valueOf(location.getLongitude());
-            initGeocode(lat, lng);
+            if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0){
+                String lat = String.valueOf(location.getLatitude());
+                String lng = String.valueOf(location.getLongitude());
+                initGeocode(lat, lng);
+            }else{
+                new Ubication_D(this,true,null,this).show();
+            }
         } else {
             Ubication_DTO dto = application.getUbication();
             if (dto != null) {
                 if (dto.getArea().equals("-1")) {
-                    Ubication_D ubication_d = new Ubication_D(this,this);
-                    ubication_d.show();
+                    new Ubication_D(this,true,null,this).show();
                 }else{
                     showMessage(dto.getArea());
                 }
             }else{
-                Ubication_D ubication_d = new Ubication_D(this,this);
-                ubication_d.show();
+                new Ubication_D(this,true,null,this).show();
             }
         }
     }
@@ -206,10 +208,14 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             super.onFailure(statusCode, headers, throwable, errorResponse);
                             onSuccessArea.onSuccessArea(false, null);
+                            LatLng latLng = new LatLng(Double.parseDouble("0.0"),Double.parseDouble("0.0"));
+                            Ubication_DTO dto = new Ubication_DTO(latLng,"1");
+                            application.setUbication(dto);
+                            showMessage("Fallo obtener ciudad");
                         }
                     });
                 } else {
-                    LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                    LatLng latLng = new LatLng(Double.parseDouble("0.0"),Double.parseDouble("0.0"));
                     Ubication_DTO dto = new Ubication_DTO(latLng,"1");
                     application.setUbication(dto);
                     showMessage("Fallo obtener ciudad");

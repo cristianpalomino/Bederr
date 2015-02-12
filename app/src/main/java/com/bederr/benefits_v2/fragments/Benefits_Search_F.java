@@ -171,7 +171,7 @@ public class Benefits_Search_F extends Fragment_Master implements View.OnFocusCh
 
 
         Service_Locality service_locality = new Service_Locality(getBederr());
-        service_locality.sendRequest();
+        service_locality.sendRequest(getUbication().getArea());
         service_locality.setOnSuccessLocality(new OnSuccessLocality() {
             @Override
             public void onSuccessLocality(boolean success, ArrayList<Locality_DTO> locality_dtos) {

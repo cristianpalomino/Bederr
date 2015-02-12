@@ -83,6 +83,7 @@ public class Life_Dialog extends AlertDialog implements View.OnClickListener {
             public void onSuccessAdd(boolean success, String message) {
                 Life_Dialog.this.hide();
                 Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+                interface_dialog_life.updateView(success);
             }
         });
     }

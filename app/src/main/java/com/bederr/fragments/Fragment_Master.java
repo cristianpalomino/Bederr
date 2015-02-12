@@ -11,9 +11,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bederr.application.Maven_Application;
@@ -21,7 +26,10 @@ import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.main.Bederr;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Locator;
+import com.bederr.utils.Util_Fonts;
 import com.bederr.views.View_Message;
+
+import pe.bederr.com.R;
 
 /**
  * Created by Gantz on 30/09/14.
@@ -202,7 +210,17 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     }
 
     public void showMessage(String message) {
-        Toast.makeText(getBederr(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity() , message, Toast.LENGTH_SHORT).show();
+    }
+
+    public View getEmptyView(){
+        return getView().findViewById(R.id.empty);
+    }
+
+    public void setEmptyView(ListView list){
+        TextView message = (TextView) getView().findViewById(R.id.text_type_message_no_data);
+        message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
+        list.setVisibility(View.GONE);
     }
 }
 

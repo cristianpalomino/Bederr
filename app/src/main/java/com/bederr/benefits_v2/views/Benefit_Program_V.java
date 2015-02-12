@@ -70,7 +70,6 @@ public class Benefit_Program_V extends LinearLayout implements View.OnClickListe
         fondoempresa.setBackgroundColor(Color.parseColor("#" + benefit_program_dto.getColor()));
 
         String logo = benefit_program_dto.getCompany_logo();
-        //String logo = "";
         Picasso.with(getContext()).
                 load(logo).
                 centerCrop().

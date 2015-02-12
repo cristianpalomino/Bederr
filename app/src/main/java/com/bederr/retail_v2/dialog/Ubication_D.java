@@ -108,6 +108,8 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Ubication_D.this.dismiss();
+                Ubication_D.this.hide();
 
                 boolean flag = false;
                 ArrayList<Area_V> areas = new ArrayList<Area_V>();
@@ -140,6 +142,7 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
         seetings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Ubication_D.this.dismiss();
                 Ubication_D.this.hide();
                 getContext().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                 ((Bederr)activity).setFlag(true);

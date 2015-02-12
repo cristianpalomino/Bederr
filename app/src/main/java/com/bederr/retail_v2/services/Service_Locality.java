@@ -27,9 +27,12 @@ public class Service_Locality {
         this.onSuccessLocality = onSuccessLocality;
     }
 
-    public void sendRequest() {
+    public void sendRequest(String area) {
         AsyncHttpClient httpClient = new AsyncHttpClient();
-        httpClient.get(context, Bederr_WS.BEDERR_LOCALITY, null , new JsonHttpResponseHandler() {
+
+        String URL = Bederr_WS.BEDERR_LOCALITY.replace("*",area);
+
+        httpClient.get(context, URL, null , new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
