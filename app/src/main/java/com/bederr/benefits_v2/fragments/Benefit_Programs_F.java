@@ -116,8 +116,6 @@ public class Benefit_Programs_F extends Fragment_Master implements AdapterView.O
             life_dialog.getWindow().setWindowAnimations(R.style.Dialog_Animation_UP_DOWN);
             life_dialog.setInterface_dialog_life(this);
             life_dialog.show();
-        } else {
-
         }
         showMessage(type + "");
     }

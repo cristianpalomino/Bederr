@@ -52,45 +52,7 @@ public class Fragment_Beneficios extends Fragment_Master {
 
     @Override
     protected void initView() {
-        super.initView();
-        final LinearLayout frameempty = (LinearLayout) getView().findViewById(R.id.frameempy);
-        final LinearLayout frameempresas = (LinearLayout) getView().findViewById(R.id.frame_container);
-        final LinearLayout framegeneral = (LinearLayout) getView().findViewById(R.id.frameempresageneral);
 
-        ((TextView)getView().findViewById(R.id.txtmensajecorporativo)).setTypeface(Util_Fonts.setPNASemiBold(getActivity()));
-
-        Operation_Empresas operation_empresas = new Operation_Empresas(getActivity());
-        operation_empresas.getMisEmpresasLife();
-        operation_empresas.setInterface_operation_mis_empresas(new Operation_Empresas.Interface_Operation_Mis_Empresas() {
-
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void getMisEmpresasLife(boolean status, ArrayList<Empresa_DTO> empresa_dtos, String mensaje) {
-                try {
-                    if (status) {
-                        frameempty.setVisibility(View.GONE);
-                        frameempresas.setVisibility(View.VISIBLE);
-                        framegeneral.setBackground(getActivity().getResources().getDrawable(R.drawable.fondo_maven));
-
-                        for (int i = 0; i < empresa_dtos.size(); i++) {
-                            View_Empresa_Life view_empresa = new View_Empresa_Life(getActivity(), empresa_dtos.get(i));
-                            view_empresa.isClickable(true);
-                            frameempresas.addView(view_empresa);
-                        }
-
-                        Fragment_Beneficios.this.onFinishLoad(frameempresas);
-
-                    } else {
-                        frameempty.setVisibility(View.VISIBLE);
-                        frameempresas.setVisibility(View.GONE);
-
-                        framegeneral.setBackgroundColor(getActivity().getResources().getColor(R.color.verde_maven));
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     @Override

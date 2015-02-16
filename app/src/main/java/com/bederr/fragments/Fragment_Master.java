@@ -214,13 +214,18 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     }
 
     public View getEmptyView(){
-        return getView().findViewById(R.id.empty);
+        View empty = getView().findViewById(R.id.empty_view);
+        return empty;
     }
 
+
     public void setEmptyView(ListView list){
-        TextView message = (TextView) getView().findViewById(R.id.text_type_message_no_data);
+        View empty = getView().findViewById(R.id.empty_view);
+        TextView message = (TextView)empty.findViewById(R.id.text_type_message_no_data);
         message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
-        list.setVisibility(View.GONE);
+
+        getLayout().setVisibility(View.GONE);
+        empty.setVisibility(View.VISIBLE);
     }
 }
 
