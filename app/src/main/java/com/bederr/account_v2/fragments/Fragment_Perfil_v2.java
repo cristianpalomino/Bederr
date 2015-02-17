@@ -14,7 +14,9 @@ import com.bederr.account_v2.interfaces.OnSuccessCounty;
 import com.bederr.account_v2.interfaces.OnSuccessMe;
 import com.bederr.account_v2.services.Service_Country;
 import com.bederr.account_v2.views.Country_V;
+import com.bederr.application.Maven_Application;
 import com.bederr.beans_v2.Country_DTO;
+import com.bederr.beans_v2.Location_DTO;
 import com.bederr.main.Bederr;
 import com.bederr.dialog.Dialog_Contrasenia;
 import com.bederr.fragments.Fragment_Master;
@@ -33,11 +35,10 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Fragment_Perfil_v2 extends Fragment_Master {
+public class Fragment_Perfil_v2 extends Fragment_Master implements Country_V.OnChecked {
 
     private ImageView action_right;
     private LinearLayout containerciudad;
-
 
     public Fragment_Perfil_v2() {
         setId_layout(R.layout.fragment_perfil);
@@ -84,6 +85,16 @@ public class Fragment_Perfil_v2 extends Fragment_Master {
                             ((TextView) getView().findViewById(R.id.txtsexousuario)).setText(user_dto.getLast_name());
                             ((TextView) getView().findViewById(R.id.txtcorreousuario)).setText(user_dto.getEmail());
                             ((TextView) getView().findViewById(R.id.txtcumpleaniosusuario)).setText(user_dto.getBirthday());
+
+                            /**
+                             * Ciudad - Pais , Usuario
+                             */
+                            Location_DTO location = ((Maven_Application)getBederr().getApplication()).getLocation_dto();
+                            if(location != null){
+                                ((TextView) getView().findViewById(R.id.txtciudadusuario))
+                                        .setText(location.getPais() + " , " + location.getCiudad());
+                            }
+
                             Picasso.with(getActivity()).load(user_dto.getPhoto()).placeholder(R.drawable.placeholder_usuario).transform(new RoundedTransformation(75, 0)).into(((ImageView) getView().findViewById(R.id.img_perfil_usuario)));
                         }
                     }
@@ -141,6 +152,7 @@ public class Fragment_Perfil_v2 extends Fragment_Master {
                             if(success){
                                 for (int i = 0; i < country_dtos.size() ; i++) {
                                     Country_V country_v = new Country_V(getBederr(),country_dtos.get(i));
+                                    country_v.setOnChecked(Fragment_Perfil_v2.this);
                                     ciudades.addView(country_v);
                                 }
                             }
@@ -196,5 +208,10 @@ public class Fragment_Perfil_v2 extends Fragment_Master {
 
         TextView action_middle = (TextView) getView().findViewById(R.id.action_middle);
         action_middle.setTypeface(Util_Fonts.setPNASemiBold(getActivity()));
+    }
+
+    @Override
+    public void onChecked(boolean checked, Object tag) {
+        showMessage("Check");
     }
 }

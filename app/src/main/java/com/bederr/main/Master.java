@@ -15,6 +15,7 @@ import com.bederr.application.Maven_Application;
 import com.bederr.beans_v2.Area_DTO;
 import com.bederr.beans_v2.Bederr_DTO;
 import com.bederr.beans_v2.Country_DTO;
+import com.bederr.beans_v2.Location_DTO;
 import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.retail_v2.dialog.Ubication_D;
 import com.bederr.util_v2.Bederr_WS;
@@ -90,6 +91,8 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
             if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0){
                 String lat = String.valueOf(location.getLatitude());
                 String lng = String.valueOf(location.getLongitude());
+               // String lat = String.valueOf("29.1738854");
+               // String lng = String.valueOf("-82.1568079");
                 initGeocode(lat, lng);
             }else{
                 new Ubication_D(this,true,null,this).show();
@@ -184,11 +187,19 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                                             LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
                                             Ubication_DTO dto = new Ubication_DTO(latLng,area_dto.getId());
                                             application.setUbication(dto);
+
                                             showMessage("GPS : ON" + "\n" +
                                                     "LAT : " + lat + "\n" +
                                                     "LNG : " + lng + "\n" +
                                                     "CIUDAD : " + area + "\n" +
+                                                    "PAIS : " + country_dto.getName() + "\n" +
                                                     "CODE : " + area_dto.getId());
+
+                                            Location_DTO location = new Location_DTO();
+                                            location.setPais(country_dto.getName());
+                                            location.setCiudad(area);
+                                            application.setLocation_dto(location);
+
                                             onSuccessArea.onSuccessArea(true,dto);
                                             break;
                                         }

@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_maven">
@@ -25,8 +26,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="25dp"
             android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            />
+            android:paddingTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,163 +45,200 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/frame_container">
+        android:layout_height="wrap_content"
+        android:id="@+id/view_header">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/view_header">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:background="@drawable/holo_flat_button_plomo_claro"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="5dp">
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:background="@drawable/holo_flat_button_plomo_claro"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="5dp">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:id="@+id/imgusuariopregunta"
-                            android:src="@drawable/placeholder_usuario"
-                            android:adjustViewBounds="true"
-                            android:layout_margin="5dp"
-                            android:scaleType="fitXY"
-                            android:layout_gravity="center_vertical" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_gravity="center_vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="Mario Gil pregunto :"
-                                android:lines="1"
-                                android:maxEms="1"
-                                android:maxLines="1"
-                                android:id="@+id/nombreusuario"
-                                android:textColor="#584545"
-                                android:layout_alignTop="@+id/img_categoria_local"
-                                android:layout_toRightOf="@+id/img_categoria_local"
-                                android:textSize="16sp" />
-
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent">
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/icono_timer_pregunta"
-                                    android:layout_gravity="center_vertical"
-                                    android:scaleType="centerInside"
-                                    android:layout_marginRight="3dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="?android:attr/textAppearanceMedium"
-                                    android:text="Hace 12 minutos"
-                                    android:lines="1"
-                                    android:maxEms="1"
-                                    android:maxLines="1"
-                                    android:id="@+id/tiempopregunta"
-                                    android:textColor="#7B6569"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:id="@+id/imgcategoriapregunta"
-                            android:src="@drawable/viajes"
-                            android:adjustViewBounds="true"
-                            android:layout_margin="10dp"
-                            android:scaleType="centerInside"
-                            android:layout_gravity="center_vertical" />
-                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/imgusuariopregunta"
+                        android:src="@drawable/placeholder_usuario"
+                        android:adjustViewBounds="true"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center_vertical" />
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:background="#F8F5F1"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="1dp">
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Quisiera saber cual es el mejor lugar para comprar ropa de mujer, que no sea muy juvenil, más bien para señora me avisan??"
-                            android:maxEms="5"
-                            android:maxLines="5"
-                            android:id="@+id/textopregunta"
-                            android:paddingTop="13dp"
-                            android:paddingBottom="15dp"
-                            android:paddingLeft="13dp"
-                            android:paddingRight="15dp"
+                            android:text="Mario Gil pregunto :"
+                            android:lines="1"
+                            android:maxEms="1"
+                            android:maxLines="1"
+                            android:id="@+id/nombreusuario"
                             android:textColor="#584545"
-                            android:layout_gravity="center"
-                            android:gravity="center"
                             android:layout_alignTop="@+id/img_categoria_local"
                             android:layout_toRightOf="@+id/img_categoria_local"
                             android:textSize="16sp" />
 
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
 
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:lines="1"
-                            android:imeOptions="actionGo"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="Responder"
-                            android:textColor="@color/color_blanco"
-                            android:textStyle="bold"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:textSize="16sp"
-                            android:id="@+id/btn_responder"
-                            android:background="@drawable/button_verde_maven" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icono_timer_pregunta"
+                                android:layout_gravity="center_vertical"
+                                android:scaleType="centerInside"
+                                android:layout_marginRight="3dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Hace 12 minutos"
+                                android:lines="1"
+                                android:maxEms="1"
+                                android:maxLines="1"
+                                android:id="@+id/tiempopregunta"
+                                android:textColor="#7B6569"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/imgcategoriapregunta"
+                        android:src="@drawable/viajes"
+                        android:adjustViewBounds="true"
+                        android:layout_margin="10dp"
+                        android:scaleType="centerInside"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:background="#F8F5F1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Quisiera saber cual es el mejor lugar para comprar ropa de mujer, que no sea muy juvenil, más bien para señora me avisan??"
+                        android:maxEms="5"
+                        android:maxLines="5"
+                        android:id="@+id/textopregunta"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="15dp"
+                        android:textColor="#584545"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_alignTop="@+id/img_categoria_local"
+                        android:layout_toRightOf="@+id/img_categoria_local"
+                        android:textSize="16sp" />
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:imeOptions="actionGo"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="Responder"
+                        android:textColor="@color/color_blanco"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="16sp"
+                        android:id="@+id/btn_responder"
+                        android:background="@drawable/button_verde_maven" />
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_container"
+        android:visibility="visible">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
             android:listSelector="@android:color/transparent"
-            android:id="@+id/lista_respuestas" />
+            android:id="@+id/lista_respuestas"
+            />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fondo_message"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:visibility="gone"
+        android:id="@+id/empty_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="No Data"
+            android:id="@+id/text_type_message_no_data"
+            android:paddingBottom="3dp"
+            android:textColor="@color/color_blanco"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_type_message_no_data"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icono_no_data"
+            android:layout_gravity="center" />
     </LinearLayout>
 
 </LinearLayout>

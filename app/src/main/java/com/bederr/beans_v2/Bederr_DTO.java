@@ -453,11 +453,11 @@ public class Bederr_DTO {
             if (!dataSource.isNull(key)) {
                 return dataSource.getJSONArray(key);
             } else {
-                return null;
+                return new JSONArray();
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            return new JSONArray();
         }
     }
 

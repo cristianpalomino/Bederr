@@ -19,6 +19,7 @@ import com.bederr.beans_v2.Listing_DTO;
 import pe.bederr.com.R;
 
 import com.bederr.operations.Operation_Listas;
+import com.bederr.questions_v2.adapters.Answer_A;
 import com.bederr.retail_v2.adapters.Listing_A;
 import com.bederr.retail_v2.interfaces.OnSuccessListings;
 import com.bederr.retail_v2.services.Service_Listings;
@@ -67,7 +68,6 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_listas = (ListView) getView().findViewById(R.id.lista_listas);
         lista_listas.setOnItemClickListener(this);
         lista_listas.setOnScrollListener(this);
-        lista_listas.setVisibility(View.GONE);
 
         try {
             if (getUbication() != null) {
@@ -83,17 +83,27 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                                       String count,
                                                       String next,
                                                       String previous) {
-                            if (success) {
-                                try {
-                                    listing_a = new Listing_A(getBederr(), listing_dtos);
-                                    lista_listas.setAdapter(listing_a);
-                                    Listing_F.this.onFinishLoad(lista_listas);
+                            try {
+                                if (success) {
+                                    if (!listing_dtos.isEmpty()) {
+                                        listing_a = new Listing_A(getBederr(), listing_dtos);
+                                        lista_listas.setAdapter(listing_a);
+                                        getEmptyView();
 
-                                    PREVIOUS = previous;
-                                    NEXT = next;
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                        /**
+                                         * Stacks
+                                         */
+                                        PREVIOUS = previous;
+                                        NEXT = next;
+                                    } else {
+                                        setEmptyView(lista_listas);
+                                    }
+                                } else {
+                                    setEmptyView(lista_listas);
                                 }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                setEmptyView(lista_listas);
                             }
                         }
                     });
@@ -107,17 +117,27 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                                       String count,
                                                       String next,
                                                       String previous) {
-                            if (success) {
-                                try {
-                                    listing_a = new Listing_A(getBederr(), listing_dtos);
-                                    lista_listas.setAdapter(listing_a);
-                                    Listing_F.this.onFinishLoad(lista_listas);
+                            try {
+                                if (success) {
+                                    if (!listing_dtos.isEmpty()) {
+                                        listing_a = new Listing_A(getBederr(), listing_dtos);
+                                        lista_listas.setAdapter(listing_a);
+                                        getEmptyView();
 
-                                    PREVIOUS = previous;
-                                    NEXT = next;
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                        /**
+                                         * Stacks
+                                         */
+                                        PREVIOUS = previous;
+                                        NEXT = next;
+                                    } else {
+                                        setEmptyView(lista_listas);
+                                    }
+                                } else {
+                                    setEmptyView(lista_listas);
                                 }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                setEmptyView(lista_listas);
                             }
                         }
                     });

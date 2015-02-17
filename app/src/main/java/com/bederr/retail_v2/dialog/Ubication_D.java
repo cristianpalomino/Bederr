@@ -27,6 +27,7 @@ import com.bederr.account_v2.views.Area_V;
 import com.bederr.account_v2.views.Country_V;
 import com.bederr.application.Maven_Application;
 import com.bederr.beans_v2.Country_DTO;
+import com.bederr.beans_v2.Location_DTO;
 import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.main.Bederr;
@@ -132,6 +133,14 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
                 if(!flag){
                     showMessage("Seleccione una Ciudad");
                 }else{
+                    Location_DTO location = new Location_DTO();
+                    location.setPais(area_v.getCountry_v().getCountry_dto().getName());
+                    location.setCiudad(area_v.getArea_dto().getName());
+                    ((Maven_Application)activity.getApplication()).setLocation_dto(location);
+
+                    showMessage("Pais : " + location.getPais() + "\n" +
+                                "Ciudad : " + location.getCiudad());
+
                     Ubication_DTO dto = new Ubication_DTO(null,area_v.getArea_dto().getId());
                     ((Maven_Application)activity.getApplication()).setUbication(dto);
                     ((Bederr)activity).restart();

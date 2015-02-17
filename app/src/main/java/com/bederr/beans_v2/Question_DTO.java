@@ -6,7 +6,7 @@ package com.bederr.beans_v2;
 public class Question_DTO extends Bederr_DTO {
 
     private String category_name = "category_name";
-    private String category_code = "category_code";
+    private String category_code = "category";
     private String created_at = "created_at";
     private String content = "content";
     private String owner_fullname = "owner_fullname";

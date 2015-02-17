@@ -79,6 +79,7 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
         listaCorp = (ListView) getView().findViewById(R.id.lists_corp);
         listaCorp.setOnItemClickListener(this);
         listaCorp.setOnItemLongClickListener(this);
+
     }
 
     @Override
@@ -116,7 +117,7 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
                             if (!program_dtos.isEmpty()) {
                                 benefit_a = new Benefit_A(getActivity(), program_dtos, 1);
                                 listaCorp.setAdapter(benefit_a);
-                                getEmptyView().setVisibility(View.GONE);
+                                getEmptyView();
                             } else {
                                 setEmptyView(listaCorp);
                             }
@@ -200,6 +201,7 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         int type = (int) view.findViewById(R.id.nombreempresa).getTag();
+        program_dto = (Benefit_Program_DTO) parent.getItemAtPosition(position);
         if (type == 1) {
             Dialog_Empresa dialog_empresa = new Dialog_Empresa(getBederr());
             dialog_empresa.getWindow().setWindowAnimations(R.style.Dialog_Animation_DOWN_UP);

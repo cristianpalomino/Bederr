@@ -23,6 +23,7 @@ import com.bederr.main.Bederr;
 import com.bederr.questions_v2.adapters.Question_A;
 import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
 import com.bederr.questions_v2.services.Service_Question;
+import com.bederr.retail_v2.adapters.Listing_A;
 import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
 import com.bederr.retail_v2.services.Service_Places;
 import com.bederr.session.Session_Manager;
@@ -74,7 +75,6 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
         lista_preguntas = (ListView) getView().findViewById(R.id.lista_preguntas);
         lista_preguntas.setOnItemClickListener(this);
         lista_preguntas.setOnScrollListener(this);
-        lista_preguntas.setVisibility(View.GONE);
 
         try {
             validateInitQuestion();
@@ -95,20 +95,28 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                                           String count,
                                           String next,
                                           String previous) {
+
                 try {
                     if (success) {
-                        question_a = new Question_A(getBederr(), question_dtos);
-                        lista_preguntas.setAdapter(question_a);
-                        Question_F.this.onFinishLoad(lista_preguntas);
+                        if (!question_dtos.isEmpty()) {
+                            question_a = new Question_A(getBederr(), question_dtos);
+                            lista_preguntas.setAdapter(question_a);
+                            getEmptyView();
 
-                        /**
-                         * Stacks
-                         */
-                        PREVIOUS = previous;
-                        NEXT = next;
+                            /**
+                             * Stacks
+                             */
+                            PREVIOUS = previous;
+                            NEXT = next;
+                        } else {
+                            setEmptyView(lista_preguntas);
+                        }
+                    } else {
+                        setEmptyView(lista_preguntas);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    setEmptyView(lista_preguntas);
                 }
             }
         });
@@ -124,20 +132,28 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                                           String count,
                                           String next,
                                           String previous) {
+
                 try {
                     if (success) {
-                        question_a = new Question_A(getBederr(), question_dtos);
-                        lista_preguntas.setAdapter(question_a);
-                        Question_F.this.onFinishLoad(lista_preguntas);
+                        if (!question_dtos.isEmpty()) {
+                            question_a = new Question_A(getBederr(), question_dtos);
+                            lista_preguntas.setAdapter(question_a);
+                            getEmptyView();
 
-                        /**
-                         * Stacks
-                         */
-                        PREVIOUS = previous;
-                        NEXT = next;
+                            /**
+                             * Stacks
+                             */
+                            PREVIOUS = previous;
+                            NEXT = next;
+                        } else {
+                            setEmptyView(lista_preguntas);
+                        }
+                    } else {
+                        setEmptyView(lista_preguntas);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    setEmptyView(lista_preguntas);
                 }
             }
         });

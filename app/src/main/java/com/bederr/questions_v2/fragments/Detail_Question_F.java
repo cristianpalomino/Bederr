@@ -24,6 +24,7 @@ import com.bederr.beans.Respuesta_DTO;
 import com.bederr.beans_v2.Answer_DTO;
 import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Question_DTO;
+import com.bederr.benefits_v2.adapter.Benefit_A;
 import com.bederr.fragments.Fragment_Master;
 import com.bederr.main.Bederr;
 import com.bederr.questions_v2.adapters.Answer_A;
@@ -106,7 +107,6 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
         lista_respuestas = (ListView) getView().findViewById(R.id.lista_respuestas);
         lista_respuestas.setOnItemClickListener(this);
         lista_respuestas.setOnScrollListener(this);
-        lista_respuestas.setVisibility(View.GONE);
 
         Service_Answers service_answers = new Service_Answers(getBederr());
         service_answers.sendRequest(String.valueOf(question_dto.getId()));
@@ -119,18 +119,25 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                                         String previous) {
                 try {
                     if (success) {
-                        answer_a = new Answer_A(getBederr(), answer_dtos);
-                        lista_respuestas.setAdapter(answer_a);
-                        Detail_Question_F.this.onFinishLoad(lista_respuestas);
+                        if (!answer_dtos.isEmpty()) {
+                            answer_a = new Answer_A(getBederr(), answer_dtos);
+                            lista_respuestas.setAdapter(answer_a);
+                            getEmptyView();
 
-                        /**
-                         * Stacks
-                         */
-                        PREVIOUS = previous;
-                        NEXT = next;
+                            /**
+                             * Stacks
+                             */
+                            PREVIOUS = previous;
+                            NEXT = next;
+                        } else {
+                            setEmptyView(lista_respuestas);
+                        }
+                    } else {
+                        setEmptyView(lista_respuestas);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    setEmptyView(lista_respuestas);
                 }
             }
         });
@@ -201,55 +208,52 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
         DateTime dt = formatter.parseDateTime(question_dto.getCreated_at());
         tiempopregunta.setText(Util_Time.getTimeAgo(dt.getMillis()));
 
-        btn_responder.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View v) {
+        btn_responder.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Session_Manager session_manager = new Session_Manager(getActivity());
+                        btn_responder.setClickable(false);
 
-                                                 ProgressDialog dialog = ProgressDialog.show(getBederr(), null, "Espere", true, false);
+                        if (session_manager.isLogin()) {
+                            final ProgressDialog dialog = ProgressDialog.show(getBederr(),null,"Espere",false);
 
-                                                 Session_Manager session_manager = new Session_Manager(getActivity());
-                                                 if (session_manager.isLogin()) {
-                                                     if (getBederr().getPlace_dtos() != null) {
-                                                         final Places_D places_d = new Places_D(getActivity(), (Bederr) getActivity());
-                                                         places_d.getWindow().setWindowAnimations(R.style.Dialog_Animation_DOWN_UP);
-                                                         places_d.show();
-                                                     } else {
-                                                         String lat = getUbication().getLatitude();
-                                                         String lng = getUbication().getLongitude();
-                                                         String name = "";
-                                                         String cat = "";
-                                                         String city = "";
-                                                         String area = getUbication().getArea();
+                            String lat = getUbication().getLatitude();
+                            String lng = getUbication().getLongitude();
+                            String name = "";
+                            String cat = question_dto.getCategory_code();
+                            String city = "";
+                            String area = getUbication().getArea();
 
-                                                         Service_Places service_places = new Service_Places(getBederr());
-                                                         service_places.sendRequest(lat, lng, name, cat, city, area);
-                                                         service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
-                                                             @Override
-                                                             public void onSuccessPlaces(boolean success,
-                                                                                         ArrayList<Place_DTO> place_dtos,
-                                                                                         String count,
-                                                                                         String next,
-                                                                                         String previous) {
-                                                                 if (success) {
-                                                                     getBederr().setPlace_dtos(place_dtos);
-                                                                     final Places_D places_d = new Places_D(getActivity(), (Bederr) getActivity());
-                                                                     places_d.getWindow().setWindowAnimations(R.style.Dialog_Animation_DOWN_UP);
-                                                                     places_d.show();
-                                                                 }
-                                                             }
-                                                         });
-                                                     }
-
-                                                     dialog.hide();
-                                                 } else {
-                                                     getActivity().
-                                                             getSupportFragmentManager().
-                                                             beginTransaction().
-                                                             replace(R.id.container, Fragment_Entrar_v2.newInstance("0"), Fragment_Entrar_v2.class.getName()).
-                                                             commit();
-                                                 }
-                                             }
-                                         }
+                            Service_Places service_places = new Service_Places(getBederr());
+                            service_places.sendRequest(lat, lng, name, cat, city, area);
+                            service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+                                @Override
+                                public void onSuccessPlaces(boolean success,
+                                                            ArrayList<Place_DTO> place_dtos,
+                                                            String count,
+                                                            String next,
+                                                            String previous) {
+                                    dialog.hide();
+                                    if (success) {
+                                        final Places_D places_d = new Places_D(getActivity(), (Bederr) getActivity());
+                                        places_d.getWindow().setWindowAnimations(R.style.Dialog_Animation_DOWN_UP);
+                                        getBederr().setPlace_dtos(place_dtos);
+                                        places_d.initDialog();
+                                        places_d.show();
+                                        btn_responder.setClickable(true);
+                                    }
+                                }
+                            });
+                        } else {
+                            getActivity().
+                                    getSupportFragmentManager().
+                                    beginTransaction().
+                                    replace(R.id.container, Fragment_Entrar_v2.newInstance("0"), Fragment_Entrar_v2.class.getName()).
+                                    commit();
+                        }
+                    }
+                }
         );
     }
 

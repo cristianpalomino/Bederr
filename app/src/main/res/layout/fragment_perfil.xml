@@ -161,7 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Lima, Perú"
+                    android:text="Bederr"
                     android:gravity="left"
                     android:id="@+id/txtciudadusuario"
                     android:padding="10dp"

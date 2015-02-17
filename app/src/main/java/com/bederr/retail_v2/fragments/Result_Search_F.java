@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bederr.beans.Categoria_DTO;
 import com.bederr.beans_v2.Category_DTO;
 import com.bederr.beans_v2.Locality_DTO;
+import com.bederr.benefits_v2.adapter.Benefit_A;
 import com.bederr.main.Bederr;
 import com.bederr.fragments.Fragment_Master;
 import com.bederr.retail_v2.adapters.Places_A;
@@ -94,7 +95,6 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
         lista_locales_busquedas = (ListView) getView().findViewById(R.id.lista_locales_busquedas);
         lista_locales_busquedas.setOnItemClickListener(this);
         lista_locales_busquedas.setOnScrollListener(this);
-        lista_locales_busquedas.setVisibility(View.GONE);
 
         try {
             validateSearchPlaces();
@@ -344,22 +344,22 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                                         String previous) {
                 try {
                     if (success) {
-                        if (place_dtos.size() > 0) {
+                        if (!place_dtos.isEmpty()) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales_busquedas.setAdapter(places_a);
-                            Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
+                            getEmptyView();
 
                             NEXT = next;
                             PREVIOUS = previous;
                         } else {
-                            //getEmptyView().setVisibility(View.VISIBLE);
-                            lista_locales_busquedas.setVisibility(View.GONE);
+                            setEmptyView(lista_locales_busquedas);
                         }
+                    } else {
+                        setEmptyView(lista_locales_busquedas);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    //getEmptyView().setVisibility(View.VISIBLE);
-                    lista_locales_busquedas.setVisibility(View.GONE);
+                    setEmptyView(lista_locales_busquedas);
                 }
             }
         });
@@ -377,22 +377,22 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                                         String previous) {
                 try {
                     if (success) {
-                        if (place_dtos.size() > 0) {
+                        if (!place_dtos.isEmpty()) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales_busquedas.setAdapter(places_a);
-                            Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
+                            getEmptyView();
 
                             NEXT = next;
                             PREVIOUS = previous;
                         } else {
-                            //getEmptyView().setVisibility(View.VISIBLE);
-                            lista_locales_busquedas.setVisibility(View.GONE);
+                            setEmptyView(lista_locales_busquedas);
                         }
+                    } else {
+                        setEmptyView(lista_locales_busquedas);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    //getEmptyView().setVisibility(View.VISIBLE);
-                    lista_locales_busquedas.setVisibility(View.GONE);
+                    setEmptyView(lista_locales_busquedas);
                 }
             }
         });

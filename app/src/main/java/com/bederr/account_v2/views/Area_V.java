@@ -35,6 +35,8 @@ public class Area_V extends LinearLayout {
     private OnChecked onChecked;
     private boolean checked = false;
 
+    private Country_V country_v;
+
     public void setOnChecked(OnChecked onChecked) {
         this.onChecked = onChecked;
     }
@@ -89,6 +91,15 @@ public class Area_V extends LinearLayout {
                 }
             }
         });
+    }
+
+
+    public void setCountry_v(Country_V country_v) {
+        this.country_v = country_v;
+    }
+
+    public Country_V getCountry_v() {
+        return country_v;
     }
 
     public Area_DTO getArea_dto() {

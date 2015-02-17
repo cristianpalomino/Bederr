@@ -25,6 +25,7 @@ import com.bederr.retail_v2.adapters.Category_A;
 import com.bederr.retail_v2.adapters.Locality_A;
 import com.bederr.retail_v2.interfaces.OnSuccessLocality;
 import com.bederr.retail_v2.services.Service_Locality;
+import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
 
 import java.util.ArrayList;
@@ -119,7 +120,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(listaCategorias.getAdapter() != null){
+                if (listaCategorias.getAdapter() != null) {
                     String text = edtcategorias.getText().toString().toLowerCase(Locale.getDefault());
                     ((Category_A) listaCategorias.getAdapter()).filter(text);
                 }
@@ -171,20 +172,36 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
         flagcategoria = true;
         flagdistrito = true;
 
-        ArrayList<Categoria_DTO> categoria_dtos = new ArrayList<Categoria_DTO>();
-        categoria_dtos.add(new Categoria_DTO("Beneficios", "beneficios", R.drawable.categoria_beneficio, false, 0));
-        categoria_dtos.add(new Categoria_DTO("Descuentos", "descuentos", R.drawable.categoria_descuento, false, 1));
-        categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
-        categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
-        categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
-        categoria_dtos.add(new Categoria_DTO("Viajes", "viajes", R.drawable.categoria_viajes, false, 5));
-        categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
-        categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
-        getBederr().setCategoria_dtos(categoria_dtos);
+        getBederr().setCategoria_dtos(getCategorias());
+        Category_A adapter_categoria = new Category_A(getBederr(), getCategorias());
 
-        Category_A adapter_categoria = new Category_A(getBederr() , categoria_dtos);
         listaCategorias.setAdapter(adapter_categoria);
         listaCategorias.setVisibility(View.VISIBLE);
+    }
+
+
+    private ArrayList<Categoria_DTO> getCategorias() {
+        ArrayList<Categoria_DTO> categoria_dtos = new ArrayList<Categoria_DTO>();
+        Session_Manager session_manager = new Session_Manager(getBederr());
+        if (session_manager.isLogin()) {
+            categoria_dtos.add(new Categoria_DTO("Beneficios", "beneficios", R.drawable.categoria_beneficio, false, 0));
+            categoria_dtos.add(new Categoria_DTO("Descuentos", "descuentos", R.drawable.categoria_descuento, false, 1));
+            categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
+            categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
+            categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
+            categoria_dtos.add(new Categoria_DTO("Viajes", "viajes", R.drawable.categoria_viajes, false, 5));
+            categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
+            categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
+        }else{
+            categoria_dtos.add(new Categoria_DTO("Descuentos", "descuentos", R.drawable.categoria_descuento, false, 1));
+            categoria_dtos.add(new Categoria_DTO("Comida", "comida", R.drawable.categoria_comida, false, 2));
+            categoria_dtos.add(new Categoria_DTO("Ropa", "ropa", R.drawable.categoria_ropa, false, 4));
+            categoria_dtos.add(new Categoria_DTO("Salud y belleza", "salud-y-belleza", R.drawable.categoria_salud, false, 9));
+            categoria_dtos.add(new Categoria_DTO("Viajes", "viajes", R.drawable.categoria_viajes, false, 5));
+            categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
+            categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
+        }
+        return categoria_dtos;
     }
 
     @Override
@@ -249,7 +266,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
                             )
                             .add(
                                     R.id.container,
-                                    Result_Search_F.newInstance(s,distrito),
+                                    Result_Search_F.newInstance(s, distrito),
                                     Result_Search_F.class.getName()
                             )
                             .addToBackStack(null)

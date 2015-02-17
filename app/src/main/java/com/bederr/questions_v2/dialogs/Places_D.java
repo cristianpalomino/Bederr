@@ -49,13 +49,11 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
     public Places_D(Context context, ActionBarActivity actionBarActivity) {
         super(context);
         this.actionBarActivity = actionBarActivity;
-        initDialog();
     }
 
     public Places_D(Context context, boolean cancelable, OnCancelListener cancelListener, ActionBarActivity actionBarActivity) {
         super(context, cancelable, cancelListener);
         this.actionBarActivity = actionBarActivity;
-        initDialog();
     }
 
     /**
@@ -72,10 +70,9 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
     public Places_D(Context context, int theme, ActionBarActivity actionBarActivity) {
         super(context, theme);
         this.actionBarActivity = actionBarActivity;
-        initDialog();
     }
 
-    private void initDialog() {
+    public void initDialog() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         final View view = inflater.inflate(R.layout.dialog_locales, null);
         initActionBar(view);
@@ -137,7 +134,7 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
                     String lat = app.getUbication().getLatitude();
                     String lng = app.getUbication().getLongitude();
                     String name = action_middle.getText().toString();
-                    String cat = "";
+                    String cat = ((Bederr)actionBarActivity).getQuestion_dto().getCategory_code();
                     String city = "";
                     String locality = "";
                     String area = app.getUbication().getArea();

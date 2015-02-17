@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -214,7 +215,8 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     }
 
     public View getEmptyView(){
-        View empty = getView().findViewById(R.id.empty_view);
+        LinearLayout empty = (LinearLayout) getView().findViewById(R.id.empty_view);
+        empty.setVisibility(View.GONE);
         return empty;
     }
 
@@ -223,7 +225,6 @@ public class Fragment_Master extends Fragment implements Interface_Load {
         View empty = getView().findViewById(R.id.empty_view);
         TextView message = (TextView)empty.findViewById(R.id.text_type_message_no_data);
         message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
-
         getLayout().setVisibility(View.GONE);
         empty.setVisibility(View.VISIBLE);
     }

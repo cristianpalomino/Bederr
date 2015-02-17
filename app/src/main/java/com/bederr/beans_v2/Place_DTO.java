@@ -108,7 +108,7 @@ public class Place_DTO extends Bederr_DTO {
     public int isInplace() {
         if (getInplace_offers().size() > 0) {
             return View.VISIBLE;
-        }else{
+        } else {
             return View.GONE;
         }
     }
@@ -116,7 +116,7 @@ public class Place_DTO extends Bederr_DTO {
     public int isEspecial() {
         if (getSpecial_offers().size() > 0) {
             return View.VISIBLE;
-        }else{
+        } else {
             return View.GONE;
         }
     }
@@ -124,14 +124,14 @@ public class Place_DTO extends Bederr_DTO {
     public int isCorporate() {
         if (getCorporate_offers().size() > 0 || getLegacy_offers().size() > 0) {
             return View.VISIBLE;
-        }else{
+        } else {
             return View.GONE;
         }
     }
 
     public ArrayList<Offer_DTO> getSpecial_offers() {
-        try {
             ArrayList<Offer_DTO> offer_dtos = new ArrayList<Offer_DTO>();
+        try {
             JSONArray jsonArray = parseJSONArray(KEY_JSON_ARRAY_OFFER_SPECIAL, getDataSource());
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -142,13 +142,13 @@ public class Place_DTO extends Bederr_DTO {
             return offer_dtos;
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            return offer_dtos;
         }
     }
 
     public ArrayList<CorporateOffer_DTO> getCorporate_offers() {
-        try {
             ArrayList<CorporateOffer_DTO> corporateOffer_dtos = new ArrayList<CorporateOffer_DTO>();
+        try {
             JSONArray jsonArray = parseJSONArray(KEY_JSON_ARRAY_CORPORATEOFFER, getDataSource());
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -159,13 +159,13 @@ public class Place_DTO extends Bederr_DTO {
             return corporateOffer_dtos;
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            return corporateOffer_dtos;
         }
     }
 
     public ArrayList<CorporateOffer_DTO> getLegacy_offers() {
+        ArrayList<CorporateOffer_DTO> corporateOffer_dtos = new ArrayList<CorporateOffer_DTO>();
         try {
-            ArrayList<CorporateOffer_DTO> corporateOffer_dtos = new ArrayList<CorporateOffer_DTO>();
             JSONArray jsonArray = parseJSONArray("legacy_corporate_offers", getDataSource());
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -176,7 +176,7 @@ public class Place_DTO extends Bederr_DTO {
             return corporateOffer_dtos;
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            return corporateOffer_dtos;
         }
     }
 }

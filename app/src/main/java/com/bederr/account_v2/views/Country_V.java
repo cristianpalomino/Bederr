@@ -73,9 +73,14 @@ public class Country_V extends LinearLayout implements Area_V.OnChecked {
         ArrayList<Area_DTO> area_dtos = country_dto.getAreas();
         for (int i = 0; i < area_dtos.size() ; i++) {
             Area_V area_v = new Area_V(getContext(),area_dtos.get(i));
+            area_v.setCountry_v(this);
             area_v.setOnChecked(this);
             container.addView(area_v);
         }
+    }
+
+    public Country_DTO getCountry_dto() {
+        return country_dto;
     }
 
     @Override
