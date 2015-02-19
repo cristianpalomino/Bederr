@@ -24,6 +24,7 @@ import com.bederr.beans_v2.Country_DTO;
 import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.retail_v2.dialog.Ubication_D;
 import com.bederr.util_v2.Bederr_WS;
+import com.bederr.utils.Connectivity;
 import com.bederr.utils.GPSTracker;
 import com.bederr.utils.GpsLocationTracker;
 import com.google.android.gms.maps.model.LatLng;
@@ -71,100 +72,20 @@ public class Splash extends ActionBarActivity {
             mGpsLocationTracker.showSettingsAlert();
         }
 
-        /*
-        Service_Country service_country = new Service_Country(this);
-        service_country.sendRequest();
-        service_country.setOnSuccessCounty(new OnSuccessCounty() {
-            @Override
-            public void onSuccessCountry(boolean success,
-                                         final ArrayList<Country_DTO> country_dtos,
-                                         String message) {
-                if (success) {
-                    GPSTracker gpsTracker = new GPSTracker(Splash.this);
-                    final Maven_Application application = ((Maven_Application) getApplication());
-                    if (gpsTracker.canGetLocation()) {
-                        final LatLng latlng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 
-                        String URL = Bederr_WS.BEDERR_GEOCODE.
-                                replace("LAT", String.valueOf(latlng.latitude)).
-                                replace("LON", String.valueOf(latlng.longitude));
-                        Log.e("URL", URL);
-                        AsyncHttpClient httpClient = new AsyncHttpClient();
-                        httpClient.get(Splash.this, URL, null, new JsonHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                super.onSuccess(statusCode, headers, response);
-
-                                String area = "NO AREA";
-                                try {
-                                    Bederr_DTO bederr_dto = new Bederr_DTO();
-                                    String success = bederr_dto.parseString("status", response);
-
-                                    if (success.equals("OK")) {
-                                        JSONObject object = bederr_dto.parseJSONArray("results", response).getJSONObject(0);
-                                        JSONArray adresses = object.getJSONArray("address_components");
-                                        for (int i = 0; i < adresses.length(); i++) {
-                                            JSONObject address = adresses.getJSONObject(i);
-                                            JSONArray types = address.getJSONArray("types");
-                                            for (int j = 0; j < types.length(); j++) {
-                                                String admin_area = "administrative_area_level_1";
-                                                String type = types.getString(j);
-                                                if (admin_area.equals(type)) {
-                                                    area = bederr_dto.parseString("long_name", address);
-                                                }
-                                            }
-                                        }
-                                    }
-
-
-                                    for (int i = 0; i < country_dtos.size(); i++) {
-                                        Country_DTO country_dto = country_dtos.get(i);
-                                        for (int j = 0; j < country_dto.getAreas().size(); j++) {
-                                            Area_DTO area_dto = country_dto.getAreas().get(j);
-                                            if (area.equals(area_dto.getName())) {
-                                                Ubication_DTO ubication_dto = new Ubication_DTO(latlng,area_dto.getId());
-                                                application.setUbication(ubication_dto);
-
-                                                showMessage("GPS : ON" + "\n" +
-                                                        "LAT : " + latlng.latitude + "\n" +
-                                                        "LNG : " + latlng.longitude + "\n" +
-                                                        "CIUDAD : " + area + "\n" +
-                                                        "CODE : " + area_dto.getId());
-                                            }
-                                        }
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                                validateSession();
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                super.onFailure(statusCode, headers, throwable, errorResponse);
-                            }
-                        });
-                    } else {
-                        Ubication_DTO ubication_dto = new Ubication_DTO(null,null);
-                        application.setUbication(ubication_dto);
-                        validateSession();
-                    }
+        Connectivity connectivity = new Connectivity();
+        connectivity.getNetworkInfo(this);
+        if (connectivity.isConnected(this)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    validateSession();
                 }
-            }
-        });
-        */
-               /*
-            Usa : 35.227672 - -97.734375
-            Australia : -27.313214 - 131.132813
-             */
+            }, 2000);
+        }else{
+            Toast.makeText(this,"Se necesita conexión a Internet.",Toast.LENGTH_SHORT).show();
+        }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                validateSession();
-            }
-        }, 2000);
     }
 
     private void validateSession() {

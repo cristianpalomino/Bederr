@@ -43,11 +43,12 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Explore_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, Bederr.BederrOnSuccessArea {
+public class Explore_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, Bederr.BederrOnSuccessArea, Detail_Place_F.OnBack {
 
     private ListView lista_locales;
     protected Places_A places_a;
     private boolean isLoading = false;
+    private boolean flag = true;
 
     public Explore_F() {
         setId_layout(R.layout.fragment_explorar_v2);
@@ -174,10 +175,16 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Place_DTO place_dto = (Place_DTO) parent.getItemAtPosition(position);
         ((Bederr) getActivity()).setPlace_dto(place_dto);
+
+        lista_locales.setOnItemClickListener(null);
+        lista_locales.setClickable(false);
+
+        Detail_Place_F detail_place_f = Detail_Place_F.newInstance("Explore");
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance("Explore"), Detail_Place_F.class.getName()).
-                addToBackStack(null).commit();
+                add(R.id.container, detail_place_f, Detail_Place_F.class.getName()).
+                addToBackStack(Detail_Place_F.class.getName()).commit();
+        detail_place_f.setOnBack(this);
     }
 
     /**
@@ -295,7 +302,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                  * Si tiene AREA
                  */
                 else {
-                    openLoginUser(token, "", "", name, cat, city, area);
+                    setEmptyView(lista_locales);
                 }
             } else {
                 /**
@@ -308,7 +315,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                  * Si tiene AREA
                  */
                 else {
-                    openLogin("", "", name, cat, city, area);
+                    setEmptyView(lista_locales);
                 }
             }
         }
@@ -337,6 +344,12 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                         addToBackStack("busquedas").commit();
             }
         });
+    }
+
+    @Override
+    public void onBack() {
+        lista_locales.setOnItemClickListener(this);
+        lista_locales.setClickable(true);
     }
 
     /*

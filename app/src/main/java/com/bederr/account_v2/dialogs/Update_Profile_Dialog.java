@@ -11,6 +11,8 @@ import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -24,8 +26,8 @@ import com.bederr.beans_v2.User_DTO;
 import pe.bederr.com.R;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
-import com.mobsandgeeks.saripaar.ValidationError;
-import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Required;
+import com.mobsandgeeks.saripaar.annotation.TextRule;
 
 import java.util.Calendar;
 import java.util.List;
@@ -35,18 +37,43 @@ import java.util.List;
  */
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class Update_Profile_Dialog extends AlertDialog implements View.OnClickListener, DialogInterface.OnClickListener, Validator.ValidationListener {
+public class Update_Profile_Dialog extends AlertDialog implements View.OnClickListener, DialogInterface.OnClickListener {
+
+    /*
+    @Password(order = 3, message = "El campo contraseña es requerido")
+    private EditText password;
+    @Required(order = 4, message = "Repetir contraseña")
+    @ConfirmPassword(order = 6, message = "Las contraseñas no coinciden")
+    private EditText repeat_passsword;
+    @Required(order = 1, message = "El campo Nombre es requerido")
+    private EditText nombre;
+    @Required(order = 2, message = "El campo Apellidos es requerido")
+    private EditText apellidos;
+    @Required(order = 3, message = "El campo DNI es requerido")
+    @TextRule(order = 7, minLength = 8, maxLength = 8, message = "El DNI consta de 8 dígitos")
+    private EditText dni;
+    @Required(order = 5, message = "El campo email es requerido")
+    @Email(order = 8, message = "El email es incorrecto")
+    private EditText correo;
+     */
 
     private View view;
     private Validator validator;
 
+    @Required(order = 1, message = "El campo Nombre es requerido")
     private EditText edtnombres;
+
+    @Required(order = 2, message = "El campo Apellidos es requerido")
     private EditText edtapellidos;
     private EditText edtcorreo;
+
+    @Required(order = 2, message = "El campo Sexo es requerido")
     private TextView txtsexo;
+    @Required(order = 2, message = "El campo Cumpleaños es requerido")
     private TextView txtcumpleanios;
 
-
+    @Required(order = 3, message = "El campo DNI es requerido")
+    @TextRule(order = 7, minLength = 8, maxLength = 8, message = "El DNI consta de 8 dígitos")
     private TextView txtdni;
 
     private Button btn_editar;
@@ -67,7 +94,6 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
         setView(view);
 
         validator = new Validator(this);
-        validator.setValidationListener(this);
 
         edtnombres = (EditText) view.findViewById(R.id.txt_nombres);
         edtapellidos = (EditText) view.findViewById(R.id.txt_apellidos);
@@ -90,8 +116,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
         }else{
             edtnombres.setVisibility(View.VISIBLE);
             edtapellidos.setVisibility(View.VISIBLE);
-            edtcorreo.setVisibility(View.VISIBLE);
-            txtcumpleanios.setVisibility(View.VISIBLE);
+            txtcumpleanios.setVisibility(View.GONE);
             txtsexo.setVisibility(View.VISIBLE);
             txtdni.setVisibility(View.VISIBLE);
         }
@@ -169,29 +194,39 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
      */
     @Override
     public void onClick(final View v) {
-        validator.validate();
-        v.setVisibility(View.GONE);
-        view.findViewById(R.id.img_logo_beeder).setVisibility(View.VISIBLE);
-
-        Session_Manager session_manager = new Session_Manager(getContext());
-        String token = session_manager.getUserToken();
-        User_DTO user_dto = new User_DTO();
-        user_dto.setDataSource(session_manager.getSession_v2());
-
-        Service_Update service_update = new Service_Update(getContext());
-        service_update.sendRequest(token,user_dto,txtdni.getText().toString());
-        service_update.setOnSuccessUpdate(new OnSuccessUpdate() {
+        validator.setValidationListener(new Validator.ValidationListener() {
             @Override
-            public void onSuccessUpdate(boolean success, String message) {
-                Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
-                if(success){
-                    Update_Profile_Dialog.this.hide();
-                }else{
-                    v.setVisibility(View.VISIBLE);
-                    view.findViewById(R.id.img_logo_beeder).setVisibility(View.GONE);
-                }
+            public void onValidationSucceeded() {
+                v.setVisibility(View.GONE);
+                view.findViewById(R.id.img_logo_beeder).setVisibility(View.VISIBLE);
+
+                Session_Manager session_manager = new Session_Manager(getContext());
+                String token = session_manager.getUserToken();
+                User_DTO user_dto = new User_DTO();
+                user_dto.setDataSource(session_manager.getSession_v2());
+
+                Service_Update service_update = new Service_Update(getContext());
+                service_update.sendRequest(token,user_dto,txtdni.getText().toString());
+                service_update.setOnSuccessUpdate(new OnSuccessUpdate() {
+                    @Override
+                    public void onSuccessUpdate(boolean success, String message) {
+                        Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+                        if(success){
+                            Update_Profile_Dialog.this.hide();
+                        }else{
+                            v.setVisibility(View.VISIBLE);
+                            view.findViewById(R.id.img_logo_beeder).setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onValidationFailed(View failedView, Rule<?> failedRule) {
+                ((EditText)failedView).setError(failedRule.getFailureMessage());
             }
         });
+        validator.validate();
     }
 
     @Override
@@ -214,34 +249,5 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
                 hide();
             }
         });
-    }
-
-    /**
-     * Called when all {@link com.mobsandgeeks.saripaar.Rule}s pass.
-     */
-    @Override
-    public void onValidationSucceeded() {
-        Toast.makeText(getContext(), "Yay! we got it right!", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Called when one or several {@link com.mobsandgeeks.saripaar.Rule}s fail.
-     *
-     * @param errors List containing references to the {@link android.view.View}s and
-     *               {@link com.mobsandgeeks.saripaar.Rule}s that failed.
-     */
-    @Override
-    public void onValidationFailed(List<ValidationError> errors) {
-        for (ValidationError error : errors) {
-            View view = error.getView();
-            String message = error.getCollatedErrorMessage(getContext());
-
-            // Display error messages ;)
-            if (view instanceof EditText) {
-                ((EditText) view).setError(message);
-            } else {
-                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-            }
-        }
     }
 }

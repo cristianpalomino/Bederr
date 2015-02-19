@@ -47,11 +47,16 @@ public class Detail_Place_F extends Fragment_Master {
 
     private GoogleMap map;
     private String option;
+    private OnBack onBack;
 
     public Detail_Place_F()
     {
         setId_layout(R.layout.fragment_detalle_local);
         setId_container(R.id.frame_container);
+    }
+
+    public void setOnBack(OnBack onBack) {
+        this.onBack = onBack;
     }
 
     public static final Detail_Place_F newInstance(String option) {
@@ -164,6 +169,7 @@ public class Detail_Place_F extends Fragment_Master {
                 trans.remove(Detail_Place_F.this);
                 trans.commit();
                 manager.popBackStack();
+                onBack.onBack();
             }
         });
 
@@ -208,6 +214,7 @@ public class Detail_Place_F extends Fragment_Master {
                         trans.remove(Detail_Place_F.this);
                         trans.commit();
                         manager.popBackStack();
+                        onBack.onBack();
                         return true;
                     }
                 }
@@ -290,5 +297,9 @@ public class Detail_Place_F extends Fragment_Master {
             }
         }
     };
+
+    public interface OnBack {
+        public void onBack();
+    }
 }
 

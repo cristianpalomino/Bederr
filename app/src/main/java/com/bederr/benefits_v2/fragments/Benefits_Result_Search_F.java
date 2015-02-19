@@ -37,7 +37,7 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 5/07/14.
  */
-public class Benefits_Result_Search_F extends Fragment_Master implements AdapterView.OnItemClickListener {
+public class Benefits_Result_Search_F extends Fragment_Master implements AdapterView.OnItemClickListener, Detail_Place_F.OnBack {
 
     private String s;
     private String distrito;
@@ -269,9 +269,21 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Place_DTO place_dto = (Place_DTO) parent.getItemAtPosition(position);
         ((Bederr) getActivity()).setPlace_dto(place_dto);
+
+        lista_locales_busquedas.setOnItemClickListener(null);
+        lista_locales_busquedas.setClickable(false);
+
+        Detail_Place_F detail_place_f = Detail_Place_F.newInstance("Benefits");
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance("Benefits"), Detail_Place_F.class.getName()).
+                add(R.id.container, detail_place_f, Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
+        detail_place_f.setOnBack(Benefits_Result_Search_F.this);
+    }
+
+    @Override
+    public void onBack() {
+        lista_locales_busquedas.setOnItemClickListener(this);
+        lista_locales_busquedas.setClickable(true);
     }
 }

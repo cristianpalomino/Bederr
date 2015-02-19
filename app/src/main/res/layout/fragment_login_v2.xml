@@ -122,7 +122,8 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="@color/color_blanco"
-                    android:id="@+id/txt_olvidaste_contrasenia" />
+                    android:id="@+id/txt_olvidaste_contrasenia"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:layout_width="match_parent"

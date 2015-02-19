@@ -27,6 +27,11 @@ import pe.bederr.com.R;
 
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Password;
+import com.mobsandgeeks.saripaar.annotation.Required;
 
 import java.util.Calendar;
 
@@ -35,7 +40,40 @@ import java.util.Calendar;
  */
 public class Fragment_Registro_v2 extends Fragment_Master implements DialogInterface.OnClickListener {
 
+    /*
+@Password(order = 3, message = "El campo contraseña es requerido")
+private EditText password;
+@Required(order = 4, message = "Repetir contraseña")
+@ConfirmPassword(order = 6, message = "Las contraseñas no coinciden")
+private EditText repeat_passsword;
+@Required(order = 1, message = "El campo Nombre es requerido")
+private EditText nombre;
+@Required(order = 2, message = "El campo Apellidos es requerido")
+private EditText apellidos;
+@Required(order = 3, message = "El campo DNI es requerido")
+@TextRule(order = 7, minLength = 8, maxLength = 8, message = "El DNI consta de 8 dígitos")
+private EditText dni;
+@Required(order = 5, message = "El campo email es requerido")
+@Email(order = 8, message = "El email es incorrecto")
+private EditText correo;
+*/
+
+    @Required(order = 1, message = "El campo Nombre es requerido")
+    private EditText name;
+    @Required(order = 2, message = "El campo Apellidos es requerido")
+    private EditText apel;
+    @Required(order = 5, message = "El campo email es requerido")
+    @Email(order = 8, message = "El email es incorrecto")
+    protected EditText mail;
+    @Required(order = 2, message = "El campo Cumpleaños es requerido")
+    private EditText cump;
+    @Required(order = 2, message = "El campo Sexo es requerido")
+    private EditText sex;
+    @Password(order = 3, message = "El campo contraseña es requerido")
+    private EditText pass;
+
     private ProgressDialog progressDialog;
+    private Validator validator;
 
     public Fragment_Registro_v2() {
         setId_layout(R.layout.fragment_registro);
@@ -66,6 +104,14 @@ public class Fragment_Registro_v2 extends Fragment_Master implements DialogInter
         super.initView();
         initStyles();
         Fragment_Registro_v2.this.onFinishLoad(getView());
+        validator = new Validator(this);
+
+        name = ((EditText) getView().findViewById(R.id.edtnombre));
+        apel = ((EditText) getView().findViewById(R.id.edtapellido));
+        sex = ((EditText) getView().findViewById(R.id.edtsexo));
+        cump = ((EditText) getView().findViewById(R.id.edtcumpleanios));
+        mail = ((EditText) getView().findViewById(R.id.edtmail));
+        pass = ((EditText) getView().findViewById(R.id.edtcontrasenia));
 
         getView().findViewById(R.id.edtsexo).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,36 +156,45 @@ public class Fragment_Registro_v2 extends Fragment_Master implements DialogInter
         getView().findViewById(R.id.btnregistrar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombre = ((EditText) getView().findViewById(R.id.edtnombre)).getText().toString();
-                String apellido = ((EditText) getView().findViewById(R.id.edtapellido)).getText().toString();
-                String sexo = ((TextView) getView().findViewById(R.id.edtsexo)).getText().toString();
-                String nacimiento = ((TextView) getView().findViewById(R.id.edtcumpleanios)).getText().toString();
-                String email = ((EditText) getView().findViewById(R.id.edtmail)).getText().toString();
-                String password = ((EditText) getView().findViewById(R.id.edtcontrasenia)).getText().toString();
-
-                if (sexo.equals("Masculino")) {
-                    sexo = "m";
-                } else {
-                    sexo = "f";
-                }
-
-                progressDialog = ProgressDialog.show(getActivity(), null, "Registrando", true);
-
-                Service_Register service_register = new Service_Register(getBederr());
-                service_register.sendRequest(nombre, apellido, email, nacimiento, sexo, password);
-                service_register.setOnSuccessRegister(new OnSuccessRegister() {
+                validator.setValidationListener(new Validator.ValidationListener() {
                     @Override
-                    public void onSuccessRegister(boolean success, String token_access) {
-                        progressDialog.hide();
-                        if (success) {
-                            Toast.makeText(getBederr(), "Correcto", Toast.LENGTH_SHORT).show();
-                            Session_Manager session_manager = new Session_Manager(getBederr());
-                            session_manager.crearSession_v2(token_access, 0);
+                    public void onValidationSucceeded() {
+                        String sexo = sex.getText().toString();
+                        if (sexo.equals("Masculino")) {
+                            sexo = "m";
                         } else {
-                            Toast.makeText(getBederr(), token_access, Toast.LENGTH_SHORT).show();
+                            sexo = "f";
                         }
+
+                        progressDialog = ProgressDialog.show(getActivity(), null, "Registrando", true);
+
+                        Service_Register service_register = new Service_Register(getBederr());
+                        service_register.sendRequest(name.getText().toString(),
+                                apel.getText().toString(),
+                                mail.getText().toString(),
+                                cump.getText().toString(), sexo, pass.getText().toString());
+                        service_register.setOnSuccessRegister(new OnSuccessRegister() {
+                            @Override
+                            public void onSuccessRegister(boolean success, String token_access) {
+                                progressDialog.hide();
+                                if (success) {
+                                    Toast.makeText(getBederr(), "Correcto", Toast.LENGTH_SHORT).show();
+                                    Session_Manager session_manager = new Session_Manager(getBederr());
+                                    session_manager.crearSession_v2(token_access, 0);
+                                } else {
+                                    Toast.makeText(getBederr(), token_access, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onValidationFailed(View failedView, Rule<?> failedRule) {
+                        ((EditText)failedView).setError(failedRule.getFailureMessage());
                     }
                 });
+
+                validator.validate();
             }
         });
     }

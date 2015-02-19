@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnItemClickListener {
+public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnItemClickListener, Detail_Place_F.OnBack {
 
     protected ListView lista_locales;
 
@@ -156,9 +156,22 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Place_DTO place_dto = (Place_DTO) parent.getItemAtPosition(position);
         ((Bederr) getActivity()).setPlace_dto(place_dto);
+
+        lista_locales.setOnItemClickListener(null);
+        lista_locales.setClickable(false);
+
+        Detail_Place_F detail_place_f = Detail_Place_F.newInstance("Explore");
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance("Explore"), Detail_Place_F.class.getName()).
+                add(R.id.container, detail_place_f, Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
+        detail_place_f.setOnBack(Detail_Listing_F.this);
+    }
+
+
+    @Override
+    public void onBack() {
+        lista_locales.setOnItemClickListener(this);
+        lista_locales.setClickable(true);
     }
 }

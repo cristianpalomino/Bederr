@@ -22,13 +22,46 @@ import com.bederr.account_v2.services.Service_Login;
 import pe.bederr.com.R;
 import com.bederr.dialog.Dialog_Olvidaste_Contrasenia;
 import com.bederr.utils.Util_Fonts;
+import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Password;
+import com.mobsandgeeks.saripaar.annotation.Required;
 
 /**
  * Created by Gantz on 30/09/14.
  */
 public class Fragment_Login_v2 extends Fragment_Master {
 
+        /*
+    @Password(order = 3, message = "El campo contraseña es requerido")
+    private EditText password;
+    @Required(order = 4, message = "Repetir contraseña")
+    @ConfirmPassword(order = 6, message = "Las contraseñas no coinciden")
+    private EditText repeat_passsword;
+    @Required(order = 1, message = "El campo Nombre es requerido")
+    private EditText nombre;
+    @Required(order = 2, message = "El campo Apellidos es requerido")
+    private EditText apellidos;
+    @Required(order = 3, message = "El campo DNI es requerido")
+    @TextRule(order = 7, minLength = 8, maxLength = 8, message = "El DNI consta de 8 dígitos")
+    private EditText dni;
+    @Required(order = 5, message = "El campo email es requerido")
+    @Email(order = 8, message = "El email es incorrecto")
+    private EditText correo;
+     */
+
+
     private ProgressDialog progressDialog;
+
+    @Required(order = 5, message = "El campo email es requerido")
+    @Email(order = 8, message = "El email es incorrecto")
+    private EditText correo;
+
+    @Password(order = 3, message = "El campo contraseña es requerido")
+    private EditText password;
+
+    private Validator validator;
 
     public Fragment_Login_v2() {
         setId_layout(R.layout.fragment_login_v2);
@@ -60,6 +93,11 @@ public class Fragment_Login_v2 extends Fragment_Master {
         initStyles();
         Fragment_Login_v2.this.onFinishLoad(getView());
 
+        validator = new Validator(this);
+
+        correo = ((EditText) getView().findViewById(R.id.edtmail));
+        password = ((EditText) getView().findViewById(R.id.edtcontrasenia));
+
 
         /**
          * Iniciar Session
@@ -68,24 +106,33 @@ public class Fragment_Login_v2 extends Fragment_Master {
         btningresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = ((EditText) getView().findViewById(R.id.edtmail)).getText().toString();
-                String password = ((EditText) getView().findViewById(R.id.edtcontrasenia)).getText().toString();
-                progressDialog = ProgressDialog.show(getActivity(), null, "Ingresando", true);
-                Service_Login service_login = new Service_Login(getBederr());
-                service_login.sendRequest(email, password);
-                service_login.setOnSuccessLogin(new OnSuccessLogin() {
+                validator.setValidationListener(new Validator.ValidationListener() {
                     @Override
-                    public void onSuccessLogin(boolean success, String token_access) {
-                        progressDialog.hide();
-                        if (success) {
-                            Toast.makeText(getBederr(), "Correcto", Toast.LENGTH_SHORT).show();
-                            Session_Manager session_manager = new Session_Manager(getBederr());
-                            session_manager.crearSession_v2(token_access, 0);
-                        } else {
-                            Toast.makeText(getBederr(), token_access, Toast.LENGTH_SHORT).show();
-                        }
+                    public void onValidationSucceeded() {
+                        progressDialog = ProgressDialog.show(getActivity(), null, "Ingresando", true);
+                        Service_Login service_login = new Service_Login(getBederr());
+                        service_login.sendRequest(correo.getText().toString(), password.getText().toString());
+                        service_login.setOnSuccessLogin(new OnSuccessLogin() {
+                            @Override
+                            public void onSuccessLogin(boolean success, String token_access) {
+                                progressDialog.hide();
+                                if (success) {
+                                    Toast.makeText(getBederr(), "Correcto", Toast.LENGTH_SHORT).show();
+                                    Session_Manager session_manager = new Session_Manager(getBederr());
+                                    session_manager.crearSession_v2(token_access, 0);
+                                } else {
+                                    Toast.makeText(getBederr(), token_access, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onValidationFailed(View failedView, Rule<?> failedRule) {
+                        ((EditText)failedView).setError(failedRule.getFailureMessage());
                     }
                 });
+                validator.validate();
             }
         });
 

@@ -62,7 +62,7 @@ import java.util.Date;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Detail_Question_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class Detail_Question_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, Detail_Place_F.OnBack {
 
     protected Question_DTO question_dto;
 
@@ -307,10 +307,16 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Place_DTO place_dto = ((Answer_DTO) parent.getItemAtPosition(position)).getPlace_dto();
         ((Bederr) getActivity()).setPlace_dto(place_dto);
+
+        lista_respuestas.setOnItemClickListener(null);
+        lista_respuestas.setClickable(false);
+
+        Detail_Place_F detail_place_f = Detail_Place_F.newInstance("Explore");
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Place_F.newInstance("Explore"), Detail_Place_F.class.getName()).
+                add(R.id.container, detail_place_f, Detail_Place_F.class.getName()).
                 addToBackStack(null).commit();
+        detail_place_f.setOnBack(Detail_Question_F.this);
     }
 
     @Override
@@ -354,5 +360,11 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                 });
             }
         }
+    }
+
+    @Override
+    public void onBack() {
+        lista_respuestas.setOnItemClickListener(this);
+        lista_respuestas.setClickable(true);
     }
 }
