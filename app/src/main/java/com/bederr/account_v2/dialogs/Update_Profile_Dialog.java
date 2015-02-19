@@ -6,6 +6,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,23 +24,29 @@ import com.bederr.beans_v2.User_DTO;
 import pe.bederr.com.R;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Gantz on 7/08/14.
  */
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class Update_Profile_Dialog extends AlertDialog implements View.OnClickListener, DialogInterface.OnClickListener {
+public class Update_Profile_Dialog extends AlertDialog implements View.OnClickListener, DialogInterface.OnClickListener, Validator.ValidationListener {
 
     private View view;
+    private Validator validator;
 
     private EditText edtnombres;
     private EditText edtapellidos;
     private EditText edtcorreo;
     private TextView txtsexo;
     private TextView txtcumpleanios;
+
+
     private TextView txtdni;
 
     private Button btn_editar;
@@ -57,6 +65,9 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
         LayoutInflater inflater = LayoutInflater.from(getContext());
         view = inflater.inflate(R.layout.dialog_editar_perfil, null);
         setView(view);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         edtnombres = (EditText) view.findViewById(R.id.txt_nombres);
         edtapellidos = (EditText) view.findViewById(R.id.txt_apellidos);
@@ -94,6 +105,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
         txtdni.setTypeface(Util_Fonts.setPNALight(getContext()));
         btn_editar.setTypeface(Util_Fonts.setPNASemiBold(getContext()));
 
+
         User_DTO user_dto = new User_DTO();
         user_dto.setDataSource(new Session_Manager(getContext()).getSession_v2());
         if(user_dto != null){
@@ -107,6 +119,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
                 txtsexo.setText("Masculino");
             }
             txtcumpleanios.setText(user_dto.getBirthday());
+            txtdni.setText(user_dto.getDni());
         }
 
         txtcumpleanios.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +169,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
      */
     @Override
     public void onClick(final View v) {
+        validator.validate();
         v.setVisibility(View.GONE);
         view.findViewById(R.id.img_logo_beeder).setVisibility(View.VISIBLE);
 
@@ -200,5 +214,34 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
                 hide();
             }
         });
+    }
+
+    /**
+     * Called when all {@link com.mobsandgeeks.saripaar.Rule}s pass.
+     */
+    @Override
+    public void onValidationSucceeded() {
+        Toast.makeText(getContext(), "Yay! we got it right!", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Called when one or several {@link com.mobsandgeeks.saripaar.Rule}s fail.
+     *
+     * @param errors List containing references to the {@link android.view.View}s and
+     *               {@link com.mobsandgeeks.saripaar.Rule}s that failed.
+     */
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(getContext());
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

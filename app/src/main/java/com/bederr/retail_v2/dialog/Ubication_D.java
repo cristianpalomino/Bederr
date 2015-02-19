@@ -136,6 +136,7 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
                     Location_DTO location = new Location_DTO();
                     location.setPais(area_v.getCountry_v().getCountry_dto().getName());
                     location.setCiudad(area_v.getArea_dto().getName());
+                    location.setFlag(area_v.getCountry_v().getCountry_dto().getFlag_image());
                     ((Maven_Application)activity.getApplication()).setLocation_dto(location);
 
                     showMessage("Pais : " + location.getPais() + "\n" +
@@ -164,7 +165,7 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
     }
 
     @Override
-    public void onChecked(boolean checked,Object tag) {
+    public void onChecked(boolean checked,Object tag,Country_V mcountry_v,Area_V marea_v) {
 
         ArrayList<Area_V> areas = new ArrayList<Area_V>();
 

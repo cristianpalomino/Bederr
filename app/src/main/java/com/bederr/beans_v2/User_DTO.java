@@ -13,6 +13,7 @@ public class User_DTO extends Bederr_DTO {
     private String birthday = "birthday";
     private String gender = "gender";
     private String photo = "photo";
+    private String dni = "dni";
 
     private String password;
     private String old_password;
@@ -40,6 +41,10 @@ public class User_DTO extends Bederr_DTO {
 
     public String getPhoto() {
         return parseString(photo,getDataSource());
+    }
+
+    public String getDni() {
+        return parseString(dni,getDataSource());
     }
 
     public String getAccess_token() {

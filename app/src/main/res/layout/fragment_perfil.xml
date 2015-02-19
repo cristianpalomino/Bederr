@@ -22,8 +22,11 @@
             android:adjustViewBounds="true"
             android:scaleType="matrix"
             android:layout_gravity="left|center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
+            android:paddingBottom="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,8 +135,11 @@
                     android:scaleType="matrix"
                     android:visibility="visible"
                     android:layout_gravity="right|top"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:paddingBottom="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    />
 
             </FrameLayout>
 
@@ -157,16 +163,31 @@
                 android:background="@drawable/holo_flat_button_plomo_claro"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Bederr"
-                    android:gravity="left"
-                    android:id="@+id/txtciudadusuario"
-                    android:padding="10dp"
-                    android:textColor="#7B6569"
-                    android:layout_gravity="left" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Bederr"
+                        android:gravity="left"
+                        android:id="@+id/txtciudadusuario"
+                        android:padding="10dp"
+                        android:textColor="#7B6569"
+                        android:layout_gravity="left"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imagen_pais"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="10dp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"

@@ -7,6 +7,15 @@ public class Location_DTO {
 
     private String pais;
     private String ciudad;
+    private String flag;
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
 
     public String getPais() {
         return pais;

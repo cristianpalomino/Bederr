@@ -79,12 +79,12 @@ public class Area_V extends LinearLayout {
                         //Un - Checked
                         imgarea.setVisibility(VISIBLE);
                         checked = true;
-                        onChecked.onChecked(true, getArea_dto().getId());
+                        onChecked.onChecked(true, getArea_dto().getId(),Area_V.this);
                     } else {
                         //Checked
                         imgarea.setVisibility(GONE);
                         checked = false;
-                        onChecked.onChecked(false, getArea_dto().getId());
+                        onChecked.onChecked(false, getArea_dto().getId(),Area_V.this);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -122,6 +122,6 @@ public class Area_V extends LinearLayout {
     }
 
     public interface OnChecked {
-        public void onChecked(boolean checked, Object tag);
+        public void onChecked(boolean checked, Object tag,Area_V area_v);
     }
 }

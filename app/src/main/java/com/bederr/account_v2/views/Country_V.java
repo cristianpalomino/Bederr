@@ -84,8 +84,8 @@ public class Country_V extends LinearLayout implements Area_V.OnChecked {
     }
 
     @Override
-    public void onChecked(boolean checked,Object tag) {
-        onChecked.onChecked(checked,tag);
+    public void onChecked(boolean checked,Object tag,Area_V area_v) {
+        onChecked.onChecked(checked,tag,this,area_v);
     }
 
     public void showMessage(String message) {
@@ -93,7 +93,7 @@ public class Country_V extends LinearLayout implements Area_V.OnChecked {
     }
 
     public interface OnChecked{
-        public void onChecked(boolean checked,Object tag);
+        public void onChecked(boolean checked,Object tag,Country_V country_v,Area_V area_v);
     }
 
     public ArrayList<Area_V> getAreas(){
