@@ -165,7 +165,7 @@ public class Benefits_Result_Search_F extends Fragment_Master implements Adapter
 
         places_a = new Places_A(getBederr(), mplaces, 0, "Benefits");
         lista_locales_busquedas.setAdapter(places_a);
-        Benefits_Result_Search_F.this.onFinishLoad(lista_locales_busquedas);
+        getEmptyView(lista_locales_busquedas);
 
         if (lista_locales_busquedas.getAdapter().getCount() == 0) {
             lista_locales_busquedas.setVisibility(View.GONE);

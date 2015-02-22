@@ -34,6 +34,7 @@ import java.util.ArrayList;
 public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnItemClickListener, Detail_Place_F.OnBack {
 
     protected ListView lista_locales;
+    private OnBack onBack;
 
     public Detail_Listing_F() {
         setId_layout(R.layout.fragment_detalle_lista);
@@ -42,6 +43,10 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
 
     public static final Detail_Listing_F newInstance() {
         return new Detail_Listing_F();
+    }
+
+    public void setOnBack(OnBack onBack) {
+        this.onBack = onBack;
     }
 
     @Override
@@ -82,10 +87,17 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
                                         String next,
                                         String previous) {
                 try {
+
                     if (success) {
-                        Places_A places_a = new Places_A(getBederr(), place_dtos , 1 , "Explore");
-                        lista_locales.setAdapter(places_a);
-                        Detail_Listing_F.this.onFinishLoad(getView());
+                        if (!place_dtos.isEmpty()) {
+                            Places_A places_a = new Places_A(getBederr(), place_dtos, 1, "Explore");
+                            lista_locales.setAdapter(places_a);
+                            getEmptyView(lista_locales);
+                        } else {
+                            setEmptyView();
+                        }
+                    } else {
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -111,6 +123,7 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
                 trans.remove(Detail_Listing_F.this);
                 trans.commit();
                 manager.popBackStack();
+                onBack.onBack();
             }
         });
     }
@@ -131,6 +144,7 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
                         trans.remove(Detail_Listing_F.this);
                         trans.commit();
                         manager.popBackStack();
+                        onBack.onBack();
                         return true;
                     }
                 }
@@ -173,5 +187,9 @@ public class Detail_Listing_F extends Fragment_Master implements AdapterView.OnI
     public void onBack() {
         lista_locales.setOnItemClickListener(this);
         lista_locales.setClickable(true);
+    }
+
+    public interface OnBack {
+        public void onBack();
     }
 }

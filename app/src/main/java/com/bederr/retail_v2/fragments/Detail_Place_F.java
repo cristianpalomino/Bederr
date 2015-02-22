@@ -169,6 +169,10 @@ public class Detail_Place_F extends Fragment_Master {
                 trans.remove(Detail_Place_F.this);
                 trans.commit();
                 manager.popBackStack();
+
+                /**
+                 * 
+                 */
                 onBack.onBack();
             }
         });

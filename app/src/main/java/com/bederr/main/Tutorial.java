@@ -36,13 +36,17 @@ import pe.bederr.com.R;
 /**
  * Created by Gantz on 8/10/14.
  */
-public class Tutorial extends ActionBarActivity {
+public class Tutorial extends ActionBarActivity implements View.OnClickListener {
 
     protected Adapter_Fragment mAdapter;
     protected ViewPager mPager;
     protected PageIndicator mIndicator;
     protected Dialog_Maven dialog_maven;
-    
+
+    private Button btn_bederr;
+    private Button btn_fb;
+    private boolean flag = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +61,8 @@ public class Tutorial extends ActionBarActivity {
         mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
 
-        Button btn_bederr = (Button) findViewById(R.id.btnbederr);
-        Button btn_fb = (Button) findViewById(R.id.btnfacebook);
+        btn_bederr = (Button) findViewById(R.id.btnbederr);
+        btn_fb = (Button) findViewById(R.id.btnfacebook);
         TextView txt_skip = (TextView) findViewById(R.id.txt_skip);
 
         txt_skip.setTypeface(Util_Fonts.setPNALight(Tutorial.this));
@@ -76,12 +80,9 @@ public class Tutorial extends ActionBarActivity {
                 editor.commit();
             }
         });
-        btn_fb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginFacebook();
-            }
-        });
+
+        btn_fb.setOnClickListener(this);
+
         btn_bederr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +90,7 @@ public class Tutorial extends ActionBarActivity {
                 SharedPreferences.Editor editor = settings.edit();
 
                 Intent intent = new Intent(Tutorial.this, Bederr.class);
-                intent.putExtra("flag",0);
+                intent.putExtra("flag", 0);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 Tutorial.this.finish();
@@ -101,6 +102,23 @@ public class Tutorial extends ActionBarActivity {
 
         btn_bederr.setTypeface(Util_Fonts.setPNASemiBold(Tutorial.this));
         btn_fb.setTypeface(Util_Fonts.setPNASemiBold(Tutorial.this));
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        if (v.equals(btn_fb)) {
+            if (flag) {
+                v.setOnClickListener(null);
+                v.setClickable(false);
+                flag = false;
+                loginFacebook();
+            }
+        }
     }
 
     class Adapter_Fragment extends FragmentPagerAdapter {
@@ -116,9 +134,9 @@ public class Tutorial extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if(position == 4){
+            if (position == 4) {
                 return Fragment_Bederr.newInstance();
-            }else{
+            } else {
                 return Fragment_Tutorial.newInstance(titulo[position], descripciones[position], iconos[position], colores[position]);
             }
         }
@@ -151,10 +169,15 @@ public class Tutorial extends ActionBarActivity {
                 "user_relationships",
                 "user_location",
                 "user_likes");
-        ParseFacebookUtils.logIn(permissions,Tutorial.this, new LogInCallback() {
+        ParseFacebookUtils.logIn(permissions, Tutorial.this, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
+
+                flag = true;
+                btn_fb.setClickable(true);
+                btn_fb.setOnClickListener(Tutorial.this);
                 dialog_maven.hide();
+
                 if (user == null) {
                     Log.e("Facebook", err.getMessage());
                 } else if (user.isNew()) {
@@ -187,6 +210,10 @@ public class Tutorial extends ActionBarActivity {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putBoolean("hasLoggedIn", true);
                     editor.commit();
+
+                    flag = true;
+                    btn_fb.setClickable(true);
+                    btn_fb.setOnClickListener(Tutorial.this);
                 }
             });
         }

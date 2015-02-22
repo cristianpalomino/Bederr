@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Listing_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class Listing_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, Detail_Listing_F.OnBack {
 
     protected ListView lista_listas;
     protected Listing_A listing_a;
@@ -88,7 +88,7 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                     if (!listing_dtos.isEmpty()) {
                                         listing_a = new Listing_A(getBederr(), listing_dtos);
                                         lista_listas.setAdapter(listing_a);
-                                        getEmptyView();
+                                        getEmptyView(lista_listas);
 
                                         /**
                                          * Stacks
@@ -96,14 +96,14 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                         PREVIOUS = previous;
                                         NEXT = next;
                                     } else {
-                                        setEmptyView(lista_listas);
+                                        setEmptyView();
                                     }
                                 } else {
-                                    setEmptyView(lista_listas);
+                                    setEmptyView();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                setEmptyView(lista_listas);
+                                setEmptyView();
                             }
                         }
                     });
@@ -122,7 +122,7 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                     if (!listing_dtos.isEmpty()) {
                                         listing_a = new Listing_A(getBederr(), listing_dtos);
                                         lista_listas.setAdapter(listing_a);
-                                        getEmptyView();
+                                        getEmptyView(lista_listas);
 
                                         /**
                                          * Stacks
@@ -130,14 +130,14 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                         PREVIOUS = previous;
                                         NEXT = next;
                                     } else {
-                                        setEmptyView(lista_listas);
+                                        setEmptyView();
                                     }
                                 } else {
-                                    setEmptyView(lista_listas);
+                                    setEmptyView();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                setEmptyView(lista_listas);
+                                setEmptyView();
                             }
                         }
                     });
@@ -180,11 +180,18 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Listing_DTO listing_dto = (Listing_DTO) parent.getItemAtPosition(position);
         final View mview = lista_listas.getAdapter().getView(position, null, lista_listas);
+
+        lista_listas.setOnItemClickListener(null);
+        lista_listas.setClickable(false);
+
+        Detail_Listing_F detail_listing_f = Detail_Listing_F.newInstance();
+        detail_listing_f.setOnBack(this);
+
         getBederr().setViewExtra(mview);
         getBederr().setListing_dto(listing_dto);
         getBederr().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Listing_F.newInstance(), Detail_Listing_F.class.getName()).
+                add(R.id.container, detail_listing_f , Detail_Listing_F.class.getName()).
                 addToBackStack(null).commit();
     }
 
@@ -246,5 +253,11 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                 });
             }
         }
+    }
+
+    @Override
+    public void onBack() {
+        lista_listas.setOnItemClickListener(this);
+        lista_listas.setClickable(true);
     }
 }

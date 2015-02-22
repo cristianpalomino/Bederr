@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.bederr.account_v2.fragments.Fragment_Login_v2;
 import com.bederr.account_v2.interfaces.OnSuccessCounty;
 import com.bederr.account_v2.services.Service_Country;
 import com.bederr.application.Maven_Application;
@@ -45,6 +47,7 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
     private Maven_Application application;
     private OnSuccessArea onSuccessArea;
     public boolean flag = false;
+    private Ubication_D ubication_d;
 
     public void setFlag(boolean flag) {
         this.flag = flag;
@@ -96,7 +99,7 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                 // String lng = String.valueOf("-82.1568079");
                 initGeocode(lat, lng);
             } else {
-                Ubication_D ubication_d = new Ubication_D(this, true, null, this);
+                ubication_d = new Ubication_D(this, true, null, this);
                 ubication_d.setCancelable(false);
                 ubication_d.show();
             }
@@ -104,17 +107,23 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
             Ubication_DTO dto = application.getUbication();
             if (dto != null) {
                 if (dto.getArea().equals("-1")) {
-                    Ubication_D ubication_d = new Ubication_D(this, true, null, this);
+                    ubication_d = new Ubication_D(this, true, null, this);
                     ubication_d.setCancelable(false);
-                    ubication_d.show();
+                  ubication_d.show();
                 } else {
                     showMessage(dto.getArea());
                 }
             } else {
-                Ubication_D ubication_d = new Ubication_D(this, true, null, this);
+                ubication_d = new Ubication_D(this, true, null, this);
                 ubication_d.setCancelable(false);
                 ubication_d.show();
             }
+        }
+
+        Fragment_Login_v2 login_v2 = (Fragment_Login_v2) getSupportFragmentManager().findFragmentByTag(Fragment_Login_v2.class.getName());
+        if(login_v2 != null){
+            ubication_d.dismiss();
+            ubication_d.hide();
         }
     }
 
@@ -183,7 +192,7 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                                     LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
                                     Ubication_DTO dto = new Ubication_DTO(latLng, "1");
                                     application.setUbication(dto);
-                                    onSuccessArea.onSuccessArea(true, dto);
+                                    onSuccessArea.onSuccessArea(true, dto,ubication_d);
                                 }
 
                                 for (int i = 0; i < country_dtos.size(); i++) {
@@ -207,28 +216,29 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                                             location.setCiudad(area);
                                             application.setLocation_dto(location);
 
-                                            onSuccessArea.onSuccessArea(true, dto);
+                                            onSuccessArea.onSuccessArea(true, dto,ubication_d);
                                             break;
                                         }
                                     }
                                 }
-                            } catch (JSONException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                                 showMessage("Fallo Geocode");
                                 LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
                                 Ubication_DTO dto = new Ubication_DTO(latLng, "1");
                                 application.setUbication(dto);
-                                onSuccessArea.onSuccessArea(true, dto);
+                                onSuccessArea.onSuccessArea(true, dto,ubication_d);
                             }
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             super.onFailure(statusCode, headers, throwable, errorResponse);
-                            onSuccessArea.onSuccessArea(false, null);
                             LatLng latLng = new LatLng(Double.parseDouble("0.0"), Double.parseDouble("0.0"));
                             Ubication_DTO dto = new Ubication_DTO(latLng, "1");
                             application.setUbication(dto);
+                            onSuccessArea.onSuccessArea(true, dto,ubication_d);
+
                             showMessage("Fallo obtener ciudad");
                         }
                     });
@@ -236,6 +246,7 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
                     LatLng latLng = new LatLng(Double.parseDouble("0.0"), Double.parseDouble("0.0"));
                     Ubication_DTO dto = new Ubication_DTO(latLng, "1");
                     application.setUbication(dto);
+                    onSuccessArea.onSuccessArea(true, dto,ubication_d);
                     showMessage("Fallo obtener ciudad");
                 }
             }
@@ -243,12 +254,13 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
     }
 
     public interface OnSuccessArea {
-        public void onSuccessArea(boolean success, Ubication_DTO ubication_dto);
+        public void onSuccessArea(boolean success, Ubication_DTO ubication_dto, Ubication_D ubication_d);
     }
 
 
     public void restart() {
         Intent intent = getIntent();
+        intent.putExtra("flag",-1);
         finish();
         startActivity(intent);
     }
@@ -265,5 +277,9 @@ public class Master extends ActionBarActivity implements GoogleApiClient.Connect
             InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    public Ubication_D getUbication_d() {
+        return ubication_d;
     }
 }

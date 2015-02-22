@@ -91,12 +91,12 @@ public class Benefit_Programs_F extends Fragment_Master implements AdapterView.O
                             if (!program_dtos.isEmpty()) {
                                 benefit_a = new Benefit_A(getActivity(), program_dtos, 0);
                                 listaCorp.setAdapter(benefit_a);
-                                getEmptyView();
+                                getEmptyView(listaCorp);
                             } else {
-                                setEmptyView(listaCorp);
+                                setEmptyView();
                             }
                         } else {
-                            setEmptyView(listaCorp);
+                            setEmptyView();
                         }
                     }
                 });

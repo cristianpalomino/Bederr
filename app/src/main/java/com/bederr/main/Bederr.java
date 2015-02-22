@@ -336,8 +336,9 @@ public class Bederr extends Master implements Master.OnSuccessArea {
 
     private void initApp() {
         int flag = getIntent().getIntExtra("flag", -1);
+
         if (flag == 0) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, Fragment_Login_v2.newInstance()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, Fragment_Login_v2.newInstance(),Fragment_Login_v2.class.getName()).commit();
         } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, Explore_F.newInstance()).commit();
         }
@@ -364,8 +365,8 @@ public class Bederr extends Master implements Master.OnSuccessArea {
     }
 
     @Override
-    public void onSuccessArea(boolean success, Ubication_DTO ubication_dto) {
-        bederrOnSuccessArea.bederrOnSuccessArea(success,ubication_dto);
+    public void onSuccessArea(boolean success, Ubication_DTO ubication_dto,Ubication_D ubication_d) {
+        bederrOnSuccessArea.bederrOnSuccessArea(success,ubication_dto,ubication_d);
     }
 
     public void setBederrOnSuccessArea(BederrOnSuccessArea bederrOnSuccessArea) {
@@ -373,6 +374,6 @@ public class Bederr extends Master implements Master.OnSuccessArea {
     }
 
     public interface BederrOnSuccessArea {
-        public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto);
+        public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto,Ubication_D ubication_d);
     }
 }

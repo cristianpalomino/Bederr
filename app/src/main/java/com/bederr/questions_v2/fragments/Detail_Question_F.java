@@ -78,6 +78,7 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
     private ImageView imagenusuario;
     private ImageView imagencategoriapregunta;
     private Button btn_responder;
+    private OnBack onBack;
 
     public Detail_Question_F() {
         setId_layout(R.layout.fragment_detalle_pregunta_v2);
@@ -86,6 +87,10 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
 
     public static final Detail_Question_F newInstance() {
         return new Detail_Question_F();
+    }
+
+    public void setOnBack(OnBack onBack) {
+        this.onBack = onBack;
     }
 
     @Override
@@ -122,7 +127,7 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                         if (!answer_dtos.isEmpty()) {
                             answer_a = new Answer_A(getBederr(), answer_dtos);
                             lista_respuestas.setAdapter(answer_a);
-                            getEmptyView();
+                            getEmptyView(lista_respuestas);
 
                             /**
                              * Stacks
@@ -130,14 +135,14 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                             PREVIOUS = previous;
                             NEXT = next;
                         } else {
-                            setEmptyView(lista_respuestas);
+                            setEmptyView();
                         }
                     } else {
-                        setEmptyView(lista_respuestas);
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView(lista_respuestas);
+                    setEmptyView();
                 }
             }
         });
@@ -168,6 +173,12 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                         beginTransaction().
                         replace(R.id.container, Question_F.newInstance(), Question_F.class.getName()).
                         commit();
+
+                try {
+                    onBack.onBack();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -216,7 +227,7 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                         btn_responder.setClickable(false);
 
                         if (session_manager.isLogin()) {
-                            final ProgressDialog dialog = ProgressDialog.show(getBederr(),null,"Espere",false);
+                            final ProgressDialog dialog = ProgressDialog.show(getBederr(), null, "Espere", false);
 
                             String lat = getUbication().getLatitude();
                             String lng = getUbication().getLongitude();
@@ -281,6 +292,12 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                                 beginTransaction().
                                 replace(R.id.container, Question_F.newInstance(), Question_F.class.getName()).
                                 commit();
+
+                        try {
+                            onBack.onBack();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         return true;
                     }
@@ -366,5 +383,9 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
     public void onBack() {
         lista_respuestas.setOnItemClickListener(this);
         lista_respuestas.setClickable(true);
+    }
+
+    public interface OnBack {
+        public void onBack();
     }
 }

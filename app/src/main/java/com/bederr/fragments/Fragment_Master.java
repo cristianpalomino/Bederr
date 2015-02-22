@@ -97,7 +97,7 @@ public class Fragment_Master extends Fragment implements Interface_Load {
 
     protected void initView() {
         view_message = new View_Message(getActivity(), 0);
-        getLayout().addView(view_message);
+        //getLayout().addView(view_message);
     }
 
     protected void initActionBar() {
@@ -214,14 +214,22 @@ public class Fragment_Master extends Fragment implements Interface_Load {
         Toast.makeText(getActivity() , message, Toast.LENGTH_SHORT).show();
     }
 
-    public View getEmptyView(){
+    public View getEmptyView(ListView list){
         LinearLayout empty = (LinearLayout) getView().findViewById(R.id.empty_view);
         empty.setVisibility(View.GONE);
+
+        LinearLayout loader = (LinearLayout) getView().findViewById(R.id.loader);
+        loader.setVisibility(View.GONE);
+
+        list.setVisibility(View.VISIBLE);
         return empty;
     }
 
 
-    public void setEmptyView(ListView list){
+    public void setEmptyView(){
+        LinearLayout loader = (LinearLayout) getView().findViewById(R.id.loader);
+        loader.setVisibility(View.GONE);
+
         View empty = getView().findViewById(R.id.empty_view);
         TextView message = (TextView)empty.findViewById(R.id.text_type_message_no_data);
         message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));

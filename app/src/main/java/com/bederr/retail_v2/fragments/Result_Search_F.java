@@ -3,6 +3,7 @@ package com.bederr.retail_v2.fragments;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,6 +107,7 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
     private boolean validateCategory(){
         if(getBederr().getCategoria_dtos() != null){
             for (int i = 0; i < getBederr().getCategoria_dtos().size(); i++) {
+                Log.e("CATE",getBederr().getCategoria_dtos().get(i).getNombrecategoria());
                 Categoria_DTO category_dto = getBederr().getCategoria_dtos().get(i);
                 if(s.equals(category_dto.getNombrecategoria())){
                     return true;
@@ -119,6 +121,7 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
     
     private Categoria_DTO getCategory(String name){
         for (int i = 0; i < getBederr().getCategoria_dtos().size() ; i++) {
+            Log.e("CAT",name + " - " + getBederr().getCategoria_dtos().get(i).getNombrecategoria());
             if(name.equals(getBederr().getCategoria_dtos().get(i).getNombrecategoria())){
                 return getBederr().getCategoria_dtos().get(i);
             }
@@ -347,19 +350,19 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                         if (!place_dtos.isEmpty()) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales_busquedas.setAdapter(places_a);
-                            getEmptyView();
+                            getEmptyView(lista_locales_busquedas);
 
                             NEXT = next;
                             PREVIOUS = previous;
                         } else {
-                            setEmptyView(lista_locales_busquedas);
+                            setEmptyView();
                         }
                     } else {
-                        setEmptyView(lista_locales_busquedas);
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView(lista_locales_busquedas);
+                    setEmptyView();
                 }
             }
         });
@@ -380,19 +383,19 @@ public class Result_Search_F extends Fragment_Master implements AdapterView.OnIt
                         if (!place_dtos.isEmpty()) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales_busquedas.setAdapter(places_a);
-                            getEmptyView();
+                            getEmptyView(lista_locales_busquedas);
 
                             NEXT = next;
                             PREVIOUS = previous;
                         } else {
-                            setEmptyView(lista_locales_busquedas);
+                            setEmptyView();
                         }
                     } else {
-                        setEmptyView(lista_locales_busquedas);
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView(lista_locales_busquedas);
+                    setEmptyView();
                 }
             }
         });

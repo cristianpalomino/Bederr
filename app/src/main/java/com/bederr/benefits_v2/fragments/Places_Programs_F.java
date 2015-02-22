@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bederr.beans_v2.Place_DTO;
+import com.bederr.benefits_v2.adapter.Benefit_A;
 import com.bederr.main.Bederr;
 import com.bederr.benefits_v2.services.Service_Programs_Places;
 import com.bederr.benefits_v2.views.Benefit_Program_V;
@@ -37,6 +38,7 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
 
     private ListView lista_locales;
     private Places_A places_a;
+    private OnBack onBack;
 
     public Places_Programs_F() {
         setId_layout(R.layout.fragment_locales_life);
@@ -45,6 +47,10 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
 
     public static final Places_Programs_F newInstance() {
         return new Places_Programs_F();
+    }
+
+    public void setOnBack(OnBack onBack) {
+        this.onBack = onBack;
     }
 
     @Override
@@ -73,7 +79,6 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
         benefit_program_v.setOnClickListener(null);
 
         lista_locales.setOnItemClickListener(this);
-        lista_locales.setVisibility(View.GONE);
 
         Session_Manager session_manager = new Session_Manager(getBederr());
         if (session_manager.isLogin()) {
@@ -94,15 +99,20 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                                                 String next,
                                                 String previous) {
                         try {
+
                             if (success) {
-                                if(place_dtos.size() > 0){
+                                if (!place_dtos.isEmpty()) {
+
                                     getBederr().setPlace_dtos(place_dtos);
+
                                     places_a = new Places_A(getBederr(),place_dtos,0,"Benefits");
                                     lista_locales.setAdapter(places_a);
-                                    lista_locales.setVisibility(View.VISIBLE);
-                                }else{
-                                    lista_locales.setVisibility(View.GONE);
+                                    getEmptyView(lista_locales);
+                                } else {
+                                    setEmptyView();
                                 }
+                            } else {
+                                setEmptyView();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -130,6 +140,7 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                 trans.remove(Places_Programs_F.this);
                 trans.commit();
                 manager.popBackStack();
+                onBack.onBack();
             }
         });
 
@@ -203,6 +214,7 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                         trans.remove(Places_Programs_F.this);
                         trans.commit();
                         manager.popBackStack();
+                        onBack.onBack();
                         return true;
                     }
                 }
@@ -215,5 +227,9 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
     public void onBack() {
         lista_locales.setOnItemClickListener(this);
         lista_locales.setClickable(true);
+    }
+
+    public interface OnBack {
+        void onBack();
     }
 }

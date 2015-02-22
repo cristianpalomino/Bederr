@@ -38,7 +38,7 @@ import pe.bederr.com.R;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Question_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class Question_F extends Fragment_Master implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, Detail_Question_F.OnBack {
 
     private ListView lista_preguntas;
     private Question_A question_a;
@@ -95,13 +95,12 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                                           String count,
                                           String next,
                                           String previous) {
-
                 try {
                     if (success) {
                         if (!question_dtos.isEmpty()) {
                             question_a = new Question_A(getBederr(), question_dtos);
                             lista_preguntas.setAdapter(question_a);
-                            getEmptyView();
+                            getEmptyView(lista_preguntas);
 
                             /**
                              * Stacks
@@ -109,14 +108,14 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                             PREVIOUS = previous;
                             NEXT = next;
                         } else {
-                            setEmptyView(lista_preguntas);
+                            setEmptyView();
                         }
                     } else {
-                        setEmptyView(lista_preguntas);
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView(lista_preguntas);
+                    setEmptyView();
                 }
             }
         });
@@ -138,7 +137,7 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                         if (!question_dtos.isEmpty()) {
                             question_a = new Question_A(getBederr(), question_dtos);
                             lista_preguntas.setAdapter(question_a);
-                            getEmptyView();
+                            getEmptyView(lista_preguntas);
 
                             /**
                              * Stacks
@@ -146,14 +145,14 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                             PREVIOUS = previous;
                             NEXT = next;
                         } else {
-                            setEmptyView(lista_preguntas);
+                            setEmptyView();
                         }
                     } else {
-                        setEmptyView(lista_preguntas);
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView(lista_preguntas);
+                    setEmptyView();
                 }
             }
         });
@@ -205,10 +204,17 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Question_DTO question_dto = (Question_DTO) parent.getItemAtPosition(position);
         ((Bederr) getActivity()).setQuestion_dto(question_dto);
+
+        Detail_Question_F detail_question_f = Detail_Question_F.newInstance();
+        detail_question_f.setOnBack(this);
+
+        lista_preguntas.setOnItemClickListener(null);
+        lista_preguntas.setClickable(false);
+
         getActivity().getSupportFragmentManager().
                 beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                add(R.id.container, Detail_Question_F.newInstance(), Detail_Question_F.class.getName()).
+                add(R.id.container, detail_question_f , Detail_Question_F.class.getName()).
                 addToBackStack(null).commit();
     }
 
@@ -332,5 +338,11 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                 }
             }
         }
+    }
+
+    @Override
+    public void onBack() {
+        lista_preguntas.setOnItemClickListener(null);
+        lista_preguntas.setClickable(false);
     }
 }

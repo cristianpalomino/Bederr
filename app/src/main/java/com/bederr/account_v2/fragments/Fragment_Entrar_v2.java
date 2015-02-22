@@ -41,6 +41,11 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
     protected Dialog_Maven dialog_maven;
     protected Session_Manager session_manager;
     private String type;
+    private boolean flag = true;
+
+    private Button facebook;
+    private Button logueo;
+    private TextView registro;
 
     public Fragment_Entrar_v2() {
         setId_layout(R.layout.fragment_entrar);
@@ -87,9 +92,13 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
 
         initStyles();
 
-        getView().findViewById(R.id.btnlogeo).setOnClickListener(this);
-        getView().findViewById(R.id.btnfacebook).setOnClickListener(this);
-        getView().findViewById(R.id.txtregistro).setOnClickListener(this);
+        logueo = (Button) getView().findViewById(R.id.btnlogeo);
+        facebook = (Button) getView().findViewById(R.id.btnfacebook);
+        registro = (TextView) getView().findViewById(R.id.txtregistro);
+
+        logueo.setOnClickListener(this);
+        facebook.setOnClickListener(this);
+        registro.setOnClickListener(this);
     }
 
     @Override
@@ -100,9 +109,10 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
                 break;
 
             case R.id.btnfacebook:
+                flag = false;
+                facebook.setOnClickListener(null);
+                facebook.setClickable(false);
                 loginFacebook();
-                getView().setClickable(false);
-                getView().setOnClickListener(null);
                 break;
 
             case R.id.txtregistro:
@@ -134,6 +144,11 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
             @Override
             public void done(ParseUser user, ParseException err) {
                 dialog_maven.hide();
+
+                flag = true;
+                facebook.setOnClickListener(Fragment_Entrar_v2.this);
+                facebook.setClickable(true);
+
                 if (user == null) {
                     Log.e("Facebook", err.getMessage());
                 } else if (user.isNew()) {
@@ -154,11 +169,17 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
                 @Override
                 public void onSuccessLogin(boolean success, String token_access) {
                     dialog_maven.hide();
+
+                    flag = true;
+                    facebook.setOnClickListener(Fragment_Entrar_v2.this);
+                    facebook.setClickable(true);
+
                     if (success) {
                         session_manager.crearSession_v2(token_access, 1);
                     } else {
                         Toast.makeText(getBederr(), token_access, Toast.LENGTH_SHORT).show();
                     }
+
                 }
             });
         }

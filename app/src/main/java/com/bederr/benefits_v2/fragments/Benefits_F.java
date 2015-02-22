@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * Created by Gantz on 31/07/14.
  */
-public class Benefits_F extends Fragment_Master implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, Dialog_Empresa.Interface_Dialog_Empresa {
+public class Benefits_F extends Fragment_Master implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, Dialog_Empresa.Interface_Dialog_Empresa, Places_Programs_F.OnBack {
 
     private ListView listaCorp;
     private Benefit_A benefit_a;
@@ -117,12 +117,12 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
                             if (!program_dtos.isEmpty()) {
                                 benefit_a = new Benefit_A(getActivity(), program_dtos, 1);
                                 listaCorp.setAdapter(benefit_a);
-                                getEmptyView();
+                                getEmptyView(listaCorp);
                             } else {
-                                setEmptyView(listaCorp);
+                                setEmptyView();
                             }
                         } else {
-                            setEmptyView(listaCorp);
+                            setEmptyView();
                         }
                     }
                 });
@@ -175,12 +175,19 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
         int type = (int) view.findViewById(R.id.nombreempresa).getTag();
         program_dto = (Benefit_Program_DTO) parent.getItemAtPosition(position);
         if (type == 1) {
+
+            listaCorp.setOnItemClickListener(null);
+            listaCorp.setClickable(false);
+
+            Places_Programs_F places_programs_f = Places_Programs_F.newInstance();
+            places_programs_f.setOnBack(Benefits_F.this);
+
             getBederr().setBenefit_program_dto(program_dto);
             getBederr().
                     getSupportFragmentManager().
                     beginTransaction().
                     setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                    add(R.id.container, Places_Programs_F.newInstance(), Places_Programs_F.class.getName()).
+                    add(R.id.container, places_programs_f , Places_Programs_F.class.getName()).
                     addToBackStack(null).commit();
         }
     }
@@ -233,5 +240,12 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
                     replace(R.id.container, Benefits_F.newInstance(), Benefits_F.class.getName()).
                     commit();
         }
+    }
+
+
+    @Override
+    public void onBack() {
+        listaCorp.setClickable(true);
+        listaCorp.setOnItemClickListener(this);
     }
 }

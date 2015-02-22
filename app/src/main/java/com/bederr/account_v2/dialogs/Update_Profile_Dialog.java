@@ -6,11 +6,14 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+
+import com.bederr.account_v2.fragments.Fragment_Perfil_v2;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import android.widget.Button;
@@ -77,6 +80,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
     private TextView txtdni;
 
     private Button btn_editar;
+    private ActionBarActivity activity;
 
     public Update_Profile_Dialog(Context context) {
         super(context);
@@ -86,6 +90,14 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
     public Update_Profile_Dialog(Context context, int theme) {
         super(context, theme);
         initDialog();
+    }
+
+    public void setActivity(ActionBarActivity activity) {
+        this.activity = activity;
+    }
+
+    public ActionBarActivity getActivity() {
+        return activity;
     }
 
     private void initDialog() {
@@ -213,6 +225,7 @@ public class Update_Profile_Dialog extends AlertDialog implements View.OnClickLi
                         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
                         if(success){
                             Update_Profile_Dialog.this.hide();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, Fragment_Perfil_v2.newInstance(),Fragment_Perfil_v2.class.getName()).commit();
                         }else{
                             v.setVisibility(View.VISIBLE);
                             view.findViewById(R.id.img_logo_beeder).setVisibility(View.GONE);

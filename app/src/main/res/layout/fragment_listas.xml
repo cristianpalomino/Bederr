@@ -41,6 +41,21 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/loader"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -51,7 +66,7 @@
             android:layout_height="match_parent"
             android:listSelector="@android:color/transparent"
             android:drawingCacheQuality="low"
-
+            android:visibility="gone"
             android:id="@+id/lista_listas" />
     </LinearLayout>
 

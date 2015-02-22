@@ -56,6 +56,21 @@
             android:paddingBottom="10dp"/>
     </FrameLayout>
 
+    <LinearLayout
+        android:id="@+id/loader"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/frame_container"
@@ -66,6 +81,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:listSelector="@android:color/transparent"
             android:id="@+id/lists_corp" />
 

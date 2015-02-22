@@ -13,13 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bederr.account_v2.interfaces.OnSuccessLogin;
+import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.main.Bederr;
 import com.bederr.dialog.Dialog_Web;
 import com.bederr.fragments.Fragment_Master;
+import com.bederr.retail_v2.dialog.Ubication_D;
+import com.bederr.retail_v2.fragments.Explore_F;
 import com.bederr.session.Session_Manager;
 import com.bederr.account_v2.services.Service_Login;
 
 import pe.bederr.com.R;
+
 import com.bederr.dialog.Dialog_Olvidaste_Contrasenia;
 import com.bederr.utils.Util_Fonts;
 import com.mobsandgeeks.saripaar.Rule;
@@ -31,7 +35,7 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 /**
  * Created by Gantz on 30/09/14.
  */
-public class Fragment_Login_v2 extends Fragment_Master {
+public class Fragment_Login_v2 extends Fragment_Master implements Bederr.BederrOnSuccessArea {
 
         /*
     @Password(order = 3, message = "El campo contraseña es requerido")
@@ -75,6 +79,7 @@ public class Fragment_Login_v2 extends Fragment_Master {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        getBederr().setBederrOnSuccessArea(this);
     }
 
     @Override
@@ -129,7 +134,7 @@ public class Fragment_Login_v2 extends Fragment_Master {
 
                     @Override
                     public void onValidationFailed(View failedView, Rule<?> failedRule) {
-                        ((EditText)failedView).setError(failedRule.getFailureMessage());
+                        ((EditText) failedView).setError(failedRule.getFailureMessage());
                     }
                 });
                 validator.validate();
@@ -170,6 +175,7 @@ public class Fragment_Login_v2 extends Fragment_Master {
                 dialog_web.show();
             }
         });
+
     }
 
     private void initStyles() {
@@ -189,7 +195,7 @@ public class Fragment_Login_v2 extends Fragment_Master {
         action_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getBederr().finish();
+                getBederr().restart();
             }
         });
     }
@@ -204,12 +210,20 @@ public class Fragment_Login_v2 extends Fragment_Master {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        getBederr().finish();
+                        getBederr().restart();
                         return true;
                     }
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto, Ubication_D ubication_d) {
+        if (ubication_d != null) {
+            ubication_d.dismiss();
+            ubication_d.hide();
+        }
     }
 }

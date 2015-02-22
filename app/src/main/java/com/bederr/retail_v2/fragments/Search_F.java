@@ -172,7 +172,6 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
         flagcategoria = true;
         flagdistrito = true;
 
-        getBederr().setCategoria_dtos(getCategorias());
         Category_A adapter_categoria = new Category_A(getBederr(), getCategorias());
 
         listaCategorias.setAdapter(adapter_categoria);
@@ -201,6 +200,7 @@ public class Search_F extends Fragment_Master implements View.OnFocusChangeListe
             categoria_dtos.add(new Categoria_DTO("Tiendas y servicios", "tiendas-y-servicios", R.drawable.categoria_markets, false, 7));
             categoria_dtos.add(new Categoria_DTO("Grifos", "grifo", R.drawable.grifos, false, 8));
         }
+        getBederr().setCategoria_dtos(categoria_dtos);
         return categoria_dtos;
     }
 

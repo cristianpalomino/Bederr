@@ -181,6 +181,7 @@ public class Fragment_Perfil_v2 extends Fragment_Master implements Country_V.OnC
             public void onClick(View v) {
                 Update_Profile_Dialog update_profile_dialog = new Update_Profile_Dialog(getActivity());
                 update_profile_dialog.getWindow().setWindowAnimations(R.style.Dialog_Animation_UP_DOWN);
+                update_profile_dialog.setActivity(getBederr());
                 update_profile_dialog.show();
             }
         });
@@ -227,6 +228,12 @@ public class Fragment_Perfil_v2 extends Fragment_Master implements Country_V.OnC
                             for (int i = 0; i < country_dtos.size(); i++) {
                                 Country_V country_v = new Country_V(getBederr(), country_dtos.get(i));
                                 country_v.setOnChecked(Fragment_Perfil_v2.this);
+
+                                if(country_v.getCountry_dto().getName().
+                                        equals(((Maven_Application) getBederr().getApplication()).getLocation_dto().getPais())){
+                                    country_v.setVisibility(View.GONE);
+                                }
+
                                 ciudades.addView(country_v);
                             }
                         }

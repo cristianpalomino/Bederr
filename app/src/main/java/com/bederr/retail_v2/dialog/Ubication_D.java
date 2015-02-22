@@ -109,8 +109,6 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Ubication_D.this.dismiss();
-                Ubication_D.this.hide();
 
                 boolean flag = false;
                 ArrayList<Area_V> areas = new ArrayList<Area_V>();
@@ -133,6 +131,9 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
                 if(!flag){
                     showMessage("Seleccione una Ciudad");
                 }else{
+                    Ubication_D.this.dismiss();
+                    Ubication_D.this.hide();
+
                     Location_DTO location = new Location_DTO();
                     location.setPais(area_v.getCountry_v().getCountry_dto().getName());
                     location.setCiudad(area_v.getArea_dto().getName());

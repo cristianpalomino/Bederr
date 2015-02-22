@@ -20,6 +20,7 @@ import com.bederr.fragments.Fragment_Master;
 import com.bederr.main.Master;
 import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
 import com.bederr.questions_v2.services.Service_Question;
+import com.bederr.retail_v2.adapters.Listing_A;
 import com.bederr.retail_v2.adapters.Places_A;
 import com.bederr.adapter.Adapter_Locales;
 import com.bederr.beans.Local_DTO;
@@ -104,22 +105,26 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                                         String previous) {
                 try {
                     if (success) {
-                        if (place_dtos.size() > 0) {
+                        if (!place_dtos.isEmpty()) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales.setAdapter(places_a);
-                            Explore_F.this.onFinishLoad(lista_locales);
+                            getEmptyView(lista_locales);
 
-                            NEXT = next;
+                            /**
+                             * Stacks
+                             */
                             PREVIOUS = previous;
+                            NEXT = next;
                         } else {
-                            //getEmptyView().setVisibility(View.VISIBLE);
-                            lista_locales.setVisibility(View.GONE);
+                            setEmptyView();
                         }
+                    } else {
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    //getEmptyView().setVisibility(View.VISIBLE);
-                    lista_locales.setVisibility(View.GONE);
+                    setEmptyView();
+
                 }
             }
         });
@@ -137,22 +142,26 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                                         String previous) {
                 try {
                     if (success) {
-                        if (place_dtos.size() > 0) {
+                        if (!place_dtos.isEmpty()) {
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales.setAdapter(places_a);
-                            Explore_F.this.onFinishLoad(lista_locales);
+                            getEmptyView(lista_locales);
 
-                            NEXT = next;
+                            /**
+                             * Stacks
+                             */
                             PREVIOUS = previous;
+                            NEXT = next;
                         } else {
-                            //getEmptyView().setVisibility(View.VISIBLE);
-                            lista_locales.setVisibility(View.GONE);
+                            setEmptyView();
                         }
+                    } else {
+                        setEmptyView();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    //getEmptyView().setVisibility(View.VISIBLE);
-                    lista_locales.setVisibility(View.GONE);
+                    setEmptyView();
+
                 }
             }
         });
@@ -267,7 +276,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
     }
 
     @Override
-    public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto) {
+    public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto,Ubication_D ubication_d) {
         try {
             validateInitPlaces();
         } catch (Exception e) {
@@ -302,7 +311,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                  * Si tiene AREA
                  */
                 else {
-                    setEmptyView(lista_locales);
+                    setEmptyView();
                 }
             } else {
                 /**
@@ -315,7 +324,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                  * Si tiene AREA
                  */
                 else {
-                    setEmptyView(lista_locales);
+                    setEmptyView();
                 }
             }
         }
