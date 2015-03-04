@@ -115,7 +115,6 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView();
                 }
             }
         });
@@ -152,7 +151,6 @@ public class Question_F extends Fragment_Master implements AdapterView.OnItemCli
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView();
                 }
             }
         });

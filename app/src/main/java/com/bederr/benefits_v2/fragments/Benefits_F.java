@@ -106,23 +106,26 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
                 Service_Programs service_programs = new Service_Programs(getBederr());
                 service_programs.sendRequestMe(token);
                 service_programs.setOnSuccessPrograms(new OnSuccessPrograms() {
-                    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccessPrograms(boolean success,
                                                   ArrayList<Benefit_Program_DTO> program_dtos,
                                                   String count,
                                                   String next,
                                                   String previous) {
-                        if (success) {
-                            if (!program_dtos.isEmpty()) {
-                                benefit_a = new Benefit_A(getActivity(), program_dtos, 1);
-                                listaCorp.setAdapter(benefit_a);
-                                getEmptyView(listaCorp);
+                        try {
+                            if (success) {
+                                if (!program_dtos.isEmpty()) {
+                                    benefit_a = new Benefit_A(getActivity(), program_dtos, 1);
+                                    listaCorp.setAdapter(benefit_a);
+                                    getEmptyView(listaCorp);
+                                } else {
+                                    setEmptyView();
+                                }
                             } else {
                                 setEmptyView();
                             }
-                        } else {
-                            setEmptyView();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -187,7 +190,7 @@ public class Benefits_F extends Fragment_Master implements AdapterView.OnItemCli
                     getSupportFragmentManager().
                     beginTransaction().
                     setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
-                    add(R.id.container, places_programs_f , Places_Programs_F.class.getName()).
+                    add(R.id.container, places_programs_f, Places_Programs_F.class.getName()).
                     addToBackStack(null).commit();
         }
     }

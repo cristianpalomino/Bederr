@@ -30,6 +30,9 @@ import com.bederr.utils.Locator;
 import com.bederr.utils.Util_Fonts;
 import com.bederr.views.View_Message;
 
+import java.util.HashMap;
+
+import intercom.intercomsdk.Intercom;
 import pe.bederr.com.R;
 
 /**
@@ -211,30 +214,64 @@ public class Fragment_Master extends Fragment implements Interface_Load {
     }
 
     public void showMessage(String message) {
-        Toast.makeText(getActivity() , message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-    public View getEmptyView(ListView list){
+    public View getEmptyView(ListView list) {
         LinearLayout empty = (LinearLayout) getView().findViewById(R.id.empty_view);
         empty.setVisibility(View.GONE);
 
         LinearLayout loader = (LinearLayout) getView().findViewById(R.id.loader);
         loader.setVisibility(View.GONE);
 
+        getLayout().setVisibility(View.VISIBLE);
         list.setVisibility(View.VISIBLE);
         return empty;
     }
 
+    public void showLoader() {
+        LinearLayout loader = (LinearLayout) getView().findViewById(R.id.loader);
+        loader.setVisibility(View.VISIBLE);
+    }
 
-    public void setEmptyView(){
+
+    public void setEmptyView() {
         LinearLayout loader = (LinearLayout) getView().findViewById(R.id.loader);
         loader.setVisibility(View.GONE);
 
         View empty = getView().findViewById(R.id.empty_view);
-        TextView message = (TextView)empty.findViewById(R.id.text_type_message_no_data);
+        TextView message = (TextView) empty.findViewById(R.id.text_type_message_no_data);
         message.setTypeface(Util_Fonts.setPNASemiBold(getBederr()));
-        getLayout().setVisibility(View.GONE);
         empty.setVisibility(View.VISIBLE);
+
+        getLayout().setVisibility(View.GONE);
+    }
+
+    public void openLoginIntercom(String mail) {
+        showMessage(mail);
+        Intercom.beginSessionWithEmail(mail,
+                new Intercom.IntercomEventListener() {
+                    @Override
+                    public void onComplete(String error) {
+                        // lets check if we get an error string
+                        if (error != null) {
+                            showMessage(error);
+                        } else {
+                            showMessage("LOGIN");
+                            HashMap<String, Object> attributes = new HashMap<String, Object>();
+                            HashMap<String, Object> customAttributes = new HashMap<String, Object>();
+                            customAttributes.put("paid_subscriber", "Yes");
+                            customAttributes.put("monthly_spend", 155.5);
+                            customAttributes.put("team_mates", 3);
+                            customAttributes.put("email", "ca.palomino.rivera@gmail.com");
+                            customAttributes.put("user_id", "12");
+                            attributes.put("custom_attributes", customAttributes);
+                            Intercom.updateUser(attributes);
+                        }
+                    }
+
+
+                });
     }
 }
 

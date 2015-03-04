@@ -81,6 +81,8 @@
         android:text="SKIP"
         android:id="@+id/txt_skip"
         android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:textColor="@color/plomo_claro_silver"
         android:layout_gravity="right|top" />

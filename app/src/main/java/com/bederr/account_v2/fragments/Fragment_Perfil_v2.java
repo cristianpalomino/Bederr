@@ -137,10 +137,13 @@ public class Fragment_Perfil_v2 extends Fragment_Master implements Country_V.OnC
             }
         });
 
+        try {
 
-        boolean isLatLng = !getUbication().getLatitude().equals("0.0") && !getUbication().getLongitude().equals("0.0");
-        if (!isLatLng) {
-            getView().findViewById(R.id.txtciudadusuario).setOnClickListener(this);
+        }catch (Exception e){
+            boolean isLatLng = !getUbication().getLatitude().equals("0.0") && !getUbication().getLongitude().equals("0.0");
+            if (!isLatLng) {
+                getView().findViewById(R.id.txtciudadusuario).setOnClickListener(this);
+            }
         }
 
         Fragment_Perfil_v2.this.onFinishLoad(getView());

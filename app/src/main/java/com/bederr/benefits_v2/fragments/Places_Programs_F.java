@@ -116,7 +116,6 @@ public class Places_Programs_F extends Fragment_Master implements AdapterView.On
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            lista_locales.setVisibility(View.GONE);
                         }
                     }
                 });

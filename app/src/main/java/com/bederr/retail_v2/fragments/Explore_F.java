@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -84,13 +85,13 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_locales = (ListView) getView().findViewById(R.id.lista_locales);
         lista_locales.setOnItemClickListener(this);
         lista_locales.setOnScrollListener(this);
-        lista_locales.setVisibility(View.GONE);
 
         try {
             validateInitPlaces();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     private void openLoginUser(String token, String lat, String lng, String name, String cat, String city, String area) {
@@ -123,8 +124,6 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView();
-
                 }
             }
         });
@@ -143,6 +142,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                 try {
                     if (success) {
                         if (!place_dtos.isEmpty()) {
+                            showMessage("HERE");
                             places_a = new Places_A(getBederr(), place_dtos, 0, "Explore");
                             lista_locales.setAdapter(places_a);
                             getEmptyView(lista_locales);
@@ -160,8 +160,6 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView();
-
                 }
             }
         });
@@ -189,11 +187,11 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         lista_locales.setClickable(false);
 
         Detail_Place_F detail_place_f = Detail_Place_F.newInstance("Explore");
+        detail_place_f.setOnBack(Explore_F.this);
         getActivity().getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.animator.izquierda_derecha_b, R.animator.izquierda_derecha_b).
                 add(R.id.container, detail_place_f, Detail_Place_F.class.getName()).
-                addToBackStack(Detail_Place_F.class.getName()).commit();
-        detail_place_f.setOnBack(this);
+                addToBackStack(null).commit();
     }
 
     /**
@@ -276,9 +274,11 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
     }
 
     @Override
-    public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto,Ubication_D ubication_d) {
+    public void bederrOnSuccessArea(boolean success, Ubication_DTO ubication_dto, Ubication_D ubication_d) {
         try {
-            validateInitPlaces();
+            if(places_a == null){
+                validateInitPlaces();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -305,6 +305,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                  * Si tiene LAT y LONG
                  */
                 if (isLatLng) {
+                    //showLoader();
                     openLoginUser(token, lat, lng, name, cat, city, "");
                 }
                 /**
@@ -318,6 +319,7 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
                  * Si tiene LAT y LONG
                  */
                 if (isLatLng) {
+                    //showLoader();
                     openLogin(lat, lng, name, cat, city, "");
                 }
                 /**
@@ -330,7 +332,6 @@ public class Explore_F extends Fragment_Master implements AdapterView.OnItemClic
         }
     }
 
-    @Override
     protected void initActionBar() {
         super.initActionBar();
         ImageView action_left = (ImageView) getView().findViewById(R.id.action_left);

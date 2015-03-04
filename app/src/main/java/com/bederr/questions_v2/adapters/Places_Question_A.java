@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bederr.beans.Local_DTO;
 import com.bederr.beans_v2.Place_DTO;
+import com.bederr.beans_v2.Question_DTO;
 import com.bederr.utils.RoundedTransformation;
 import com.bederr.utils.Util_Categorias;
 import com.bederr.utils.Util_Fonts;
@@ -129,6 +131,10 @@ public class Places_Question_A extends BaseAdapter {
         ImageView img_plomo;
     }
 
+    public void add(Place_DTO local_dto) {
+        place_dtos.add(local_dto);
+        notifyDataSetChanged();
+    }
 
     public static double roundKM(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();

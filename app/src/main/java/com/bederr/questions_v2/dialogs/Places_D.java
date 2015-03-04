@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,11 +21,14 @@ import com.bederr.adapter.Adapter_Locales_Pregunta;
 import com.bederr.application.Maven_Application;
 import com.bederr.beans.Local_DTO;
 import com.bederr.beans_v2.Place_DTO;
+import com.bederr.beans_v2.Question_DTO;
 import com.bederr.fragments.Fragment_Responder;
 import com.bederr.main.Bederr;
 import com.bederr.operations.Operation_Busquedas;
 import com.bederr.questions_v2.adapters.Places_Question_A;
 import com.bederr.questions_v2.fragments.Answer_F;
+import com.bederr.questions_v2.interfaces.OnSuccessQuestion;
+import com.bederr.questions_v2.services.Service_Question;
 import com.bederr.retail_v2.adapters.Places_A;
 import com.bederr.retail_v2.interfaces.OnSuccessPlaces;
 import com.bederr.retail_v2.services.Service_Places;
@@ -40,11 +44,15 @@ import pe.bederr.com.R;
  */
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class Places_D extends AlertDialog implements AdapterView.OnItemClickListener {
+public class Places_D extends AlertDialog implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
     private ActionBarActivity actionBarActivity;
     private ListView lista_locales;
     private EditText action_middle;
+    private boolean isLoading = false;
+    public String NEXT = "";
+    private Places_Question_A places_question_a;
+    public String PREVIOUS = "";
 
     public Places_D(Context context, ActionBarActivity actionBarActivity) {
         super(context);
@@ -79,7 +87,7 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
         lista_locales = (ListView) view.findViewById(R.id.lista_locales);
         lista_locales.setOnItemClickListener(this);
 
-        Places_Question_A places_question_a = new Places_Question_A(getContext(), ((Bederr) actionBarActivity).getPlace_dtos(), 0);
+        places_question_a = new Places_Question_A(getContext(), ((Bederr) actionBarActivity).getPlace_dtos(), 0);
         lista_locales.setAdapter(places_question_a);
 
         setView(view);
@@ -167,6 +175,66 @@ public class Places_D extends AlertDialog implements AdapterView.OnItemClickList
                 return false;
             }
         });
+    }
+
+    /**
+     * Callback method to be invoked while the list view or grid view is being scrolled. If the
+     * view is being scrolled, this method will be called before the next frame of the scroll is
+     * rendered. In particular, it will be called before any calls to
+     *
+     * @param view        The view whose scroll state is being reported
+     * @param scrollState The current scroll state. One of
+     *                    {@link #SCROLL_STATE_TOUCH_SCROLL} or {@link #SCROLL_STATE_IDLE}.
+     */
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    /**
+     * Callback method to be invoked when the list or grid has been scrolled. This will be
+     * called after the scroll has completed
+     *
+     * @param view             The view whose scroll state is being reported
+     * @param firstVisibleItem the index of the first visible cell (ignore if
+     *                         visibleItemCount == 0)
+     * @param visibleItemCount the number of visible cells
+     * @param totalItemCount   the number of items in the list adaptor
+     */
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
+            if (!isLoading) {
+                isLoading = true;
+                Service_Places service_places = new Service_Places(getContext());
+                service_places.loadMore(NEXT);
+                service_places.setOnSuccessPlaces(new OnSuccessPlaces() {
+                    @Override
+                    public void onSuccessPlaces(boolean success,
+                                                ArrayList<Place_DTO> place_dtos,
+                                                String count,
+                                                String next,
+                                                String previous) {
+                        try {
+                            if (success) {
+                                for (int i = 0; i < place_dtos.size(); i++) {
+                                    places_question_a.add(place_dtos.get(i));
+                                }
+
+                                /**
+                                 * Stacks
+                                 */
+                                NEXT = next;
+                                PREVIOUS = previous;
+                                isLoading = false;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }
     }
 
     public void closeKeyboard() {

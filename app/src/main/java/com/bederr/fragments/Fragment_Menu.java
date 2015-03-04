@@ -15,12 +15,15 @@ import com.bederr.retail_v2.fragments.Explore_F;
 import com.bederr.account_v2.fragments.Fragment_Entrar_v2;
 import com.bederr.account_v2.fragments.Fragment_Perfil_v2;
 
+import intercom.intercomsdk.Intercom;
 import pe.bederr.com.R;
 import com.bederr.benefits_v2.fragments.Benefits_F;
 import com.bederr.retail_v2.fragments.Listing_F;
 import com.bederr.session.Session_Manager;
 import com.bederr.utils.Util_Fonts;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+import java.util.HashMap;
 
 /**
  * Created by Gantz on 30/09/14.
@@ -81,6 +84,16 @@ public class Fragment_Menu extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         ((Bederr) getActivity()).sm_menu.setMode(SlidingMenu.LEFT);
         setMenuIndicator(v.getId());
+
+        HashMap<String, Object> attributes = new HashMap <String, Object>();
+        HashMap<String, Object> customAttributes = new HashMap <String, Object>();
+        customAttributes.put("paid_subscriber","Yes");
+        customAttributes.put("monthly_spend",155.5);
+        customAttributes.put("team_mates",3);
+        customAttributes.put("email","ca.palomino.rivera@gmail.com");
+        attributes.put("custom_attributes", customAttributes);
+        Intercom.updateUser(attributes);
+
 
         boolean session = new Session_Manager(getActivity()).isLogin();
         switch (v.getId()) {

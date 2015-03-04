@@ -5,11 +5,17 @@ android {
     buildToolsVersion '21.1.2'
 
     defaultConfig {
-        applicationId "pe.bederr.com"
+        applicationId "pe.dipoo.client.app"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 34
+        versionName "3.0"
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
     }
 }
 
@@ -24,14 +30,16 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile 'com.squareup.picasso:picasso:2.3.4'
-    compile 'com.mcxiaoke.volley:library:1.0.6'
     compile 'com.loopj.android:android-async-http:1.4.6'
+    compile 'com.google.code.gson:gson:2.3'
     compile 'io.nlopez.smartlocation:library:3.0.0'
     compile project(':sliding_menu')
     compile project(':FacebookSDK')
     compile project(':ViewPagerIndicator')
     compile 'com.mobsandgeeks:android-saripaar:1.0.3'
+    compile(name: 'intercomsdk-0.8.5', ext: 'aar')
 }
+
 
 configurations {
     all*.exclude group: 'com.android.support', module: 'support-v4'

@@ -142,7 +142,6 @@ public class Detail_Question_F extends Fragment_Master implements AdapterView.On
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    setEmptyView();
                 }
             }
         });

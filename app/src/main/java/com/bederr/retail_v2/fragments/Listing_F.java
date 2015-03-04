@@ -103,7 +103,6 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                setEmptyView();
                             }
                         }
                     });
@@ -137,7 +136,6 @@ public class Listing_F extends Fragment_Master implements AdapterView.OnItemClic
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                setEmptyView();
                             }
                         }
                     });

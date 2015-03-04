@@ -54,12 +54,7 @@ public class Session_Manager {
         editor.putInt(TIPO_SESSION, tipo_session);
         editor.commit();
 
-        ((Bederr) context).clearHistory();
-        ((Bederr) context).getSupportFragmentManager().
-                beginTransaction().
-                setCustomAnimations(R.animator.izquierda_derecha, R.animator.derecha_izquierda).
-                replace(R.id.container, Benefits_F.newInstance()).
-                commit();
+        ((Bederr) context).restart();
         hideSoftKeyboard();
     }
 
@@ -69,12 +64,7 @@ public class Session_Manager {
         editor.putInt(TIPO_SESSION, tipo_session);
         editor.commit();
 
-        ((Bederr) context).clearHistory();
-        ((Bederr) context).getSupportFragmentManager().
-                beginTransaction().
-                setCustomAnimations(R.animator.izquierda_derecha, R.animator.derecha_izquierda).
-                replace(R.id.container, Benefits_F.newInstance()).
-                commit();
+        ((Bederr) context).restart();
         hideSoftKeyboard();
     }
 

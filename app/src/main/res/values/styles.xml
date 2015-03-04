@@ -23,4 +23,10 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item> <!-- For 2.x version  -->
+    </style>
+
+
 </resources>

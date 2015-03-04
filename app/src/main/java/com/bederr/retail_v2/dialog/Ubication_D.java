@@ -31,6 +31,7 @@ import com.bederr.beans_v2.Location_DTO;
 import com.bederr.beans_v2.Place_DTO;
 import com.bederr.beans_v2.Ubication_DTO;
 import com.bederr.main.Bederr;
+import com.bederr.main.Master;
 import com.bederr.questions_v2.adapters.Places_Question_A;
 import com.bederr.questions_v2.fragments.Answer_F;
 import com.bederr.utils.Util_Fonts;
@@ -140,8 +141,7 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
                     location.setFlag(area_v.getCountry_v().getCountry_dto().getFlag_image());
                     ((Maven_Application)activity.getApplication()).setLocation_dto(location);
 
-                    showMessage("Pais : " + location.getPais() + "\n" +
-                                "Ciudad : " + location.getCiudad());
+                    //showMessage("Pais : " + location.getPais() + "\n" +"Ciudad : " + location.getCiudad());
 
                     Ubication_DTO dto = new Ubication_DTO(null,area_v.getArea_dto().getId());
                     ((Maven_Application)activity.getApplication()).setUbication(dto);
@@ -183,6 +183,10 @@ public class Ubication_D extends AlertDialog implements Country_V.OnChecked {
                 area_v.setChecked();
             }
         }
+    }
+
+    public interface OnClick {
+        public void onClick();
     }
 
 }

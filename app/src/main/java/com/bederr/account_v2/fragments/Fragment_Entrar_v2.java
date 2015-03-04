@@ -24,7 +24,10 @@ import pe.bederr.com.R;
 
 import com.bederr.fragments.Fragment_Registro;
 import com.bederr.utils.Util_Fonts;
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
+import com.facebook.model.GraphUser;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -140,7 +143,7 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
                 "user_relationships",
                 "user_location",
                 "user_likes");
-        ParseFacebookUtils.logIn(permissions,getBederr(), new LogInCallback() {
+        ParseFacebookUtils.logIn(permissions, getBederr(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
                 dialog_maven.hide();
@@ -161,8 +164,26 @@ public class Fragment_Entrar_v2 extends Fragment_Master implements View.OnClickL
     }
 
     private void makeMeRequest() {
+        Request.newMeRequest(ParseFacebookUtils.getSession(), new Request.GraphUserCallback() {
+            @Override
+            public void onCompleted(GraphUser user, Response response) {
+                if (user != null) {
+                    try {
+                        showMessage("FACEBOOK");
+                        String email = (String) user.getProperty("email");
+                        openLoginIntercom(email);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).executeAsync();
+
+
         String access_token_facebook = ParseFacebookUtils.getSession().getAccessToken();
-        if (access_token_facebook != null || !access_token_facebook.equals("")) {
+        if (access_token_facebook != null || !access_token_facebook.equals(""))
+
+        {
             Service_Login service_login = new Service_Login(getBederr());
             service_login.sendRequestFacebook(access_token_facebook);
             service_login.setOnSuccessLogin(new OnSuccessLogin() {
